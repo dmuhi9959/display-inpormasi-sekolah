@@ -35,7 +35,6 @@
     background: #061512;
   }
 
-  /* Wallpaper layer */
   #wallpaper-layer {
     position: fixed;
     inset: 0;
@@ -54,7 +53,6 @@
     backdrop-filter: blur(3px);
   }
 
-  /* Pattern overlay */
   .pattern-overlay {
     position: fixed;
     inset: 0;
@@ -74,7 +72,6 @@
       repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(255,255,255,0.02) 60px, rgba(255,255,255,0.02) 61px);
   }
 
-  /* Particles */
   .particles {
     position: fixed;
     inset: 0;
@@ -97,7 +94,6 @@
     100% { transform: translateY(-10vh); opacity: 0; }
   }
 
-  /* Main layout */
   .display-container {
     position: relative;
     z-index: 10;
@@ -108,7 +104,6 @@
     gap: 0;
   }
 
-  /* ===== HEADER ===== */
   .display-header {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -158,6 +153,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-wrap: wrap;
   }
 
   .school-info .subtitle span {
@@ -243,7 +239,6 @@
     transform: rotate(45deg);
   }
 
-  /* ===== MAIN CONTENT ===== */
   .main-content {
     display: grid;
     grid-template-columns: 1fr 1.3fr 1fr;
@@ -252,7 +247,6 @@
     overflow: hidden;
   }
 
-  /* Schedule column */
   .schedule-column {
     display: flex;
     flex-direction: column;
@@ -275,6 +269,7 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+    flex-shrink: 0;
   }
 
   .column-title i {
@@ -298,6 +293,7 @@
     transition: var(--transition);
     position: relative;
     overflow: hidden;
+    flex-shrink: 0;
   }
 
   .schedule-card::before {
@@ -334,10 +330,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 8px;
   }
 
   .schedule-card .class-name .badge {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     padding: 2px 8px;
     background: var(--accent);
     color: #1a1a1a;
@@ -345,6 +342,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    white-space: nowrap;
   }
 
   .schedule-card.next .class-name .badge {
@@ -372,7 +370,6 @@
     margin-right: 4px;
   }
 
-  /* Center - Building image */
   .center-column {
     display: flex;
     flex-direction: column;
@@ -396,10 +393,6 @@
     height: 100%;
     object-fit: cover;
     transition: transform 10s ease;
-  }
-
-  .building-image:hover img {
-    transform: scale(1.05);
   }
 
   .building-image::after {
@@ -433,7 +426,6 @@
     text-shadow: 0 2px 8px rgba(0,0,0,0.8);
   }
 
-  /* Clock widget */
   .clock-widget {
     background: linear-gradient(135deg, rgba(13, 82, 64, 0.6), rgba(6, 24, 22, 0.6));
     border: 1px solid var(--card-border);
@@ -444,6 +436,7 @@
     justify-content: space-between;
     gap: 16px;
     backdrop-filter: blur(10px);
+    flex-shrink: 0;
   }
 
   .clock-widget .clock-time {
@@ -482,12 +475,12 @@
     50% { opacity: 0.6; transform: scale(0.95); }
   }
 
-  /* Progress for current activity */
   .activity-progress-mini {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
     padding: 10px 14px;
     border: 1px solid var(--card-border);
+    flex-shrink: 0;
   }
 
   .activity-progress-mini .label {
@@ -498,6 +491,7 @@
     margin-bottom: 6px;
     display: flex;
     justify-content: space-between;
+    gap: 8px;
   }
 
   .progress-bar-mini {
@@ -528,7 +522,6 @@
     to { transform: translateX(100%); }
   }
 
-  /* ===== FOOTER ===== */
   .display-footer {
     background: linear-gradient(135deg, rgba(13, 82, 64, 0.95), rgba(6, 24, 22, 0.95));
     border-top: 3px solid var(--accent);
@@ -562,7 +555,6 @@
   }
 
   .footer-section .footer-icon.red { background: var(--accent-3); }
-  .footer-section .footer-icon.green { background: var(--success); }
 
   .footer-section .footer-text {
     flex: 1;
@@ -588,27 +580,6 @@
     100% { transform: translateX(-100%); }
   }
 
-  .footer-badge {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 10px;
-    background: rgba(76, 175, 80, 0.2);
-    border: 1px solid var(--success);
-    border-radius: 50px;
-    color: var(--success);
-    font-size: 0.75rem;
-    font-weight: 600;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
-  .footer-badge i {
-    font-size: 0.5rem;
-    animation: pulse 2s ease-in-out infinite;
-  }
-
-  /* ===== SETTINGS PANEL ===== */
   .settings-overlay {
     position: fixed;
     inset: 0;
@@ -654,6 +625,7 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid var(--accent);
+    flex-shrink: 0;
   }
 
   .settings-header h2 {
@@ -692,6 +664,7 @@
     border-bottom: 1px solid var(--card-border);
     background: rgba(0, 0, 0, 0.2);
     overflow-x: auto;
+    flex-shrink: 0;
   }
 
   .tab-btn {
@@ -708,6 +681,7 @@
     align-items: center;
     gap: 6px;
     white-space: nowrap;
+    font-family: inherit;
   }
 
   .tab-btn:hover { color: var(--text); }
@@ -819,7 +793,6 @@
     justify-content: center;
   }
 
-  /* Wallpaper grid */
   .wallpaper-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -862,7 +835,6 @@
 
   .wallpaper-item.active .check { display: flex; }
 
-  /* Alarm list */
   .alarm-list, .schedule-list-settings {
     display: flex;
     flex-direction: column;
@@ -883,7 +855,7 @@
 
   .alarm-item:hover { background: rgba(255, 255, 255, 0.08); }
 
-  .alarm-info { flex: 1; }
+  .alarm-info { flex: 1; min-width: 0; }
 
   .alarm-time {
     font-family: 'Orbitron', sans-serif;
@@ -896,11 +868,13 @@
     font-size: 0.75rem;
     color: var(--text-muted);
     margin-top: 3px;
+    word-break: break-word;
   }
 
   .alarm-actions {
     display: flex;
     gap: 6px;
+    flex-shrink: 0;
   }
 
   .icon-btn {
@@ -928,6 +902,7 @@
     border-radius: 50px;
     cursor: pointer;
     transition: var(--transition);
+    flex-shrink: 0;
   }
 
   .toggle-switch.active { background: var(--success); }
@@ -946,7 +921,6 @@
 
   .toggle-switch.active::after { transform: translateX(20px); }
 
-  /* Upload */
   .file-upload {
     position: relative;
     display: block;
@@ -985,7 +959,6 @@
     color: var(--text-muted);
   }
 
-  /* Slider */
   .slider-container {
     display: flex;
     align-items: center;
@@ -1030,7 +1003,6 @@
     text-align: right;
   }
 
-  /* Toast */
   .toast {
     position: fixed;
     top: 24px;
@@ -1058,7 +1030,6 @@
   .toast.error i { color: var(--danger); }
   .toast.info i { color: var(--accent); }
 
-  /* Alarm modal */
   .alarm-modal {
     position: fixed;
     inset: 0;
@@ -1123,7 +1094,6 @@
     margin-bottom: 22px;
   }
 
-  /* Scrollbar */
   ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
   ::-webkit-scrollbar-thumb {
@@ -1132,14 +1102,11 @@
   }
   ::-webkit-scrollbar-thumb:hover { background: rgba(244, 196, 48, 0.5); }
 
-  /* Responsive */
   @media (max-width: 1100px) {
     .main-content {
       grid-template-columns: 1fr 1.2fr;
     }
-    .schedule-column:nth-child(3) {
-      display: none;
-    }
+    .schedule-column:nth-child(3) { display: none; }
   }
 
   @media (max-width: 768px) {
@@ -1161,15 +1128,12 @@
 </head>
 <body>
 
-<!-- Wallpaper Background -->
 <div id="wallpaper-layer"></div>
 <div class="pattern-overlay"></div>
 <div class="particles" id="particles"></div>
 
-<!-- Main Display -->
 <div class="display-container">
 
-  <!-- HEADER -->
   <header class="display-header">
     <div class="header-left">
       <div class="school-logo" id="schoolLogo">PJ</div>
@@ -1196,25 +1160,20 @@
     </div>
   </header>
 
-  <!-- MAIN CONTENT -->
   <div class="main-content">
 
-    <!-- LEFT: Kelas 7 -->
     <div class="schedule-column">
       <div class="column-title">
         <i class="fas fa-users"></i> KELAS 7
       </div>
-      <div class="schedule-list" id="scheduleListLeft">
-        <!-- Diisi oleh JS -->
-      </div>
+      <div class="schedule-list" id="scheduleListLeft"></div>
     </div>
 
-    <!-- CENTER: Building image + Clock -->
     <div class="center-column">
       <div class="building-image">
         <img src="https://images.unsplash.com/photo-1562774053-701439336967?w=1200" alt="Gedung Sekolah" id="buildingImg">
         <div class="building-caption">
-          <h2 id="buildingTitle"> Gedung Utama Sekolah</h2>
+          <h2 id="buildingTitle">Gedung Utama Sekolah</h2>
           <p id="buildingSubtitle">Pusat kegiatan belajar mengajar</p>
         </div>
       </div>
@@ -1241,19 +1200,15 @@
       </div>
     </div>
 
-    <!-- RIGHT: Kelas 8 & 9 -->
     <div class="schedule-column">
       <div class="column-title">
         <i class="fas fa-users"></i> KELAS 8 & 9
       </div>
-      <div class="schedule-list" id="scheduleListRight">
-        <!-- Diisi oleh JS -->
-      </div>
+      <div class="schedule-list" id="scheduleListRight"></div>
     </div>
 
   </div>
 
-  <!-- FOOTER -->
   <footer class="display-footer">
     <div class="footer-section">
       <div class="footer-icon"><i class="fas fa-tshirt"></i></div>
@@ -1275,7 +1230,6 @@
 
 </div>
 
-<!-- Settings Panel -->
 <div class="settings-overlay" id="settingsOverlay"></div>
 
 <aside class="settings-panel" id="settingsPanel">
@@ -1306,7 +1260,6 @@
 
   <div class="settings-body">
 
-    <!-- General Settings -->
     <div class="settings-section active" id="tab-general">
       <div class="form-group">
         <label>Nama Institusi</label>
@@ -1352,7 +1305,6 @@
       </button>
     </div>
 
-    <!-- Wallpaper Settings -->
     <div class="settings-section" id="tab-wallpaper">
       <div class="form-group">
         <label>Pilih Wallpaper Bawaan</label>
@@ -1387,7 +1339,6 @@
       </button>
     </div>
 
-    <!-- Alarm Settings -->
     <div class="settings-section" id="tab-alarm">
       <div class="form-group">
         <label>Tambah Alarm Baru</label>
@@ -1417,7 +1368,6 @@
       </button>
     </div>
 
-    <!-- Schedule Settings -->
     <div class="settings-section" id="tab-schedule">
       <div class="form-group">
         <label>Tambah Jadwal Kelas</label>
@@ -1448,7 +1398,6 @@
       </button>
     </div>
 
-    <!-- Image Settings -->
     <div class="settings-section" id="tab-image">
       <div class="form-group">
         <label>Judul Foto</label>
@@ -1480,7 +1429,6 @@
   </div>
 </aside>
 
-<!-- Alarm Modal -->
 <div class="alarm-modal" id="alarmModal">
   <div class="alarm-modal-content">
     <div class="alarm-icon"><i class="fas fa-bell"></i></div>
@@ -1492,16 +1440,12 @@
   </div>
 </div>
 
-<!-- Toast -->
 <div class="toast" id="toast">
   <i class="fas fa-info-circle"></i>
   <span id="toastMessage">Pesan</span>
 </div>
 
 <script>
-// ============================================
-// STATE
-// ============================================
 const state = {
   school: {
     name: 'PPTQ JASMA DIGITAL',
@@ -1532,7 +1476,6 @@ const state = {
   schedules: []
 };
 
-// Preset wallpapers
 const presetWallpapers = [
   { id: 'gradient1', name: 'Islamic Green', url: 'linear-gradient(135deg, #0d5240, #1a8a6f, #4dd0a8)', type: 'gradient' },
   { id: 'gradient2', name: 'Sunrise Amber', url: 'linear-gradient(135deg, #1a1a2e, #c9a25c, #e8b04b)', type: 'gradient' },
@@ -1545,15 +1488,12 @@ const presetWallpapers = [
   { id: 'photo4', name: 'Mosque', url: 'https://images.unsplash.com/photo-1542818831-43c7f87d5d0d?w=1920', type: 'image' }
 ];
 
-// Default schedules
 const defaultSchedules = [
-  // Kelas 7 (left)
   { id: 1, class: 'KELAS 7-1', subject: 'B. JERMAN', start: '05:30', end: '06:30', column: 'left' },
   { id: 2, class: 'KELAS 7-2', subject: 'B. ARAB', start: '05:30', end: '07:15', column: 'left' },
   { id: 3, class: 'KELAS 7-3', subject: 'TAHSIN', start: '06:30', end: '07:30', column: 'left' },
   { id: 4, class: 'KELAS 7-4', subject: 'MATEMATIKA', start: '07:30', end: '09:00', column: 'left' },
   { id: 5, class: 'KELAS 7-5', subject: 'IPA TERPADU', start: '09:00', end: '10:30', column: 'left' },
-  // Kelas 8 & 9 (right)
   { id: 6, class: 'KELAS 8-1', subject: 'B. INGGRIS', start: '05:30', end: '06:30', column: 'right' },
   { id: 7, class: 'KELAS 8-3', subject: 'B. TURKEY', start: '05:30', end: '07:15', column: 'right' },
   { id: 8, class: 'KELAS 8-2', subject: 'FIQH', start: '06:30', end: '07:30', column: 'right' },
@@ -1561,23 +1501,18 @@ const defaultSchedules = [
   { id: 10, class: 'KELAS 9-2', subject: 'PKn', start: '09:00', end: '10:30', column: 'right' }
 ];
 
-// ============================================
-// LOCAL STORAGE
-// ============================================
 function saveState() {
   try {
     const stateCopy = JSON.parse(JSON.stringify(state));
-    // Cek ukuran untuk hindari quota
     const size = JSON.stringify(stateCopy).length;
     if (size > 4500000) {
-      // Hapus data besar (custom wallpaper, custom image, alarm music)
       stateCopy.wallpaper.custom = null;
       stateCopy.building.custom = null;
       stateCopy.alarms = stateCopy.alarms.map(a => ({ ...a, music: null }));
     }
     localStorage.setItem('pptqDisplayState', JSON.stringify(stateCopy));
   } catch (e) {
-    console.warn('Save failed, saving minimal:', e);
+    console.warn('Save failed:', e);
     const minimal = {
       school: state.school,
       wallpaper: { ...state.wallpaper, custom: null },
@@ -1587,7 +1522,7 @@ function saveState() {
       alarms: state.alarms.map(a => ({ ...a, music: null })),
       schedules: state.schedules
     };
-    localStorage.setItem('pptqDisplayState', JSON.stringify(minimal));
+    try { localStorage.setItem('pptqDisplayState', JSON.stringify(minimal)); } catch(e2) {}
   }
 }
 
@@ -1606,11 +1541,7 @@ function loadState() {
   }
 }
 
-// ============================================
-// CLOCK & DATE
-// ============================================
 const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-const daysShort = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
 
 function updateClock() {
@@ -1633,9 +1564,6 @@ function updateClock() {
   checkAlarms();
 }
 
-// ============================================
-// SCHEDULE
-// ============================================
 function timeToMinutes(t) {
   const [h, m] = t.split(':').map(Number);
   return h * 60 + m;
@@ -1653,7 +1581,8 @@ function getCurrentSchedules() {
 function getNextSchedules() {
   const now = new Date();
   const currentMin = now.getHours() * 60 + now.getMinutes();
-  return state.schedules.filter(s => timeToMinutes(s.start) > currentMin);
+  return state.schedules.filter(s => timeToMinutes(s.start) > currentMin)
+    .sort((a, b) => timeToMinutes(a.start) - timeToMinutes(b.start));
 }
 
 function updateActivity() {
@@ -1687,16 +1616,18 @@ function renderScheduleLists() {
   const current = getCurrentSchedules();
   const next = getNextSchedules();
   const currentIds = current.map(s => s.id);
-  const nextIds = next.map(s => s.id);
+  const nextFirstId = next.length > 0 ? next[0].id : -1;
   
-  const leftSchedules = state.schedules.filter(s => s.column === 'left');
-  const rightSchedules = state.schedules.filter(s => s.column === 'right');
+  const leftSchedules = state.schedules.filter(s => s.column === 'left')
+    .sort((a, b) => timeToMinutes(a.start) - timeToMinutes(b.start));
+  const rightSchedules = state.schedules.filter(s => s.column === 'right')
+    .sort((a, b) => timeToMinutes(a.start) - timeToMinutes(b.start));
   
-  leftList.innerHTML = renderScheduleItems(leftSchedules, currentIds, nextIds);
-  rightList.innerHTML = renderScheduleItems(rightSchedules, currentIds, nextIds);
+  leftList.innerHTML = renderScheduleItems(leftSchedules, currentIds, nextFirstId);
+  rightList.innerHTML = renderScheduleItems(rightSchedules, currentIds, nextFirstId);
 }
 
-function renderScheduleItems(schedules, currentIds, nextIds) {
+function renderScheduleItems(schedules, currentIds, nextFirstId) {
   if (schedules.length === 0) {
     return '<p style="text-align: center; color: rgba(255,255,255,0.5); padding: 20px; font-size: 0.85rem;">Tidak ada jadwal</p>';
   }
@@ -1707,7 +1638,7 @@ function renderScheduleItems(schedules, currentIds, nextIds) {
     if (currentIds.includes(s.id)) {
       cls = 'active';
       badge = '<span class="badge">SEDANG BERLANGSUNG</span>';
-    } else if (nextIds.includes(s.id) && nextIds.indexOf(s.id) === 0) {
+    } else if (s.id === nextFirstId) {
       cls = 'next';
       badge = '<span class="badge">BERIKUTNYA</span>';
     }
@@ -1729,10 +1660,9 @@ function renderScheduleItems(schedules, currentIds, nextIds) {
   }).join('');
 }
 
-// ============================================
-// ALARM SYSTEM
-// ============================================
 let alarmAudio = null;
+let beepCtx = null;
+let beepInterval = null;
 
 function checkAlarms() {
   const now = new Date();
@@ -1751,9 +1681,7 @@ function checkAlarms() {
 }
 
 function triggerAlarm(alarm) {
-  if (alarmAudio) {
-    try { alarmAudio.pause(); } catch(e) {}
-  }
+  stopAlarmAudio();
   
   if (alarm.music) {
     alarmAudio = new Audio(alarm.music);
@@ -1764,8 +1692,7 @@ function triggerAlarm(alarm) {
       showToast('Klik halaman untuk mengaktifkan audio', 'info');
     });
   } else {
-    alarmAudio = createBeepSound();
-    alarmAudio.startBeep();
+    startBeepAlarm();
   }
   
   document.getElementById('alarmModalTitle').textContent = alarm.label || 'Alarm Berbunyi!';
@@ -1773,46 +1700,48 @@ function triggerAlarm(alarm) {
   document.getElementById('alarmModal').classList.add('show');
 }
 
-function createBeepSound() {
-  const ctx = new (window.AudioContext || window.webkitAudioContext)();
-  let interval;
-  let vol = state.volume / 100;
-  
-  return {
-    type: 'beep',
-    startBeep() {
-      const playBeep = () => {
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.frequency.value = 880;
-        osc.type = 'sine';
-        gain.gain.setValueAtTime(vol, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.5);
-      };
-      playBeep();
-      interval = setInterval(playBeep, 1000);
-    },
-    pause() {
-      clearInterval(interval);
-      if (ctx.state !== 'closed') ctx.close();
-    }
-  };
+function startBeepAlarm() {
+  try {
+    beepCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const vol = state.volume / 100;
+    
+    const playBeep = () => {
+      const osc = beepCtx.createOscillator();
+      const gain = beepCtx.createGain();
+      osc.connect(gain);
+      gain.connect(beepCtx.destination);
+      osc.frequency.value = 880;
+      osc.type = 'sine';
+      gain.gain.setValueAtTime(vol, beepCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, beepCtx.currentTime + 0.5);
+      osc.start();
+      osc.stop(beepCtx.currentTime + 0.5);
+    };
+    
+    playBeep();
+    beepInterval = setInterval(playBeep, 1000);
+  } catch (e) {
+    console.error('Beep failed', e);
+  }
+}
+
+function stopAlarmAudio() {
+  if (alarmAudio) {
+    try { alarmAudio.pause(); alarmAudio.currentTime = 0; } catch(e) {}
+    alarmAudio = null;
+  }
+  if (beepInterval) {
+    clearInterval(beepInterval);
+    beepInterval = null;
+  }
+  if (beepCtx) {
+    try { beepCtx.close(); } catch(e) {}
+    beepCtx = null;
+  }
 }
 
 function stopAlarm() {
-  if (alarmAudio) {
-    try {
-      alarmAudio.pause();
-      if (alarmAudio.type === 'beep' && alarmAudio.startBeep) {
-        // already stopped
-      }
-    } catch(e) {}
-    alarmAudio = null;
-  }
+  stopAlarmAudio();
   document.getElementById('alarmModal').classList.remove('show');
 }
 
@@ -1845,9 +1774,6 @@ function updateAlarmList() {
   `).join('');
 }
 
-// ============================================
-// WALLPAPER
-// ============================================
 function applyWallpaper() {
   const layer = document.getElementById('wallpaper-layer');
   document.documentElement.style.setProperty('--bg-overlay', `rgba(6, 24, 22, ${state.wallpaper.overlay / 100})`);
@@ -1857,6 +1783,7 @@ function applyWallpaper() {
     if (preset) {
       if (preset.type === 'gradient') {
         layer.style.background = preset.url;
+        layer.style.backgroundImage = 'none';
       } else {
         layer.style.backgroundImage = `url("${preset.url}")`;
       }
@@ -1880,9 +1807,6 @@ function renderWallpaperGrid() {
   `).join('');
 }
 
-// ============================================
-// BUILDING IMAGE
-// ============================================
 function applyBuildingImage() {
   const img = document.getElementById('buildingImg');
   document.getElementById('buildingTitle').textContent = state.building.title;
@@ -1895,9 +1819,6 @@ function applyBuildingImage() {
   }
 }
 
-// ============================================
-// PARTICLES
-// ============================================
 function createParticles() {
   const container = document.getElementById('particles');
   container.innerHTML = '';
@@ -1915,10 +1836,8 @@ function createParticles() {
   }
 }
 
-// ============================================
-// TOAST
-// ============================================
-function showToast(message, type = 'info') {
+function showToast(message, type) {
+  type = type || 'info';
   const toast = document.getElementById('toast');
   const icon = toast.querySelector('i');
   
@@ -1933,9 +1852,6 @@ function showToast(message, type = 'info') {
   setTimeout(() => toast.classList.remove('show'), 3000);
 }
 
-// ============================================
-// SETTINGS UI
-// ============================================
 function openSettings() {
   document.getElementById('settingsOverlay').classList.add('active');
   document.getElementById('settingsPanel').classList.add('active');
@@ -1974,7 +1890,6 @@ function updateScheduleListSettings() {
     return;
   }
   
-  // Sort by start time
   const sorted = [...state.schedules].sort((a, b) => timeToMinutes(a.start) - timeToMinutes(b.start));
   
   list.innerHTML = sorted.map(s => `
@@ -2004,14 +1919,10 @@ function applySettings() {
   applyBuildingImage();
 }
 
-// ============================================
-// EVENT LISTENERS
-// ============================================
 document.getElementById('openSettings').addEventListener('click', openSettings);
 document.getElementById('closeSettings').addEventListener('click', closeSettings);
 document.getElementById('settingsOverlay').addEventListener('click', closeSettings);
 
-// Tabs
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -2021,7 +1932,6 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
   });
 });
 
-// Save general
 document.getElementById('saveGeneral').addEventListener('click', () => {
   state.school.name = document.getElementById('setSchoolName').value;
   state.school.address = document.getElementById('setSchoolAddress').value;
@@ -2037,20 +1947,17 @@ document.getElementById('saveGeneral').addEventListener('click', () => {
   showToast('Pengaturan berhasil disimpan', 'success');
 });
 
-// Volume
 document.getElementById('volumeSlider').addEventListener('input', (e) => {
   state.volume = parseInt(e.target.value);
   document.getElementById('volumeValue').textContent = state.volume + '%';
 });
 
-// Overlay
 document.getElementById('overlaySlider').addEventListener('input', (e) => {
   state.wallpaper.overlay = parseInt(e.target.value);
   document.getElementById('overlayValue').textContent = state.wallpaper.overlay + '%';
   applyWallpaper();
 });
 
-// Wallpaper grid
 document.getElementById('wallpaperGrid').addEventListener('click', (e) => {
   const item = e.target.closest('.wallpaper-item');
   if (!item) return;
@@ -2065,7 +1972,6 @@ document.getElementById('wallpaperGrid').addEventListener('click', (e) => {
   showToast('Wallpaper diganti', 'success');
 });
 
-// Wallpaper URL
 document.getElementById('applyWallpaperUrl').addEventListener('click', () => {
   const url = document.getElementById('wallpaperUrl').value.trim();
   if (!url) {
@@ -2080,7 +1986,6 @@ document.getElementById('applyWallpaperUrl').addEventListener('click', () => {
   showToast('Wallpaper diterapkan', 'success');
 });
 
-// Wallpaper upload
 document.getElementById('wallpaperFile').addEventListener('change', (e) => {
   const file = e.target.files[0];
   if (!file) return;
@@ -2100,7 +2005,6 @@ document.getElementById('wallpaperFile').addEventListener('change', (e) => {
   reader.readAsDataURL(file);
 });
 
-// Reset wallpaper
 document.getElementById('resetWallpaper').addEventListener('click', () => {
   state.wallpaper.type = 'preset';
   state.wallpaper.value = 'gradient1';
@@ -2114,7 +2018,6 @@ document.getElementById('resetWallpaper').addEventListener('click', () => {
   showToast('Wallpaper direset', 'success');
 });
 
-// Add alarm
 document.getElementById('addAlarm').addEventListener('click', () => {
   const time = document.getElementById('newAlarmTime').value;
   const label = document.getElementById('newAlarmLabel').value;
@@ -2164,13 +2067,11 @@ document.getElementById('addAlarm').addEventListener('click', () => {
   }
 });
 
-// Alarm music label
 document.getElementById('alarmMusicFile').addEventListener('change', (e) => {
   const file = e.target.files[0];
   document.getElementById('alarmMusicName').textContent = file ? file.name : 'Pilih file MP3 (atau gunakan alarm default)';
 });
 
-// Alarm list actions
 document.getElementById('alarmList').addEventListener('click', (e) => {
   const btn = e.target.closest('[data-action]');
   if (!btn) return;
@@ -2193,7 +2094,6 @@ document.getElementById('alarmList').addEventListener('click', (e) => {
   }
 });
 
-// Test alarm
 document.getElementById('testAlarm').addEventListener('click', () => {
   triggerAlarm({
     id: 0,
@@ -2204,10 +2104,8 @@ document.getElementById('testAlarm').addEventListener('click', () => {
   });
 });
 
-// Stop alarm
 document.getElementById('stopAlarm').addEventListener('click', stopAlarm);
 
-// Add schedule
 document.getElementById('addSchedule').addEventListener('click', () => {
   const cls = document.getElementById('newScheduleClass').value;
   const subject = document.getElementById('newScheduleSubject').value;
@@ -2244,7 +2142,6 @@ document.getElementById('addSchedule').addEventListener('click', () => {
   showToast('Jadwal ditambahkan', 'success');
 });
 
-// Schedule list actions
 document.getElementById('scheduleListSettings').addEventListener('click', (e) => {
   const btn = e.target.closest('[data-action="delete-schedule"]');
   if (!btn) return;
@@ -2255,7 +2152,6 @@ document.getElementById('scheduleListSettings').addEventListener('click', (e) =>
   showToast('Jadwal dihapus', 'success');
 });
 
-// Clear all schedules
 document.getElementById('clearSchedule').addEventListener('click', () => {
   if (confirm('Hapus semua jadwal?')) {
     state.schedules = [];
@@ -2265,7 +2161,6 @@ document.getElementById('clearSchedule').addEventListener('click', () => {
   }
 });
 
-// Save image
 document.getElementById('saveImage').addEventListener('click', () => {
   state.building.title = document.getElementById('setBuildingTitle').value;
   state.building.subtitle = document.getElementById('setBuildingSubtitle').value;
@@ -2279,7 +2174,6 @@ document.getElementById('saveImage').addEventListener('click', () => {
   showToast('Foto disimpan', 'success');
 });
 
-// Building upload
 document.getElementById('buildingFile').addEventListener('change', (e) => {
   const file = e.target.files[0];
   if (!file) return;
@@ -2297,7 +2191,6 @@ document.getElementById('buildingFile').addEventListener('change', (e) => {
   reader.readAsDataURL(file);
 });
 
-// Enable audio on click
 document.addEventListener('click', () => {
   try {
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -2305,7 +2198,6 @@ document.addEventListener('click', () => {
   } catch(e) {}
 }, { once: true });
 
-// Keyboard
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     if (document.getElementById('alarmModal').classList.contains('show')) {
@@ -2316,9 +2208,6 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// ============================================
-// INIT
-// ============================================
 function init() {
   loadState();
   applySettings();
