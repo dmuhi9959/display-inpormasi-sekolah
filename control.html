@@ -7,41 +7,41 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#061512;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;padding:20px;max-width:700px;margin:0 auto;min-height:100vh}
-h1{color:#f4c430;margin-bottom:8px;font-size:1.5rem}
-h3{color:#f4c430;margin:15px 0 8px;font-size:1rem;border-bottom:1px solid rgba(244,196,48,0.2);padding-bottom:5px}
-p.sub{color:rgba(255,255,255,0.5);margin-bottom:20px;font-size:0.85rem}
-label{display:block;margin-top:10px;color:rgba(255,255,255,0.6);font-size:0.75rem;text-transform:uppercase;letter-spacing:1px;font-weight:500}
-input,textarea,select{width:100%;padding:11px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:10px;color:#fff;font-size:16px;font-family:inherit;margin-top:4px}
-input:focus,textarea:focus,select:focus{outline:none;border-color:#f4c430}
-textarea{resize:vertical;min-height:60px}
-button{padding:12px 20px;background:#f4c430;color:#1a1a1a;border:none;border-radius:10px;font-weight:700;cursor:pointer;width:100%;margin-top:12px;font-size:0.9rem;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px}
-button:hover{background:#e6a820}
-.btn2{background:rgba(255,255,255,0.06);color:#fff;border:1px solid rgba(255,255,255,0.12)}
-.btn2:hover{background:rgba(255,255,255,0.1)}
-hr{border:none;border-top:1px solid rgba(255,255,255,0.1);margin:20px 0}
-.row{display:flex;gap:8px}
-.row>div{flex:1}
-.bell-row{background:rgba(255,255,255,0.04);padding:12px;border-radius:10px;margin-bottom:8px;border:1px solid rgba(255,255,255,0.08)}
-.bell-label{color:#f4c430;font-weight:700;font-size:0.9rem;margin-bottom:6px}
-.bell-time{display:flex;gap:8px;align-items:center}
-.bell-time input[type=time]{flex:1}
-.bell-time input[type=checkbox]{width:auto}
-.add-btn{background:rgba(255,255,255,0.04);border:1px dashed rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);padding:10px;border-radius:8px;cursor:pointer;width:100%;margin-top:8px;font-size:0.85rem;font-family:inherit}
-.add-btn:hover{border-color:#f4c430;color:#f4c430}
-#status{text-align:center;font-weight:700;margin-top:15px;padding:10px;border-radius:8px;min-height:20px}
-.ok{background:rgba(76,175,80,0.15);color:#4caf50}
-.err{background:rgba(255,82,82,0.15);color:#ff5252}
-.load{background:rgba(244,196,48,0.15);color:#f4c430}
-.del-btn{background:rgba(255,82,82,0.15);color:#ff5252;border:1px solid rgba(255,82,82,0.3);padding:8px 12px;border-radius:8px;cursor:pointer;font-size:0.8rem;font-family:inherit;margin-top:6px;width:100%}
-.del-btn:hover{background:#ff5252;color:#fff}
-.col-section{background:rgba(244,196,48,0.05);border:1px solid rgba(244,196,48,0.15);border-radius:10px;padding:14px;margin-bottom:12px}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #061512; color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; padding: 20px; max-width: 700px; margin: 0 auto; min-height: 100vh; }
+h1 { color: #f4c430; margin-bottom: 8px; font-size: 1.5rem; }
+h3 { color: #f4c430; margin: 15px 0 8px; font-size: 1rem; border-bottom: 1px solid rgba(244,196,48,0.2); padding-bottom: 5px; }
+p.sub { color: rgba(255,255,255,0.5); margin-bottom: 20px; font-size: 0.85rem; }
+label { display: block; margin-top: 10px; color: rgba(255,255,255,0.6); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 500; }
+input, textarea, select { width: 100%; padding: 11px 14px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; color: #fff; font-size: 16px; font-family: inherit; margin-top: 4px; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: #f4c430; }
+textarea { resize: vertical; min-height: 60px; }
+button { padding: 12px 20px; background: #f4c430; color: #1a1a1a; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 12px; font-size: 0.9rem; font-family: inherit; display: flex; align-items: center; justify-content: center; gap: 8px; }
+button:hover { background: #e6a820; }
+.btn2 { background: rgba(255,255,255,0.06); color: #fff; border: 1px solid rgba(255,255,255,0.12); }
+.btn2:hover { background: rgba(255,255,255,0.1); }
+hr { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 20px 0; }
+.row { display: flex; gap: 8px; }
+.row > div { flex: 1; }
+.bell-row { background: rgba(255,255,255,0.04); padding: 12px; border-radius: 10px; margin-bottom: 8px; border: 1px solid rgba(255,255,255,0.08); }
+.bell-label { color: #f4c430; font-weight: 700; font-size: 0.9rem; margin-bottom: 6px; }
+.bell-time { display: flex; gap: 8px; align-items: center; }
+.bell-time input[type=time] { flex: 1; }
+.bell-time input[type=checkbox] { width: auto; }
+.add-btn { background: rgba(255,255,255,0.04); border: 1px dashed rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); padding: 10px; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 8px; font-size: 0.85rem; font-family: inherit; }
+.add-btn:hover { border-color: #f4c430; color: #f4c430; }
+#status { text-align: center; font-weight: 700; margin-top: 15px; padding: 10px; border-radius: 8px; min-height: 20px; }
+.ok { background: rgba(76,175,80,0.15); color: #4caf50; }
+.err { background: rgba(255,82,82,0.15); color: #ff5252; }
+.load { background: rgba(244,196,48,0.15); color: #f4c430; }
+.del-btn { background: rgba(255,82,82,0.15); color: #ff5252; border: 1px solid rgba(255,82,82,0.3); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; font-family: inherit; margin-top: 6px; width: 100%; }
+.del-btn:hover { background: #ff5252; color: #fff; }
+.col-section { background: rgba(244,196,48,0.05); border: 1px solid rgba(244,196,48,0.15); border-radius: 10px; padding: 14px; margin-bottom: 12px; }
 </style>
 </head>
 <body>
 <h1><i class="fas fa-cog"></i> Control Display Sekolah</h1>
-<p class="sub">Atur setting di sini → TV auto-update dalam 5 detik</p>
+<p class="sub">Atur setting di sini -> TV auto-update dalam 5 detik</p>
 
 <h3><i class="fas fa-school"></i> Info Sekolah</h3>
 <label>Nama Sekolah</label>
@@ -55,7 +55,7 @@ hr{border:none;border-top:1px solid rgba(255,255,255,0.1);margin:20px 0}
 <label>Teks Arab</label>
 <input type="text" id="arabicText" value="بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ">
 <label>Motto</label>
-<input type="text" id="motto" value="Belajar • Beriman • Beramal">
+<input type="text" id="motto" value="Belajar - Beriman - Beramal">
 
 <hr>
 <h3><i class="fas fa-volume-up"></i> Volume & Pengumuman</h3>
@@ -116,77 +116,126 @@ hr{border:none;border-top:1px solid rgba(255,255,255,0.1);margin:20px 0}
 <div id="status"></div>
 
 <script>
-var DB="https://dispay-sekolah-default-rtdb.asia-southeast1.firebasedatabase.app";
-var bells={'masuk':{time:'07:00',label:'Jam Masuk Sekolah',enabled:true,musicUrl:''},'istirahat1':{time:'09:30',label:'Jam Istirahat 1',enabled:true,musicUrl:''},'ganti1':{time:'09:45',label:'Ganti Pelajaran 1',enabled:true,musicUrl:''},'ganti2':{time:'10:45',label:'Ganti Pelajaran 2',enabled:true,musicUrl:''},'istirahat2':{time:'11:30',label:'Jam Istirahat 2',enabled:true,musicUrl:''},'ganti3':{time:'12:30',label:'Ganti Pelajaran 3',enabled:true,musicUrl:''},'ganti4':{time:'13:30',label:'Ganti Pelajaran 4',enabled:true,musicUrl:''},'ganti5':{time:'14:30',label:'Ganti Pelajaran 5',enabled:true,musicUrl:''},'pulang':{time:'15:30',label:'Jam Pulang Sekolah',enabled:true,musicUrl:''}};
-var schedules=[];
+var DB = "https://dispay-sekolah-default-rtdb.asia-southeast1.firebasedatabase.app";
 
-function renderBells(){var h='';Object.keys(bells).forEach(function(k){var b=bells[k];h+='<div class="bell-row"><div class="bell-label">'+b.label+'</div><div class="bell-time"><input type="time" value="'+b.time+'" data-k="'+k+'" onchange="bells[this.dataset.k].time=this.value"><input type="checkbox" '+(b.enabled?'checked':'')+' data-k="'+k+'" onchange="bells[this.dataset.k].enabled=this.checked"> <span style="font-size:0.8rem">Aktif</span></div><input type="text" value="'+(b.musicUrl||'')+'" data-k="'+k+'" placeholder="URL MP3 (opsional)" onchange="bells[this.dataset.k].musicUrl=this.value" style="margin-top:4px;font-size:0.8rem"></div>';});document.getElementById('bellSlots').innerHTML=h;}
-
-function addSchedule(){schedules.push({class:'KELAS ',subject:'Mapel',start:'07:00',end:'08:00',column:'left'});renderSchedules();}
-
-function deleteSchedule(i){schedules.splice(i,1);renderSchedules();}
-
-function renderSchedules(){
-var h='';
-schedules.forEach(function(s,i){
-h+='<div class="bell-row">';
-h+='<div class="row"><div><label>Nama Kelas</label><input type="text" value="'+s.class+'" data-i="'+i+'" data-f="class" onchange="schedules[parseInt(this.dataset.i)].class=this.value"></div>';
-h+='<div><label>Mata Pelajaran</label><input type="text" value="'+s.subject+'" data-i="'+i+'" data-f="subject" onchange="schedules[parseInt(this.dataset.i)].subject=this.value"></div></div>';
-h+='<div class="row"><div><label>Jam Mulai</label><input type="time" value="'+s.start+'" data-i="'+i+'" data-f="start" onchange="schedules[parseInt(this.dataset.i)].start=this.value"></div>';
-h+='<div><label>Jam Selesai</label><input type="time" value="'+s.end+'" data-i="'+i+'" data-f="end" onchange="schedules[parseInt(this.dataset.i)].end=this.value"></div></div>';
-h+='<div class="row"><div><label>Tampil di Kolom</label><select data-i="'+i+'" data-f="column" onchange="schedules[parseInt(this.dataset.i)].column=this.value"><option value="left" '+(s.column==='left'?'selected':'')+'>Kolom Kiri</option><option value="right" '+(s.column==='right'?'selected':'')+'>Kolom Kanan</option></select></div>';
-h+='<div style="display:flex;align-items:flex-end"><button class="del-btn" onclick="deleteSchedule('+i+')"><i class="fas fa-trash"></i> Hapus</button></div></div>';
-h+='</div>';
-});
-document.getElementById('scheduleSlots').innerHTML=h;
-}
-
-function saveToFirebase(){
-var data={
-school:{name:val('schoolName'),address:val('schoolAddress'),website:val('schoolWebsite'),logo:val('schoolLogo').toUpperCase(),arabic:val('arabicText'),motto:val('motto')},
-volume:parseInt(val('volume')),
-announcements:{left:val('announcement1'),right:val('announcement2')},
-theme:val('theme'),
-wallpaperUrl:val('wallpaperUrl'),
-youtubeUrl:val('youtubeUrl'),
-ytOverlay:parseInt(val('ytOverlay')),
-building:{title:val('buildingTitle'),subtitle:val('buildingSubtitle')},
-colTitles:{left:val('colLeft'),right:val('colRight')},
-bells:{},schedules:schedules
+var bells = {
+  'masuk': { time: '07:00', label: 'Jam Masuk Sekolah', enabled: true, musicUrl: '' },
+  'istirahat1': { time: '09:30', label: 'Jam Istirahat 1', enabled: true, musicUrl: '' },
+  'ganti1': { time: '09:45', label: 'Ganti Pelajaran 1', enabled: true, musicUrl: '' },
+  'ganti2': { time: '10:45', label: 'Ganti Pelajaran 2', enabled: true, musicUrl: '' },
+  'istirahat2': { time: '11:30', label: 'Jam Istirahat 2', enabled: true, musicUrl: '' },
+  'ganti3': { time: '12:30', label: 'Ganti Pelajaran 3', enabled: true, musicUrl: '' },
+  'ganti4': { time: '13:30', label: 'Ganti Pelajaran 4', enabled: true, musicUrl: '' },
+  'ganti5': { time: '14:30', label: 'Ganti Pelajaran 5', enabled: true, musicUrl: '' },
+  'pulang': { time: '15:30', label: 'Jam Pulang Sekolah', enabled: true, musicUrl: '' }
 };
-Object.keys(bells).forEach(function(k){data.bells[k]={time:bells[k].time,label:bells[k].label,enabled:bells[k].enabled,musicUrl:bells[k].musicUrl||''};});
-setStatus('Menyimpan ke Firebase...','load');
-fetch(DB+'/settings.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
-.then(function(r){return r.json();})
-.then(function(){setStatus('Tersimpan! TV update otomatis 5 detik.','ok');})
-.catch(function(e){setStatus('Error: '+e.message,'err');});
+
+var schedules = [];
+
+function renderBells() {
+  var h = '';
+  Object.keys(bells).forEach(function(k) {
+    var b = bells[k];
+    h += '<div class="bell-row">';
+    h += '<div class="bell-label">' + b.label + '</div>';
+    h += '<div class="bell-time">';
+    h += '<input type="time" value="' + b.time + '" data-k="' + k + '" onchange="bells[this.dataset.k].time=this.value">';
+    h += '<input type="checkbox" ' + (b.enabled ? 'checked' : '') + ' data-k="' + k + '" onchange="bells[this.dataset.k].enabled=this.checked">';
+    h += '<span style="font-size:0.8rem">Aktif</span>';
+    h += '</div>';
+    h += '<input type="text" value="' + (b.musicUrl || '') + '" data-k="' + k + '" placeholder="URL MP3 (opsional)" onchange="bells[this.dataset.k].musicUrl=this.value" style="margin-top:4px;font-size:0.8rem">';
+    h += '</div>';
+  });
+  document.getElementById('bellSlots').innerHTML = h;
 }
 
-function loadFromFirebase(){
-setStatus('Loading dari Firebase...','load');
-fetch(DB+'/settings.json')
-.then(function(r){return r.json();})
-.then(function(d){
-if(!d){setStatus('Belum ada data. Atur setting lalu klik Simpan.','load');return;}
-if(d.school){setVal('schoolName',d.school.name);setVal('schoolAddress',d.school.address);setVal('schoolWebsite',d.school.website);setVal('schoolLogo',d.school.logo);setVal('arabicText',d.school.arabic);setVal('motto',d.school.motto);}
-if(d.volume!==undefined)setVal('volume',d.volume);
-if(d.announcements){setVal('announcement1',d.announcements.left);setVal('announcement2',d.announcements.right);}
-if(d.theme)setVal('theme',d.theme);
-if(d.wallpaperUrl!==undefined)setVal('wallpaperUrl',d.wallpaperUrl);
-if(d.youtubeUrl!==undefined)setVal('youtubeUrl',d.youtubeUrl);
-if(d.ytOverlay!==undefined)setVal('ytOverlay',d.ytOverlay);
-if(d.building){setVal('buildingTitle',d.building.title);setVal('buildingSubtitle',d.building.subtitle);}
-if(d.colTitles){setVal('colLeft',d.colTitles.left);setVal('colRight',d.colTitles.right);}
-if(d.bells){Object.keys(d.bells).forEach(function(k){if(bells[k]){bells[k].time=d.bells[k].time;bells[k].enabled=d.bells[k].enabled;bells[k].musicUrl=d.bells[k].musicUrl||'';}});renderBells();}
-if(d.schedules){schedules=d.schedules;renderSchedules();}
-setStatus('Data dimuat!','ok');
-})
-.catch(function(e){setStatus('Error: '+e.message,'err');});
+function addSchedule() {
+  schedules.push({ class: 'KELAS ', subject: 'Mapel', start: '07:00', end: '08:00', column: 'left' });
+  renderSchedules();
 }
 
-function val(id){return document.getElementById(id).value;}
-function setVal(id,v){var el=document.getElementById(id);if(el&&v!==undefined&&v!==null)el.value=v;}
-function setStatus(msg,cls){var s=document.getElementById('status');s.textContent=msg;s.className=cls||'';}
+function deleteSchedule(i) {
+  schedules.splice(i, 1);
+  renderSchedules();
+}
+
+function renderSchedules() {
+  var h = '';
+  schedules.forEach(function(s, i) {
+    h += '<div class="bell-row">';
+    h += '<div class="row"><div><label>Nama Kelas</label>';
+    h += '<input type="text" value="' + s.class + '" data-i="' + i + '" data-f="class" onchange="schedules[parseInt(this.dataset.i)].class=this.value"></div>';
+    h += '<div><label>Mata Pelajaran</label>';
+    h += '<input type="text" value="' + s.subject + '" data-i="' + i + '" data-f="subject" onchange="schedules[parseInt(this.dataset.i)].subject=this.value"></div></div>';
+    h += '<div class="row"><div><label>Jam Mulai</label>';
+    h += '<input type="time" value="' + s.start + '" data-i="' + i + '" data-f="start" onchange="schedules[parseInt(this.dataset.i)].start=this.value"></div>';
+    h += '<div><label>Jam Selesai</label>';
+    h += '<input type="time" value="' + s.end + '" data-i="' + i + '" data-f="end" onchange="schedules[parseInt(this.dataset.i)].end=this.value"></div></div>';
+    h += '<div class="row"><div><label>Tampil di Kolom</label>';
+    h += '<select data-i="' + i + '" data-f="column" onchange="schedules[parseInt(this.dataset.i)].column=this.value">';
+    h += '<option value="left" ' + (s.column === 'left' ? 'selected' : '') + '>Kolom Kiri</option>';
+    h += '<option value="right" ' + (s.column === 'right' ? 'selected' : '') + '>Kolom Kanan</option>';
+    h += '</select></div>';
+    h += '<div style="display:flex;align-items:flex-end"><button class="del-btn" onclick="deleteSchedule(' + i + ')"><i class="fas fa-trash"></i> Hapus</button></div></div>';
+    h += '</div>';
+  });
+  document.getElementById('scheduleSlots').innerHTML = h;
+}
+
+function saveToFirebase() {
+  var data = {
+    school: { name: val('schoolName'), address: val('schoolAddress'), website: val('schoolWebsite'), logo: val('schoolLogo').toUpperCase(), arabic: val('arabicText'), motto: val('motto') },
+    volume: parseInt(val('volume')),
+    announcements: { left: val('announcement1'), right: val('announcement2') },
+    theme: val('theme'),
+    wallpaperUrl: val('wallpaperUrl'),
+    youtubeUrl: val('youtubeUrl'),
+    ytOverlay: parseInt(val('ytOverlay')),
+    building: { title: val('buildingTitle'), subtitle: val('buildingSubtitle') },
+    colTitles: { left: val('colLeft'), right: val('colRight') },
+    bells: {},
+    schedules: schedules
+  };
+  Object.keys(bells).forEach(function(k) {
+    data.bells[k] = { time: bells[k].time, label: bells[k].label, enabled: bells[k].enabled, musicUrl: bells[k].musicUrl || '' };
+  });
+  setStatus('Menyimpan ke Firebase...', 'load');
+  fetch(DB + '/settings.json', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+    .then(function(r) { return r.json(); })
+    .then(function() { setStatus('Tersimpan! TV update otomatis 5 detik.', 'ok'); })
+    .catch(function(e) { setStatus('Error: ' + e.message, 'err'); });
+}
+
+function loadFromFirebase() {
+  setStatus('Loading dari Firebase...', 'load');
+  fetch(DB + '/settings.json')
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (!d) { setStatus('Belum ada data. Atur setting lalu klik Simpan.', 'load'); return; }
+      if (d.school) { setVal('schoolName', d.school.name); setVal('schoolAddress', d.school.address); setVal('schoolWebsite', d.school.website); setVal('schoolLogo', d.school.logo); setVal('arabicText', d.school.arabic); setVal('motto', d.school.motto); }
+      if (d.volume !== undefined) setVal('volume', d.volume);
+      if (d.announcements) { setVal('announcement1', d.announcements.left); setVal('announcement2', d.announcements.right); }
+      if (d.theme) setVal('theme', d.theme);
+      if (d.wallpaperUrl !== undefined) setVal('wallpaperUrl', d.wallpaperUrl);
+      if (d.youtubeUrl !== undefined) setVal('youtubeUrl', d.youtubeUrl);
+      if (d.ytOverlay !== undefined) setVal('ytOverlay', d.ytOverlay);
+      if (d.building) { setVal('buildingTitle', d.building.title); setVal('buildingSubtitle', d.building.subtitle); }
+      if (d.colTitles) { setVal('colLeft', d.colTitles.left); setVal('colRight', d.colTitles.right); }
+      if (d.bells) {
+        Object.keys(d.bells).forEach(function(k) {
+          if (bells[k]) { bells[k].time = d.bells[k].time; bells[k].enabled = d.bells[k].enabled; bells[k].musicUrl = d.bells[k].musicUrl || ''; }
+        });
+        renderBells();
+      }
+      if (d.schedules) { schedules = d.schedules; renderSchedules(); }
+      setStatus('Data dimuat!', 'ok');
+    })
+    .catch(function(e) { setStatus('Error: ' + e.message, 'err'); });
+}
+
+function val(id) { return document.getElementById(id).value; }
+function setVal(id, v) { var el = document.getElementById(id); if (el && v !== undefined && v !== null) el.value = v; }
+function setStatus(msg, cls) { var s = document.getElementById('status'); s.textContent = msg; s.className = cls || ''; }
 
 renderBells();
 renderSchedules();
