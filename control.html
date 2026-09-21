@@ -2,216 +2,238 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#1a8a6f">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Display Sekolah">
-<title>Display Sekolah</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Control Display Sekolah</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-:root{--bg-overlay:rgba(6,24,22,0.82);--bg-solid:#061512;--primary:#1a8a6f;--primary-dark:#0d5240;--primary-light:#4dd0a8;--accent:#f4c430;--accent-2:#ffd966;--accent-3:#ff8c42;--text:#fff;--text-muted:rgba(255,255,255,0.72);--card-bg:rgba(255,255,255,0.05);--card-border:rgba(255,255,255,0.12);--danger:#ff5252;--success:#4caf50;--transition:all 0.3s cubic-bezier(0.4,0,0.2,1);--primary-rgb:26,138,111;--primary-dark-rgb:13,82,64;--primary-light-rgb:77,208,168;--bg-solid-rgb:6,21,18;--accent-rgb:244,196,48;--accent3-rgb:255,140,66}
-*{margin:0;padding:0;box-sizing:border-box}html{height:100%}
-body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);height:100vh;height:100dvh;overflow:hidden;position:relative;background:var(--bg-solid)}
-#wallpaper-layer{position:fixed;inset:0;width:100%;height:100%;background-size:cover;background-position:center;background-repeat:no-repeat;z-index:0}
-#wallpaper-layer::after{content:'';position:absolute;inset:0;background:var(--bg-overlay)}
-#wallpaper-video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;display:none}
-#wallpaper-video.active{display:block}
-#youtube-bg{position:fixed;inset:0;z-index:0;display:none;overflow:hidden}
-#youtube-bg.active{display:block}
-#youtube-bg iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100vw;height:56.25vw;min-height:100vh;min-width:177.78vh;border:0;z-index:1;pointer-events:none}
-#youtube-overlay{position:absolute;inset:0;z-index:2;pointer-events:none}
-.pattern-overlay{position:fixed;inset:0;z-index:1;pointer-events:none;background-image:radial-gradient(circle at 15% 25%,rgba(var(--primary-rgb),0.18) 0%,transparent 40%),radial-gradient(circle at 85% 75%,rgba(var(--accent-rgb),0.12) 0%,transparent 40%)}
-.particles{position:fixed;inset:0;z-index:2;pointer-events:none;overflow:hidden}
-.particle{position:absolute;background:rgba(var(--accent-rgb),0.35);border-radius:50%;animation:float linear infinite}
-@keyframes float{0%{transform:translateY(100vh);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-10vh);opacity:0}}
-#audio-unlock{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.95);display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:20px}
-#audio-unlock.show{display:flex}
-#audio-unlock i{font-size:3rem;color:var(--accent);margin-bottom:20px}
-#audio-unlock h2{font-size:1.5rem;margin-bottom:10px}
-#audio-unlock p{color:var(--text-muted);margin-bottom:24px;font-size:0.9rem}
-#audio-unlock button{padding:16px 40px;background:linear-gradient(135deg,var(--accent),#e6a820);color:#1a1a1a;border:none;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer;font-family:inherit}
-.bell-flash-overlay{position:fixed;inset:0;z-index:99;pointer-events:none;display:none}
-body.bell-active .bell-flash-overlay{display:block;background:rgba(255,0,0,0.15);animation:bellFlash 0.6s ease-in-out infinite}
-@keyframes bellFlash{0%,100%{opacity:0.2}50%{opacity:0.6}}
-.bell-border{position:fixed;inset:0;z-index:99;pointer-events:none;display:none;border:8px solid var(--danger)}
-body.bell-active .bell-border{display:block;animation:borderFlash 0.5s ease-in-out infinite}
-@keyframes borderFlash{0%,100%{border-color:#ff0000;box-shadow:inset 0 0 80px rgba(255,0,0,0.5),0 0 40px rgba(255,0,0,0.4)}50%{border-color:#ffff00;box-shadow:inset 0 0 120px rgba(255,200,0,0.7),0 0 80px rgba(255,200,0,0.6)}}
-body.bell-active .display-header{animation:headerFlash 0.5s ease-in-out infinite}
-@keyframes headerFlash{0%,100%{background:linear-gradient(135deg,rgba(var(--primary-dark-rgb),0.95),rgba(var(--bg-solid-rgb),0.95))}50%{background:linear-gradient(135deg,rgba(255,0,0,0.7),rgba(120,0,0,0.85))}}
-body.bell-active .clock-widget,body.bell-active .activity-progress-mini,body.bell-active .schedule-card.active{animation:cardFlash 0.5s ease-in-out infinite}
-@keyframes cardFlash{0%,100%{box-shadow:0 4px 20px rgba(255,0,0,0.4);border-color:rgba(255,0,0,0.6)}50%{box-shadow:0 4px 40px rgba(255,200,0,0.6);border-color:rgba(255,200,0,0.8)}}
-body.bell-active .clock-time{animation:textFlash 0.5s ease-in-out infinite}
-@keyframes textFlash{0%,100%{background:linear-gradient(135deg,#ff0000,#ff8c42);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 10px rgba(255,0,0,0.8))}50%{background:linear-gradient(135deg,#ffff00,#fff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 20px rgba(255,255,0,0.9))}}
-body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite}
-@keyframes secondsFlash{0%,100%{color:#ff0000}50%{color:#ffff00}}
-.display-container{position:relative;z-index:10;width:100vw;height:100vh;height:100dvh;display:grid;grid-template-rows:auto 1fr auto;gap:0}
-.display-header{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:14px 28px;background:linear-gradient(135deg,rgba(var(--primary-dark-rgb),0.95),rgba(var(--bg-solid-rgb),0.95));border-bottom:3px solid var(--accent);box-shadow:0 4px 24px rgba(0,0,0,0.4)}
-.header-left{display:flex;align-items:center;gap:14px}
-.school-logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-3));display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#1a1a1a;font-weight:900;box-shadow:0 6px 20px rgba(var(--accent-rgb),0.4);flex-shrink:0;cursor:pointer}
-.school-info h1{font-size:1.4rem;font-weight:800;line-height:1.1;letter-spacing:-0.3px;background:linear-gradient(90deg,#fff,var(--accent-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.school-info .subtitle{font-size:0.78rem;color:var(--text-muted);margin-top:3px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.school-info .subtitle span{display:flex;align-items:center;gap:4px}
-.school-info .subtitle i{color:var(--primary-light);font-size:0.7rem}
-.header-center{text-align:center;padding:0 20px}
-.header-center .arabic{font-family:'Amiri',serif;font-size:1.2rem;color:var(--accent);margin-bottom:2px}
-.header-center .motto{font-size:0.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:2px}
-.header-right{display:flex;align-items:center;justify-content:flex-end;gap:16px}
-.datetime-box{text-align:right;background:rgba(0,0,0,0.3);padding:8px 16px;border-radius:10px;border:1px solid rgba(var(--accent-rgb),0.2)}
-.datetime-box .day-date{font-size:0.95rem;color:var(--accent);font-weight:700;text-transform:capitalize}
-.datetime-box .time{font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:700;color:#fff;margin-top:2px;letter-spacing:1px}
-.main-content{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:16px;padding:16px 20px;overflow:hidden}
-.schedule-column{display:flex;flex-direction:column;gap:10px;overflow:hidden}
-.column-title{background:linear-gradient(135deg,var(--primary-dark),var(--primary));padding:10px 16px;border-radius:10px;text-align:center;font-weight:700;font-size:0.9rem;text-transform:uppercase;letter-spacing:1.5px;box-shadow:0 4px 12px rgba(0,0,0,0.3);border:1px solid rgba(var(--accent-rgb),0.3);display:flex;align-items:center;justify-content:center;gap:10px;flex-shrink:0}
-.column-title i{color:var(--accent)}
-.schedule-list{flex:1;display:flex;flex-direction:column;gap:8px;overflow-y:auto;padding-right:4px}
-.schedule-card{background:linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03));border:1px solid var(--card-border);border-radius:12px;padding:12px 14px;transition:var(--transition);position:relative;overflow:hidden;flex-shrink:0}
-.schedule-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--primary-light)}
-.schedule-card.active{background:linear-gradient(135deg,rgba(var(--accent-rgb),0.18),rgba(var(--accent-rgb),0.05));border-color:var(--accent);box-shadow:0 4px 20px rgba(var(--accent-rgb),0.2);transform:scale(1.02)}
-.schedule-card.active::before{background:var(--accent);width:5px}
-.schedule-card.next::before{background:var(--accent-3)}
-.schedule-card .class-name{font-size:1rem;font-weight:700;color:#fff;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;gap:8px}
-.schedule-card .class-name .badge{font-size:0.6rem;padding:2px 8px;background:var(--accent);color:#1a1a1a;border-radius:50px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap}
-.schedule-card.next .class-name .badge{background:var(--accent-3)}
-.schedule-card .class-time{font-family:'Orbitron',sans-serif;font-size:0.85rem;color:var(--accent-2);margin-bottom:4px;display:flex;align-items:center;gap:6px}
-.schedule-card .class-subject{font-size:0.85rem;color:var(--text-muted);font-weight:500}
-.schedule-card .class-subject i{color:var(--primary-light);margin-right:4px}
-.center-column{display:flex;flex-direction:column;gap:12px;overflow:hidden}
-.building-image{flex:1;border-radius:16px;overflow:hidden;position:relative;background:linear-gradient(135deg,var(--primary-dark),var(--bg-solid));border:1px solid var(--card-border);box-shadow:0 12px 40px rgba(0,0,0,0.4);min-height:200px}
-.building-image .slide{position:absolute;inset:0;opacity:0;transition:opacity 1.5s ease;background-size:cover;background-position:center}
-.building-image .slide.active{opacity:1}
-.building-image::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(var(--bg-solid-rgb),0.9));pointer-events:none;z-index:2}
-.slide-indicators{position:absolute;top:12px;right:12px;display:flex;gap:6px;z-index:3}
-.slide-indicator{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.4);transition:var(--transition)}
-.slide-indicator.active{background:var(--accent);width:24px;border-radius:10px}
-.building-caption{position:absolute;bottom:0;left:0;right:0;padding:16px 20px;z-index:3}
-.building-caption h2{font-size:1.3rem;font-weight:800;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,0.8)}
-.building-caption p{font-size:0.8rem;color:var(--accent-2);margin-top:4px;text-shadow:0 2px 8px rgba(0,0,0,0.8)}
-.clock-widget{background:linear-gradient(135deg,rgba(var(--primary-dark-rgb),0.6),rgba(var(--bg-solid-rgb),0.6));border:1px solid var(--card-border);border-radius:14px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;backdrop-filter:blur(10px);flex-shrink:0}
-.clock-widget .clock-time{font-family:'Orbitron',sans-serif;font-size:2rem;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
-.clock-widget .clock-seconds{font-family:'Orbitron',sans-serif;font-size:1.1rem;color:var(--accent-3)}
-.clock-widget .clock-label{font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:2px;margin-top:4px}
-.clock-widget .clock-icon{font-size:1.8rem;color:var(--accent);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.6;transform:scale(0.95)}}
-.activity-progress-mini{background:rgba(255,255,255,0.05);border-radius:10px;padding:10px 14px;border:1px solid var(--card-border);flex-shrink:0}
-.activity-progress-mini .label{font-size:0.7rem;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;display:flex;justify-content:space-between;gap:8px}
-.progress-bar-mini{height:6px;background:rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;position:relative}
-.progress-bar-mini-fill{height:100%;background:linear-gradient(90deg,var(--primary-light),var(--accent));border-radius:10px;transition:width 1s linear;position:relative}
-.progress-bar-mini-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);animation:shimmer 2s linear infinite}
-@keyframes shimmer{to{transform:translateX(100%)}}
-.display-footer{background:linear-gradient(135deg,rgba(var(--primary-dark-rgb),0.95),rgba(var(--bg-solid-rgb),0.95));border-top:3px solid var(--accent);padding:10px 20px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.footer-section{display:flex;align-items:center;gap:12px;padding:6px 14px;background:rgba(0,0,0,0.3);border-radius:10px;overflow:hidden}
-.footer-section .footer-icon{width:32px;height:32px;border-radius:8px;background:var(--accent);color:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:0.85rem;flex-shrink:0}
-.footer-section .footer-icon.red{background:var(--accent-3)}
-.footer-section .footer-text{flex:1;overflow:hidden;white-space:nowrap;position:relative}
-.footer-section .footer-text .ticker-text{display:inline-block;animation:scrollText 25s linear infinite;font-size:0.85rem;color:var(--text)}
-.footer-section .footer-text .ticker-text strong{color:var(--accent);margin-right:8px}
-@keyframes scrollText{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
-.toast{position:fixed;top:24px;left:50%;transform:translateX(-50%) translateY(-100px);background:linear-gradient(135deg,#0a1f1a,#1a2e28);border:1px solid var(--accent);color:var(--text);padding:12px 22px;border-radius:12px;z-index:200;transition:transform 0.3s ease;display:flex;align-items:center;gap:10px;box-shadow:0 10px 40px rgba(0,0,0,0.5);font-size:0.85rem;max-width:90vw}
-.toast.show{transform:translateX(-50%) translateY(0)}
-.alarm-modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);z-index:150;display:none;align-items:center;justify-content:center;padding:20px}
-.alarm-modal.show{display:flex}
-.alarm-modal-content{background:linear-gradient(135deg,#0a1f1a,#1a2e28);border:2px solid var(--danger);border-radius:24px;padding:36px;text-align:center;max-width:400px;width:100%;box-shadow:0 20px 80px rgba(255,0,0,0.6)}
-.alarm-icon{width:80px;height:80px;margin:0 auto 18px;border-radius:50%;background:linear-gradient(135deg,var(--danger),var(--accent-3));display:flex;align-items:center;justify-content:center;font-size:2.2rem;color:#fff;animation:ring 0.5s ease-in-out infinite;box-shadow:0 0 40px rgba(255,0,0,0.6)}
-@keyframes ring{0%,100%{transform:rotate(0) scale(1)}25%{transform:rotate(-15deg) scale(1.1)}75%{transform:rotate(15deg) scale(1.1)}}
-.alarm-modal h2{font-size:1.6rem;margin-bottom:6px;color:#fff}
-.alarm-modal p{color:var(--text-muted);margin-bottom:22px}
-::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:rgba(0,0,0,0.2)}::-webkit-scrollbar-thumb{background:rgba(var(--accent-rgb),0.3);border-radius:10px}
-@media(max-width:1100px){.main-content{grid-template-columns:1fr 1.2fr}.schedule-column:nth-child(3){display:none}}
-@media(max-width:768px){.display-header{grid-template-columns:1fr auto;padding:10px 16px}.header-center{display:none}.main-content{grid-template-columns:1fr;grid-template-rows:auto 1fr;padding:10px}.center-column{order:-1}.schedule-column:nth-child(3){display:none}.display-footer{grid-template-columns:1fr}.school-info h1{font-size:1rem}.school-info .subtitle{font-size:0.65rem}.datetime-box .time{font-size:1.1rem}.clock-widget .clock-time{font-size:1.5rem}.clock-widget{padding:10px 14px}}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #061512; color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; padding: 20px; max-width: 700px; margin: 0 auto; min-height: 100vh; }
+h1 { color: #f4c430; margin-bottom: 8px; font-size: 1.5rem; }
+h3 { color: #f4c430; margin: 15px 0 8px; font-size: 1rem; border-bottom: 1px solid rgba(244,196,48,0.2); padding-bottom: 5px; }
+p.sub { color: rgba(255,255,255,0.5); margin-bottom: 20px; font-size: 0.85rem; }
+label { display: block; margin-top: 10px; color: rgba(255,255,255,0.6); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 500; }
+input, textarea, select { width: 100%; padding: 11px 14px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; color: #fff; font-size: 16px; font-family: inherit; margin-top: 4px; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: #f4c430; }
+textarea { resize: vertical; min-height: 60px; }
+button { padding: 12px 20px; background: #f4c430; color: #1a1a1a; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 12px; font-size: 0.9rem; font-family: inherit; display: flex; align-items: center; justify-content: center; gap: 8px; }
+button:hover { background: #e6a820; }
+.btn2 { background: rgba(255,255,255,0.06); color: #fff; border: 1px solid rgba(255,255,255,0.12); }
+.btn2:hover { background: rgba(255,255,255,0.1); }
+hr { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 20px 0; }
+.row { display: flex; gap: 8px; }
+.row > div { flex: 1; }
+.bell-row { background: rgba(255,255,255,0.04); padding: 12px; border-radius: 10px; margin-bottom: 8px; border: 1px solid rgba(255,255,255,0.08); }
+.bell-label { color: #f4c430; font-weight: 700; font-size: 0.9rem; margin-bottom: 6px; }
+.bell-time { display: flex; gap: 8px; align-items: center; }
+.bell-time input[type=time] { flex: 1; }
+.bell-time input[type=checkbox] { width: auto; }
+.add-btn { background: rgba(255,255,255,0.04); border: 1px dashed rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); padding: 10px; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 8px; font-size: 0.85rem; font-family: inherit; }
+.add-btn:hover { border-color: #f4c430; color: #f4c430; }
+#status { text-align: center; font-weight: 700; margin-top: 15px; padding: 10px; border-radius: 8px; min-height: 20px; }
+.ok { background: rgba(76,175,80,0.15); color: #4caf50; }
+.err { background: rgba(255,82,82,0.15); color: #ff5252; }
+.load { background: rgba(244,196,48,0.15); color: #f4c430; }
+.del-btn { background: rgba(255,82,82,0.15); color: #ff5252; border: 1px solid rgba(255,82,82,0.3); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; font-family: inherit; margin-top: 6px; width: 100%; }
+.del-btn:hover { background: #ff5252; color: #fff; }
+.col-section { background: rgba(244,196,48,0.05); border: 1px solid rgba(244,196,48,0.15); border-radius: 10px; padding: 14px; margin-bottom: 12px; }
 </style>
 </head>
 <body>
-<div id="audio-unlock"><i class="fas fa-volume-up"></i><h2>Aktifkan Suara</h2><p>Ketuk tombol di bawah untuk mengaktifkan suara bell.</p><button id="unlockBtn">KETUK DI SINI</button></div>
-<div id="wallpaper-layer"></div>
-<video id="wallpaper-video" loop muted playsinline></video>
-<div id="youtube-bg"><iframe id="youtube-iframe" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe><div id="youtube-overlay"></div></div>
-<div class="pattern-overlay"></div>
-<div class="particles" id="particles"></div>
-<div class="bell-flash-overlay"></div>
-<div class="bell-border"></div>
-<div class="display-container">
-<header class="display-header">
-<div class="header-left"><div class="school-logo" id="schoolLogo">PJ</div><div class="school-info"><h1 id="schoolName">PPTQ JASMA DIGITAL</h1><div class="subtitle"><span><i class="fas fa-map-marker-alt"></i> <span id="schoolAddress">Jl. Pendidikan No. 123</span></span><span><i class="fas fa-globe"></i> <span id="schoolWebsite">www.pptq-jasma.sch.id</span></span></div></div></div>
-<div class="header-center"><div class="arabic" id="arabicText">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div><div class="motto" id="motto">Belajar - Beriman - Beramal</div></div>
-<div class="header-right"><div class="datetime-box"><div class="day-date" id="dayDate"></div><div class="time" id="currentTime">00:00:00</div></div></div>
-</header>
-<div class="main-content">
-<div class="schedule-column"><div class="column-title" id="colLeftTitle"><i class="fas fa-calendar-alt"></i> JADWAL PELAJARAN</div><div class="schedule-list" id="scheduleListLeft"></div></div>
-<div class="center-column">
-<div class="building-image" id="buildingImage"><div class="slide-indicators" id="slideIndicators"></div><div class="building-caption"><h2 id="buildingTitle">Gedung Utama Sekolah</h2><p id="buildingSubtitle">Pusat kegiatan belajar mengajar</p></div></div>
-<div class="clock-widget"><div><div class="clock-time" id="clockTime">00:00</div><div class="clock-label">Waktu Sekarang</div></div><div class="clock-seconds" id="clockSeconds">00</div><div class="clock-icon"><i class="fas fa-clock"></i></div></div>
-<div class="activity-progress-mini"><div class="label"><span id="currentActivityLabel">Kegiatan Saat Ini</span><span id="activityTimeLabel">--:--</span></div><div class="progress-bar-mini"><div class="progress-bar-mini-fill" id="progressBar" style="width:0%"></div></div></div>
+<h1><i class="fas fa-cog"></i> Control Display Sekolah</h1>
+<p class="sub">Atur setting di sini -> TV auto-update dalam 5 detik</p>
+
+<h3><i class="fas fa-school"></i> Info Sekolah</h3>
+<label>Nama Sekolah</label>
+<input type="text" id="schoolName" value="PPTQ JASMA DIGITAL">
+<label>Alamat</label>
+<input type="text" id="schoolAddress" value="Jl. Pendidikan No. 123, Indonesia">
+<label>Website</label>
+<input type="text" id="schoolWebsite" value="www.pptq-jasma.sch.id">
+<label>Logo (2 huruf)</label>
+<input type="text" id="schoolLogo" value="PJ" maxlength="2">
+<label>Teks Arab</label>
+<input type="text" id="arabicText" value="بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ">
+<label>Motto</label>
+<input type="text" id="motto" value="Belajar - Beriman - Beramal">
+
+<hr>
+<h3><i class="fas fa-volume-up"></i> Volume & Pengumuman</h3>
+<label>Volume Bell (%)</label>
+<input type="range" id="volume" min="0" max="100" value="80">
+<label>Pengumuman 1 (kiri bawah)</label>
+<textarea id="announcement1">Seluruh siswa wajib berpakaian seragam lengkap, rapi, dan bersepatu hitam saat masuk sekolah.</textarea>
+<label>Pengumuman 2 (kanan bawah)</label>
+<textarea id="announcement2">Awal pendaftaran siswa ber 57 hari lagi. Hubungi panitia penerimaan siswa baru di ruang TU.</textarea>
+
+<hr>
+<h3><i class="fas fa-palette"></i> Tema Warna</h3>
+<label>Pilih Tema</label>
+<select id="theme">
+<option value="islamic-green">Hijau Islamic</option>
+<option value="royal-blue">Biru Royal</option>
+<option value="royal-purple">Ungu Royal</option>
+<option value="sunset-orange">Sunset Orange</option>
+<option value="crimson-red">Merah Crimson</option>
+<option value="teal-ocean">Teal Ocean</option>
+<option value="dark-gold">Emas Gelap</option>
+<option value="midnight-indigo">Indigo Malam</option>
+</select>
+
+<hr>
+<h3><i class="fas fa-image"></i> Wallpaper & Foto</h3>
+<label>URL Gambar Wallpaper</label>
+<input type="text" id="wallpaperUrl" placeholder="https://... (kosongkan untuk default)">
+<label>YouTube Background (URL)</label>
+<input type="text" id="youtubeUrl" placeholder="https://www.youtube.com/watch?v=...">
+<label>Transparansi YouTube (%)</label>
+<input type="range" id="ytOverlay" min="0" max="80" value="30">
+<label>Judul Foto Gedung</label>
+<input type="text" id="buildingTitle" value="Gedung Utama Sekolah">
+<label>Subtitle Foto</label>
+<input type="text" id="buildingSubtitle" value="Pusat kegiatan belajar mengajar">
+
+<hr>
+<h3><i class="fas fa-bell"></i> Bell Sekolah</h3>
+<div id="bellSlots"></div>
+
+<hr>
+<h3><i class="fas fa-calendar"></i> Nama Kolom & Jadwal</h3>
+<div class="col-section">
+<label>Nama Kolom Kiri (yang ada di TV)</label>
+<input type="text" id="colLeft" value="JADWAL PELAJARAN" style="font-size:1.1rem;font-weight:700">
+<label>Nama Kolom Kanan (yang ada di TV)</label>
+<input type="text" id="colRight" value="JADWAL PELAJARAN" style="font-size:1.1rem;font-weight:700">
+<p style="font-size:0.7rem;color:rgba(255,255,255,0.4);margin-top:8px">Contoh: KELAS 1-3 SD, KELAS 10 SMA, JADWAL PELAJARAN, dll</p>
 </div>
-<div class="schedule-column"><div class="column-title" id="colRightTitle"><i class="fas fa-calendar-alt"></i> JADWAL PELAJARAN</div><div class="schedule-list" id="scheduleListRight"></div></div>
-</div>
-<footer class="display-footer">
-<div class="footer-section"><div class="footer-icon"><i class="fas fa-tshirt"></i></div><div class="footer-text"><div class="ticker-text"><strong>PENGUMUMAN:</strong> <span id="footerAnnouncement1">Seluruh siswa wajib berpakaian seragam lengkap.</span></div></div></div>
-<div class="footer-section"><div class="footer-icon red"><i class="fas fa-bell"></i></div><div class="footer-text"><div class="ticker-text"><strong>INFO:</strong> <span id="footerAnnouncement2">Pendaftaran siswa baru dibuka.</span></div></div></div>
-</footer>
-</div>
-<div class="alarm-modal" id="alarmModal"><div class="alarm-modal-content"><div class="alarm-icon"><i class="fas fa-bell"></i></div><h2 id="alarmModalTitle">Alarm!</h2><p id="alarmModalLabel">Waktunya</p><button onclick="stopAlarm()" style="background:linear-gradient(135deg,#ff5252,#c82333);color:#fff;padding:12px 24px;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;margin-top:8px"><i class="fas fa-stop"></i> Hentikan</button></div></div>
-<div class="toast" id="toast"><i class="fas fa-info-circle"></i><span id="toastMessage"></span></div>
+<label>Daftar Jadwal Pelajaran</label>
+<div id="scheduleSlots"></div>
+<button class="add-btn" onclick="addSchedule()"><i class="fas fa-plus"></i> Tambah Jadwal</button>
+
+<hr>
+<button onclick="saveToFirebase()"><i class="fas fa-save"></i> SIMPAN KE FIREBASE</button>
+<button class="btn2" onclick="loadFromFirebase()"><i class="fas fa-download"></i> LOAD DARI FIREBASE</button>
+<div id="status"></div>
+
 <script>
-if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
-var DB="https://dispay-sekolah-default-rtdb.asia-southeast1.firebasedatabase.app";
-var themes=[{id:'islamic-green',bgSolid:'#061512',bgOverlay:'#061810',primary:'#1a8a6f',primaryDark:'#0d5240',primaryLight:'#4dd0a8',accent:'#f4c430',accent2:'#ffd966',accent3:'#ff8c42'},{id:'royal-blue',bgSolid:'#080f23',bgOverlay:'#0a1530',primary:'#2563eb',primaryDark:'#1e40af',primaryLight:'#60a5fa',accent:'#fbbf24',accent2:'#fcd34d',accent3:'#f97316'},{id:'royal-purple',bgSolid:'#140a23',bgOverlay:'#1a1030',primary:'#7c3aed',primaryDark:'#5b21b6',primaryLight:'#a78bfa',accent:'#fbbf24',accent2:'#fde047',accent3:'#fb7185'},{id:'sunset-orange',bgSolid:'#1e0f05',bgOverlay:'#2a1505',primary:'#ea580c',primaryDark:'#9a3412',primaryLight:'#fb923c',accent:'#facc15',accent2:'#fde047',accent3:'#dc2626'},{id:'crimson-red',bgSolid:'#1e0505',bgOverlay:'#2a0808',primary:'#dc2626',primaryDark:'#991b1b',primaryLight:'#f87171',accent:'#fbbf24',accent2:'#fcd34d',accent3:'#f97316'},{id:'teal-ocean',bgSolid:'#05191e',bgOverlay:'#05252a',primary:'#0d9488',primaryDark:'#115e59',primaryLight:'#5eead4',accent:'#f59e0b',accent2:'#fbbf24',accent3:'#fb7185'},{id:'dark-gold',bgSolid:'#140f05',bgOverlay:'#1a1508',primary:'#a16207',primaryDark:'#713f12',primaryLight:'#fde047',accent:'#facc15',accent2:'#fde047',accent3:'#ea580c'},{id:'midnight-indigo',bgSolid:'#0a0a1e',bgOverlay:'#0e1030',primary:'#4338ca',primaryDark:'#312e81',primaryLight:'#818cf8',accent:'#22d3ee',accent2:'#67e8f9',accent3:'#f472b6'}];
-var state={school:{name:'PPTQ JASMA DIGITAL',address:'Jl. Pendidikan No. 123',website:'www.pptq-jasma.sch.id',logo:'PJ',arabic:'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',motto:'Belajar - Beriman - Beramal'},theme:'islamic-green',customColors:{bgSolid:'#061512',bgOverlay:'#061810',primary:'#1a8a6f',primaryDark:'#0d5240',primaryLight:'#4dd0a8',accent:'#f4c430',accent2:'#ffd966',accent3:'#ff8c42'},wallpaper:{type:'preset',value:'gradient1',custom:null,overlay:82},youtubeUrl:'',ytOverlay:30,volume:80,announcements:{left:'Seluruh siswa wajib berpakaian seragam lengkap.',right:'Pendaftaran siswa baru dibuka.'},bells:{'masuk':{time:'07:00',label:'Jam Masuk',music:null,enabled:true},'istirahat1':{time:'09:30',label:'Istirahat 1',music:null,enabled:true},'ganti1':{time:'09:45',label:'Ganti 1',music:null,enabled:true},'ganti2':{time:'10:45',label:'Ganti 2',music:null,enabled:true},'istirahat2':{time:'11:30',label:'Istirahat 2',music:null,enabled:true},'ganti3':{time:'12:30',label:'Ganti 3',music:null,enabled:true},'ganti4':{time:'13:30',label:'Ganti 4',music:null,enabled:true},'ganti5':{time:'14:30',label:'Ganti 5',music:null,enabled:true},'pulang':{time:'15:30',label:'Pulang',music:null,enabled:true}},schedules:[]};
-var defaultSchedules=[{id:1,class:'KELAS 7-1',subject:'B. JERMAN',start:'05:30',end:'06:30',column:'left'},{id:2,class:'KELAS 7-2',subject:'B. ARAB',start:'05:30',end:'07:15',column:'left'},{id:3,class:'KELAS 7-3',subject:'TAHSIN',start:'06:30',end:'07:30',column:'left'},{id:4,class:'KELAS 7-4',subject:'MATEMATIKA',start:'07:30',end:'09:00',column:'left'},{id:5,class:'KELAS 7-5',subject:'IPA',start:'09:00',end:'10:30',column:'left'},{id:6,class:'KELAS 8-1',subject:'B. INGGRIS',start:'05:30',end:'06:30',column:'right'},{id:7,class:'KELAS 8-3',subject:'B. TURKEY',start:'05:30',end:'07:15',column:'right'},{id:8,class:'KELAS 8-2',subject:'FIQH',start:'06:30',end:'07:30',column:'right'},{id:9,class:'KELAS 9-1',subject:'AKIDAH',start:'07:30',end:'09:00',column:'right'},{id:10,class:'KELAS 9-2',subject:'PKn',start:'09:00',end:'10:30',column:'right'}];
-var lastFB=null;var audioUnlocked=false,unlockedAudioCtx=null;var alarmAudio=null,beepCtx=null,beepInterval=null,beepCount=0;var bellTriggered={};
-var days=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];var months=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
-function hexToRgb(h){return{r:parseInt(h.slice(1,3),16),g:parseInt(h.slice(3,5),16),b:parseInt(h.slice(5,7),16)}}
-function hexToRgbStr(h){var r=hexToRgb(h);return r.r+', '+r.g+', '+r.b}
-function applyTheme(){var c=state.customColors,r=document.documentElement;r.style.setProperty('--bg-solid',c.bgSolid);r.style.setProperty('--primary',c.primary);r.style.setProperty('--primary-dark',c.primaryDark);r.style.setProperty('--primary-light',c.primaryLight);r.style.setProperty('--accent',c.accent);r.style.setProperty('--accent-2',c.accent2);r.style.setProperty('--accent-3',c.accent3);r.style.setProperty('--bg-solid-rgb',hexToRgbStr(c.bgSolid));r.style.setProperty('--primary-rgb',hexToRgbStr(c.primary));r.style.setProperty('--primary-dark-rgb',hexToRgbStr(c.primaryDark));r.style.setProperty('--primary-light-rgb',hexToRgbStr(c.primaryLight));r.style.setProperty('--accent-rgb',hexToRgbStr(c.accent));r.style.setProperty('--accent3-rgb',hexToRgbStr(c.accent3));var ov=hexToRgb(c.bgOverlay);r.style.setProperty('--bg-overlay','rgba('+ov.r+', '+ov.g+', '+ov.b+', '+(state.wallpaper.overlay/100)+')');document.body.style.background=c.bgSolid;var p=document.querySelector('.pattern-overlay');if(p)p.style.backgroundImage='radial-gradient(circle at 15% 25%, rgba('+hexToRgbStr(c.primary)+', 0.18) 0%, transparent 40%), radial-gradient(circle at 85% 75%, rgba('+hexToRgbStr(c.accent)+', 0.12) 0%, transparent 40%)';}
-function applySettings(){document.getElementById('schoolName').textContent=state.school.name;document.getElementById('schoolAddress').textContent=state.school.address;document.getElementById('schoolWebsite').textContent=state.school.website;document.getElementById('schoolLogo').textContent=state.school.logo;document.getElementById('arabicText').textContent=state.school.arabic;document.getElementById('motto').textContent=state.school.motto;document.getElementById('footerAnnouncement1').textContent=state.announcements.left;document.getElementById('footerAnnouncement2').textContent=state.announcements.right;}
-function parseYouTubeUrl(url){if(!url)return null;var p=[/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/];for(var i=0;i<p.length;i++){var m=url.match(p[i]);if(m)return m[1];}return null;}
-function applyYtOverlay(){var o=document.getElementById('youtube-overlay');var rgb=hexToRgb(state.customColors.bgSolid);o.style.background='rgba('+rgb.r+', '+rgb.g+', '+rgb.b+', '+(state.ytOverlay/100)+')';}
-function applyBackground(){var wp=document.getElementById('wallpaper-layer'),wv=document.getElementById('wallpaper-video'),yt=document.getElementById('youtube-bg'),yi=document.getElementById('youtube-iframe');if(state.youtubeUrl){var vid=parseYouTubeUrl(state.youtubeUrl);if(vid){yi.src='https://www.youtube.com/embed/'+vid+'?autoplay=1&mute=1&loop=1&playlist='+vid+'&controls=0&modestbranding=1&rel=0&playsinline=1';yt.classList.add('active');wp.style.display='none';wv.classList.remove('active');wv.pause();applyYtOverlay();return;}}yt.classList.remove('active');yi.src='';wv.classList.remove('active');wv.pause();wp.style.display='block';applyTheme();if(state.wallpaper.type==='preset'){wp.style.background='linear-gradient(135deg, #0d5240, #1a8a6f, #4dd0a8)';wp.style.backgroundImage='none';}else if(state.wallpaper.type==='url'){wp.style.background='url("'+state.wallpaper.value+'") center/cover no-repeat';}else if(state.wallpaper.type==='custom'&&state.wallpaper.custom){wp.style.background='url("'+state.wallpaper.custom+'") center/cover no-repeat';}}
-function timeToMinutes(t){var p=t.split(':');return parseInt(p[0])*60+parseInt(p[1]);}
-function getCurrentSchedules(){var n=new Date(),c=n.getHours()*60+n.getMinutes();return state.schedules.filter(function(s){return timeToMinutes(s.start)<=c&&timeToMinutes(s.end)>c;});}
-function getNextSchedules(){var n=new Date(),c=n.getHours()*60+n.getMinutes();return state.schedules.filter(function(s){return timeToMinutes(s.start)>c;}).sort(function(a,b){return timeToMinutes(a.start)-timeToMinutes(b.start);});}
-function renderScheduleLists(){var cur=getCurrentSchedules(),nxt=getNextSchedules();var cIds=cur.map(function(s){return s.id;}),nFirst=nxt.length>0?nxt[0].id:-1;var left=state.schedules.filter(function(s){return s.column==='left';}).sort(function(a,b){return timeToMinutes(a.start)-timeToMinutes(b.start);});var right=state.schedules.filter(function(s){return s.column==='right';}).sort(function(a,b){return timeToMinutes(a.start)-timeToMinutes(b.start);});function render(arr){if(arr.length===0)return'<p style="text-align:center;color:rgba(255,255,255,0.5);padding:20px;font-size:0.85rem;">Tidak ada jadwal</p>';return arr.map(function(s){var cls='',b='';if(cIds.indexOf(s.id)>=0){cls='active';b='<span class="badge">SEDANG BERLANGSUNG</span>';}else if(s.id===nFirst){cls='next';b='<span class="badge">BERIKUTNYA</span>';}return'<div class="schedule-card '+cls+'"><div class="class-name"><span>'+s.class+'</span>'+b+'</div><div class="class-time"><i class="far fa-clock"></i> '+s.start+' - '+s.end+'</div><div class="class-subject"><i class="fas fa-book"></i> '+s.subject+'</div></div>';}).join('');}document.getElementById('scheduleListLeft').innerHTML=render(left);document.getElementById('scheduleListRight').innerHTML=render(right);}
-function updateActivity(){var cur=getCurrentSchedules(),nxt=getNextSchedules();if(cur.length>0){var f=cur[0];document.getElementById('currentActivityLabel').textContent=f.class+' - '+f.subject;document.getElementById('activityTimeLabel').textContent=f.start+' - '+f.end;var n=new Date(),cm=n.getHours()*60+n.getMinutes()+n.getSeconds()/60,sm=timeToMinutes(f.start),em=timeToMinutes(f.end);document.getElementById('progressBar').style.width=Math.min(100,Math.max(0,((cm-sm)/(em-sm))*100))+'%';}else{document.getElementById('currentActivityLabel').textContent='Tidak Ada Kegiatan';document.getElementById('activityTimeLabel').textContent='--:--';document.getElementById('progressBar').style.width='0%';}renderScheduleLists();}
-function updateClock(){var n=new Date();document.getElementById('dayDate').textContent=days[n.getDay()]+', '+n.getDate()+' '+months[n.getMonth()]+' '+n.getFullYear();var h=String(n.getHours()).padStart(2,'0'),m=String(n.getMinutes()).padStart(2,'0'),s=String(n.getSeconds()).padStart(2,'0');document.getElementById('currentTime').textContent=h+':'+m+':'+s;document.getElementById('clockTime').textContent=h+':'+m;document.getElementById('clockSeconds').textContent=s;updateActivity();checkBells();}
-function checkBells(){var n=new Date(),t=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');if(n.getSeconds()!==0)return;Object.keys(state.bells).forEach(function(k){var b=state.bells[k];if(b.enabled&&b.time===t&&!bellTriggered[k]){triggerBell(k,b);bellTriggered[k]=true;setTimeout(function(){bellTriggered[k]=false;},65000);}});}
-function triggerBell(key,bell){stopAlarmAudio();document.body.classList.add('bell-active');document.getElementById('alarmModalTitle').textContent=bell.label;document.getElementById('alarmModalLabel').textContent='Pukul '+bell.time;document.getElementById('alarmModal').classList.add('show');if(bell.music){alarmAudio=new Audio(bell.music);alarmAudio.volume=state.volume/100;alarmAudio.loop=false;alarmAudio.addEventListener('ended',function(){stopAlarm();});alarmAudio.play().catch(function(){startBeep();});}else{startBeep();}}
-function startBeep(){beepCount=0;var ctx=unlockedAudioCtx;if(!ctx){try{ctx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){return;}}if(ctx.state==='suspended')ctx.resume();var vol=state.volume/100;function pb(){if(beepCount>=10){stopAlarm();return;}beepCount++;try{var o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=880;o.type='sine';g.gain.setValueAtTime(vol,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.5);o.start();o.stop(ctx.currentTime+0.5);}catch(e){}}pb();beepInterval=setInterval(pb,1000);}
-function stopAlarmAudio(){if(alarmAudio){try{alarmAudio.pause();alarmAudio.currentTime=0;}catch(e){}alarmAudio=null;}if(beepInterval){clearInterval(beepInterval);beepInterval=null;}beepCount=0;}
-function stopAlarm(){stopAlarmAudio();document.body.classList.remove('bell-active');document.getElementById('alarmModal').classList.remove('show');}
-function showToast(msg){var t=document.getElementById('toast');document.getElementById('toastMessage').textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},3000);}
-function createParticles(){var c=document.getElementById('particles');c.innerHTML='';for(var i=0;i<15;i++){var p=document.createElement('div');p.className='particle';var sz=Math.random()*4+2;p.style.width=sz+'px';p.style.height=sz+'px';p.style.left=Math.random()*100+'%';p.style.animationDuration=(Math.random()*20+15)+'s';p.style.animationDelay=Math.random()*20+'s';p.style.opacity=Math.random()*0.4+0.15;c.appendChild(p);}}
-function loadFB(){fetch(DB+'/settings.json').then(function(r){return r.json();}).then(function(d){if(!d)return;var s=JSON.stringify(d);if(s!==lastFB){lastFB=s;applyFB(d);}}).catch(function(e){console.log('FB:',e);});}
-function applyFB(d){
-if(d.school)state.school=d.school;
-if(d.theme){state.theme=d.theme;var t=themes.find(function(th){return th.id===d.theme;});if(t)state.customColors={bgSolid:t.bgSolid,bgOverlay:t.bgOverlay,primary:t.primary,primaryDark:t.primaryDark,primaryLight:t.primaryLight,accent:t.accent,accent2:t.accent2,accent3:t.accent3};}
-if(d.wallpaperUrl){state.wallpaper.type='url';state.wallpaper.value=d.wallpaperUrl;state.wallpaper.custom=null;}
-if(d.youtubeUrl!==undefined)state.youtubeUrl=d.youtubeUrl;
-if(d.ytOverlay!==undefined)state.ytOverlay=d.ytOverlay;
-if(d.building){state.building=d.building;}
-if(d.volume!==undefined)state.volume=d.volume;
-if(d.announcements)state.announcements=d.announcements;
-if(d.colTitles){document.getElementById('colLeftTitle').innerHTML='<i class="fas fa-calendar-alt"></i> '+d.colTitles.left;document.getElementById('colRightTitle').innerHTML='<i class="fas fa-calendar-alt"></i> '+d.colTitles.right;}
-if(d.bells){Object.keys(d.bells).forEach(function(k){if(state.bells[k]){state.bells[k].time=d.bells[k].time;state.bells[k].label=d.bells[k].label;state.bells[k].enabled=d.bells[k].enabled;if(d.bells[k].musicUrl)state.bells[k].music=d.bells[k].musicUrl;}});}
-if(d.schedules)state.schedules=d.schedules;
-applyTheme();applySettings();applyBackground();renderScheduleLists();
+var DB = "https://dispay-sekolah-default-rtdb.asia-southeast1.firebasedatabase.app";
+
+var bells = {
+  'masuk': { time: '07:00', label: 'Jam Masuk Sekolah', enabled: true, musicUrl: '' },
+  'istirahat1': { time: '09:30', label: 'Jam Istirahat 1', enabled: true, musicUrl: '' },
+  'ganti1': { time: '09:45', label: 'Ganti Pelajaran 1', enabled: true, musicUrl: '' },
+  'ganti2': { time: '10:45', label: 'Ganti Pelajaran 2', enabled: true, musicUrl: '' },
+  'istirahat2': { time: '11:30', label: 'Jam Istirahat 2', enabled: true, musicUrl: '' },
+  'ganti3': { time: '12:30', label: 'Ganti Pelajaran 3', enabled: true, musicUrl: '' },
+  'ganti4': { time: '13:30', label: 'Ganti Pelajaran 4', enabled: true, musicUrl: '' },
+  'ganti5': { time: '14:30', label: 'Ganti Pelajaran 5', enabled: true, musicUrl: '' },
+  'pulang': { time: '15:30', label: 'Jam Pulang Sekolah', enabled: true, musicUrl: '' }
+};
+
+var schedules = [];
+
+function renderBells() {
+  var h = '';
+  Object.keys(bells).forEach(function(k) {
+    var b = bells[k];
+    h += '<div class="bell-row"><div class="bell-label">' + b.label + '</div>';
+    h += '<div class="bell-time"><input type="time" value="' + b.time + '" data-k="' + k + '" onchange="bells[this.dataset.k].time=this.value">';
+    h += '<input type="checkbox" ' + (b.enabled ? 'checked' : '') + ' data-k="' + k + '" onchange="bells[this.dataset.k].enabled=this.checked"> ';
+    h += '<span style="font-size:0.8rem">Aktif</span></div>';
+    h += '<input type="text" value="' + (b.musicUrl || '') + '" data-k="' + k + '" placeholder="URL MP3 (opsional)" onchange="bells[this.dataset.k].musicUrl=this.value" style="margin-top:4px;font-size:0.8rem"></div>';
+  });
+  document.getElementById('bellSlots').innerHTML = h;
 }
-var logoClickCount=0,logoClickTimer=null;
-document.getElementById('schoolLogo').addEventListener('click',function(){logoClickCount++;if(logoClickTimer)clearTimeout(logoClickTimer);logoClickTimer=setTimeout(function(){logoClickCount=0;},3000);if(logoClickCount>=5){logoClickCount=0;showToast('Atur setting di control.html (buka di PC)');}});
-document.getElementById('unlockBtn').addEventListener('click',function(){if(audioUnlocked)return;try{unlockedAudioCtx=new(window.AudioContext||window.webkitAudioContext)();if(unlockedAudioCtx.state==='suspended')unlockedAudioCtx.resume();audioUnlocked=true;}catch(e){}document.getElementById('audio-unlock').classList.remove('show');showToast('Suara aktif!');});
-document.addEventListener('click',function(){if(!audioUnlocked){try{unlockedAudioCtx=new(window.AudioContext||window.webkitAudioContext)();if(unlockedAudioCtx.state==='suspended')unlockedAudioCtx.resume();audioUnlocked=true;}catch(e){}}},{once:true});
-document.addEventListener('touchstart',function(){if(!audioUnlocked){try{unlockedAudioCtx=new(window.AudioContext||window.webkitAudioContext)();if(unlockedAudioCtx.state==='suspended')unlockedAudioCtx.resume();audioUnlocked=true;}catch(e){}}},{once:true});
-function isMobile(){return/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)||window.innerWidth<768;}
-function init(){
-state.schedules=defaultSchedules;
-applyTheme();applySettings();applyBackground();createParticles();updateClock();
-setInterval(updateClock,1000);setInterval(createParticles,60000);
-loadFB();setInterval(loadFB,5000);
-if(isMobile()){setTimeout(function(){if(!audioUnlocked){document.getElementById('audio-unlock').classList.add('show');}},500);}
+
+function addSchedule() {
+  schedules.push({ class: 'KELAS ', subject: 'Mapel', start: '07:00', end: '08:00', column: 'left' });
+  renderSchedules();
 }
-init();
+
+function deleteSchedule(i) {
+  schedules.splice(i, 1);
+  renderSchedules();
+}
+
+function renderSchedules() {
+  var h = '';
+  schedules.forEach(function(s, i) {
+    h += '<div class="bell-row"><div class="row"><div><label>Nama Kelas</label>';
+    h += '<input type="text" value="' + s.class + '" data-i="' + i + '" data-f="class" onchange="schedules[parseInt(this.dataset.i)].class=this.value"></div>';
+    h += '<div><label>Mata Pelajaran</label>';
+    h += '<input type="text" value="' + s.subject + '" data-i="' + i + '" data-f="subject" onchange="schedules[parseInt(this.dataset.i)].subject=this.value"></div></div>';
+    h += '<div class="row"><div><label>Jam Mulai</label>';
+    h += '<input type="time" value="' + s.start + '" data-i="' + i + '" data-f="start" onchange="schedules[parseInt(this.dataset.i)].start=this.value"></div>';
+    h += '<div><label>Jam Selesai</label>';
+    h += '<input type="time" value="' + s.end + '" data-i="' + i + '" data-f="end" onchange="schedules[parseInt(this.dataset.i)].end=this.value"></div></div>';
+    h += '<div class="row"><div><label>Tampil di Kolom</label>';
+    h += '<select data-i="' + i + '" data-f="column" onchange="schedules[parseInt(this.dataset.i)].column=this.value">';
+    h += '<option value="left" ' + (s.column === 'left' ? 'selected' : '') + '>Kolom Kiri</option>';
+    h += '<option value="right" ' + (s.column === 'right' ? 'selected' : '') + '>Kolom Kanan</option>';
+    h += '</select></div><div style="display:flex;align-items:flex-end">';
+    h += '<button class="del-btn" onclick="deleteSchedule(' + i + ')"><i class="fas fa-trash"></i> Hapus</button></div></div></div>';
+  });
+  document.getElementById('scheduleSlots').innerHTML = h;
+}
+
+function saveToFirebase() {
+  var data = {
+    school: { name: val('schoolName'), address: val('schoolAddress'), website: val('schoolWebsite'), logo: val('schoolLogo').toUpperCase(), arabic: val('arabicText'), motto: val('motto') },
+    volume: parseInt(val('volume')),
+    announcements: { left: val('announcement1'), right: val('announcement2') },
+    theme: val('theme'),
+    wallpaperUrl: val('wallpaperUrl'),
+    youtubeUrl: val('youtubeUrl'),
+    ytOverlay: parseInt(val('ytOverlay')),
+    building: { title: val('buildingTitle'), subtitle: val('buildingSubtitle') },
+    colTitles: { left: val('colLeft'), right: val('colRight') },
+    bells: {},
+    schedules: schedules
+  };
+  Object.keys(bells).forEach(function(k) {
+    data.bells[k] = { time: bells[k].time, label: bells[k].label, enabled: bells[k].enabled, musicUrl: bells[k].musicUrl || '' };
+  });
+  setStatus('Menyimpan ke Firebase...', 'load');
+  fetch(DB + '/settings.json', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+    .then(function(r) { return r.json(); })
+    .then(function() { setStatus('Tersimpan! TV update otomatis 5 detik.', 'ok'); })
+    .catch(function(e) { setStatus('Error: ' + e.message, 'err'); });
+}
+
+function loadFromFirebase() {
+  setStatus('Loading dari Firebase...', 'load');
+  fetch(DB + '/settings.json')
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (!d) { setStatus('Belum ada data. Atur setting lalu klik Simpan.', 'load'); return; }
+      if (d.school) { setVal('schoolName', d.school.name); setVal('schoolAddress', d.school.address); setVal('schoolWebsite', d.school.website); setVal('schoolLogo', d.school.logo); setVal('arabicText', d.school.arabic); setVal('motto', d.school.motto); }
+      if (d.volume !== undefined) setVal('volume', d.volume);
+      if (d.announcements) { setVal('announcement1', d.announcements.left); setVal('announcement2', d.announcements.right); }
+      if (d.theme) setVal('theme', d.theme);
+      if (d.wallpaperUrl !== undefined) setVal('wallpaperUrl', d.wallpaperUrl);
+      if (d.youtubeUrl !== undefined) setVal('youtubeUrl', d.youtubeUrl);
+      if (d.ytOverlay !== undefined) setVal('ytOverlay', d.ytOverlay);
+      if (d.building) { setVal('buildingTitle', d.building.title); setVal('buildingSubtitle', d.building.subtitle); }
+      if (d.colTitles) { setVal('colLeft', d.colTitles.left); setVal('colRight', d.colTitles.right); }
+      if (d.bells) {
+        Object.keys(d.bells).forEach(function(k) {
+          if (bells[k]) { bells[k].time = d.bells[k].time; bells[k].enabled = d.bells[k].enabled; bells[k].musicUrl = d.bells[k].musicUrl || ''; }
+        });
+        renderBells();
+      }
+      if (d.schedules) { schedules = d.schedules; renderSchedules(); }
+      setStatus('Data dimuat!', 'ok');
+    })
+    .catch(function(e) { setStatus('Error: ' + e.message, 'err'); });
+}
+
+function val(id) { return document.getElementById(id).value; }
+function setVal(id, v) { var el = document.getElementById(id); if (el && v !== undefined && v !== null) el.value = v; }
+function setStatus(msg, cls) { var s = document.getElementById('status'); s.textContent = msg; s.className = cls || ''; }
+
+renderBells();
+renderSchedules();
+loadFromFirebase();
 </script>
 </body>
 </html>
