@@ -155,7 +155,7 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 <div class="alarm-modal" id="alarmModal"><div class="alarm-modal-content"><div class="alarm-icon"><i class="fas fa-bell"></i></div><h2 id="alarmModalTitle">Alarm!</h2><p id="alarmModalLabel">Waktunya</p><button onclick="stopAlarm()" style="background:linear-gradient(135deg,#ff5252,#c82333);color:#fff;padding:12px 24px;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;margin-top:8px"><i class="fas fa-stop"></i> Hentikan</button></div></div>
 <div class="toast" id="toast"><i class="fas fa-info-circle"></i><span id="toastMessage"></span></div>
 <script>
-if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
+// Service Worker dihapus
 function setHeight(){var h=window.innerHeight;document.documentElement.style.height=h+'px';document.body.style.height=h+'px';document.body.style.minHeight=h+'px';document.body.style.maxHeight=h+'px';}
 window.addEventListener('resize',setHeight);
 window.addEventListener('orientationchange',function(){setTimeout(setHeight,100);});
