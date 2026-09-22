@@ -2,6 +2,7 @@
   "name": "Display Sekolah",
   "short_name": "Display",
   "start_url": "./",
+  "scope": "./",
   "display": "fullscreen",
   "orientation": "landscape",
   "background_color": "#061512",
