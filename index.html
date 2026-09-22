@@ -15,7 +15,7 @@
 <style>
 :root{--bg-overlay:rgba(6,24,22,0.82);--bg-solid:#061512;--primary:#1a8a6f;--primary-dark:#0d5240;--primary-light:#4dd0a8;--accent:#f4c430;--accent-2:#ffd966;--accent-3:#ff8c42;--text:#fff;--text-muted:rgba(255,255,255,0.72);--card-bg:rgba(255,255,255,0.05);--card-border:rgba(255,255,255,0.12);--danger:#ff5252;--success:#4caf50;--transition:all 0.3s cubic-bezier(0.4,0,0.2,1);--primary-rgb:26,138,111;--primary-dark-rgb:13,82,64;--primary-light-rgb:77,208,168;--bg-solid-rgb:6,21,18;--accent-rgb:244,196,48;--accent3-rgb:255,140,66}
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{margin:0;padding:0;width:100%;height:100vh;overflow:hidden}
+html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden}
 body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);display:flex;flex-direction:column;height:100vh;overflow:hidden;background:var(--bg-solid)}
 #wallpaper-layer{position:fixed;top:0;left:0;width:100vw;height:100vh;background-size:cover;background-position:center;background-repeat:no-repeat;z-index:0}
 #wallpaper-layer::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:var(--bg-overlay)}
@@ -47,9 +47,8 @@ body.bell-active .clock-widget,body.bell-active .activity-progress-mini,body.bel
 body.bell-active .clock-time{animation:textFlash 0.5s ease-in-out infinite}
 @keyframes textFlash{0%,100%{background:linear-gradient(135deg,#ff0000,#ff8c42);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 10px rgba(255,0,0,0.8))}50%{background:linear-gradient(135deg,#ffff00,#fff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 20px rgba(255,255,0,0.9))}}
 body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite}
-@keyframes secondsFlash{0%,100%{color:#ff0000}50%{color:#ffff0}}
-.display-container{position:relative;z-index:10;flex:1;display:flex;flex-direction:column;overflow:hidden}
-.display-header{flex-shrink:0;display:flex;justify-content:space-between;align-items:center;padding:clamp(6px,1.5vh,14px) clamp(10px,2vw,28px);background:linear-gradient(135deg,rgba(var(--primary-dark-rgb),0.95),rgba(var(--bg-solid-rgb),0.95));border-bottom:3px solid var(--accent);box-shadow:0 4px 24px rgba(0,0,0,0.4)}
+@keyframes secondsFlash{0%,100%{color:#ff0000}50%{color:#ffff00}}
+.display-header{flex-shrink:0;display:flex;justify-content:space-between;align-items:center;padding:clamp(6px,1.5vh,14px) clamp(10px,2vw,28px);background:linear-gradient(135deg,rgba(var(--primary-dark-rgb),0.95),rgba(var(--bg-solid-rgb),0.95));border-bottom:3px solid var(--accent);box-shadow:0 4px 24px rgba(0,0,0,0.4);position:relative;z-index:10}
 .header-left{display:flex;align-items:center;gap:clamp(6px,1vw,14px);min-width:0;flex:1}
 .school-logo{width:clamp(40px,5vh,56px);height:clamp(40px,5vh,56px);border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-3));display:flex;align-items:center;justify-content:center;font-size:clamp(1rem,1.5vh,1.4rem);color:#1a1a1a;font-weight:900;box-shadow:0 4px 16px rgba(var(--accent-rgb),0.4);flex-shrink:0;cursor:pointer}
 .school-info{min-width:0;overflow:hidden;flex:1}
@@ -64,7 +63,7 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 .datetime-box{text-align:right;background:rgba(0,0,0,0.3);padding:clamp(4px,0.8vh,8px) clamp(6px,1vw,16px);border-radius:8px;border:1px solid rgba(var(--accent-rgb),0.2);white-space:nowrap}
 .datetime-box .day-date{font-size:clamp(0.65rem,1.3vh,0.95rem);color:var(--accent);font-weight:700;text-transform:capitalize}
 .datetime-box .time{font-family:'Orbitron',sans-serif;font-size:clamp(0.8rem,1.8vh,1.3rem);font-weight:700;color:#fff;margin-top:1px;letter-spacing:1px}
-.main-content{flex:1;display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:clamp(4px,1vw,16px);padding:clamp(4px,1.5vh,16px) clamp(6px,2vw,20px);overflow:hidden;min-height:0}
+.main-content{flex:1;display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:clamp(4px,1vw,16px);padding:clamp(4px,1.5vh,16px) clamp(6px,2vw,20px);overflow:hidden;min-height:0;position:relative;z-index:10}
 .schedule-column{display:flex;flex-direction:column;gap:8px;overflow:hidden;min-height:0}
 .column-title{background:linear-gradient(135deg,var(--primary-dark),var(--primary));padding:clamp(6px,1vh,10px) clamp(6px,1.5vw,16px);border-radius:8px;text-align:center;font-weight:700;font-size:clamp(0.6rem,1.4vh,0.9rem);text-transform:uppercase;letter-spacing:1.5px;box-shadow:0 4px 12px rgba(0,0,0,0.3);border:1px solid rgba(var(--accent-rgb),0.3);display:flex;align-items:center;justify-content:center;gap:8px;flex-shrink:0}
 .column-title i{color:var(--accent)}
@@ -103,7 +102,7 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 .progress-bar-mini-fill{height:100%;background:linear-gradient(90deg,var(--primary-light),var(--accent));border-radius:10px;transition:width 1s linear;position:relative}
 .progress-bar-mini-fill::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);animation:shimmer 2s linear infinite}
 @keyframes shimmer{to{transform:translateX(100%)}}
-.display-footer{flex-shrink:0;background:linear-gradient(135deg,rgba(var(--primary-dark-rgb),0.95),rgba(var(--bg-solid-rgb),0.95));border-top:3px solid var(--accent);padding:clamp(4px,1vh,10px) clamp(8px,2vw,20px);display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.display-footer{flex-shrink:0;background:linear-gradient(135deg,rgba(var(--primary-dark-rgb),0.95),rgba(var(--bg-solid-rgb),0.95));border-top:3px solid var(--accent);padding:clamp(4px,1vh,10px) clamp(8px,2vw,20px);display:grid;grid-template-columns:1fr 1fr;gap:12px;position:relative;z-index:10}
 .footer-section{display:flex;align-items:center;gap:10px;padding:5px 12px;background:rgba(0,0,0,0.3);border-radius:8px;overflow:hidden}
 .footer-section .footer-icon{width:clamp(24px,3vh,32px);height:clamp(24px,3vh,32px);border-radius:6px;background:var(--accent);color:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:clamp(0.6rem,1.2vh,0.85rem);flex-shrink:0}
 .footer-section .footer-icon.red{background:var(--accent-3)}
@@ -123,7 +122,7 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:rgba(0,0,0,0.2)}::-webkit-scrollbar-thumb{background:rgba(var(--accent-rgb),0.3);border-radius:10px}
 @media(max-width:1100px){.main-content{grid-template-columns:1fr 1.2fr}.schedule-column:nth-child(3){display:none}}
 @media(max-width:768px) and (orientation:landscape){.header-center{display:none}.main-content{grid-template-columns:1fr 1.2fr;padding:6px 8px;gap:6px}.schedule-column:nth-child(3){display:none}.display-footer{grid-template-columns:1fr;padding:4px 8px}}
-@media(max-width:768px) and (orientation:portrait){#rotate-warning{display:flex}.display-container{display:none}}
+@media(max-width:768px) and (orientation:portrait){#rotate-warning{display:flex}.display-header{display:none}.main-content{display:none}.display-footer{display:none}}
 </style>
 </head>
 <body>
@@ -135,7 +134,6 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 <div class="particles" id="particles"></div>
 <div class="bell-flash-overlay"></div>
 <div class="bell-border"></div>
-<div class="display-container">
 <header class="display-header">
 <div class="header-left"><div class="school-logo" id="schoolLogo">PJ</div><div class="school-info"><h1 id="schoolName">PPTQ JASMA DIGITAL</h1><div class="subtitle"><span><i class="fas fa-map-marker-alt"></i> <span id="schoolAddress">Jl. Pendidikan No. 123</span></span><span><i class="fas fa-globe"></i> <span id="schoolWebsite">www.pptq-jasma.sch.id</span></span></div></div></div>
 <div class="header-center"><div class="arabic" id="arabicText">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div><div class="motto" id="motto">Belajar - Beriman - Beramal</div></div>
@@ -154,7 +152,6 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 <div class="footer-section"><div class="footer-icon"><i class="fas fa-tshirt"></i></div><div class="footer-text"><div class="ticker-text"><strong>PENGUMUMAN:</strong> <span id="footerAnnouncement1">Seluruh siswa wajib berpakaian seragam lengkap.</span></div></div></div>
 <div class="footer-section"><div class="footer-icon red"><i class="fas fa-bell"></i></div><div class="footer-text"><div class="ticker-text"><strong>INFO:</strong> <span id="footerAnnouncement2">Pendaftaran siswa baru dibuka.</span></div></div></div>
 </footer>
-</div>
 <div class="alarm-modal" id="alarmModal"><div class="alarm-modal-content"><div class="alarm-icon"><i class="fas fa-bell"></i></div><h2 id="alarmModalTitle">Alarm!</h2><p id="alarmModalLabel">Waktunya</p><button onclick="stopAlarm()" style="background:linear-gradient(135deg,#ff5252,#c82333);color:#fff;padding:12px 24px;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;margin-top:8px"><i class="fas fa-stop"></i> Hentikan</button></div></div>
 <div class="toast" id="toast"><i class="fas fa-info-circle"></i><span id="toastMessage"></span></div>
 <script>
@@ -184,7 +181,7 @@ function startBeep(){beepCount=0;var ctx=unlockedAudioCtx;if(!ctx){try{ctx=new(w
 function stopAlarmAudio(){if(alarmAudio){try{alarmAudio.pause();alarmAudio.currentTime=0;}catch(e){}alarmAudio=null;}if(beepInterval){clearInterval(beepInterval);beepInterval=null;}beepCount=0;}
 function stopAlarm(){stopAlarmAudio();document.body.classList.remove('bell-active');document.getElementById('alarmModal').classList.remove('show');}
 function showToast(msg){var t=document.getElementById('toast');document.getElementById('toastMessage').textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},3000);}
-function createParticles(){var c=document.getElementById('particles');c.innerHTML='';for(var i=0;i<12;i++){var p=document.createElement('div');p.className='particle';var sz=Math.random()*4+2;p.style.width=sz+'px';p.style.height=sz+'px';p.style.left=Math.random()*100+'%';p.style.animationDuration=(Math.random()*20+15)+'s';p.style.animationDelay=Math.random()*20+'s';p.style.opacity=Math.random()*0.4+0.15;c.appendChild(p);}}
+function createParticles(){var c=document.getElementById('particles');c.innerHTML='';for(var i=0;i<12;i++){var p=document.createElement('div');p.className='particle';var sz=Math.random()*4+2;p.style.width=sz+'px';.style.height=sz+'px';p.style.left=Math.random()*100+'%';p.style.animationDuration=(Math.random()*20+15)+'s';p.style.animationDelay=Math.random()*20+'s';p.style.opacity=Math.random()*0.4+0.15;c.appendChild(p);}}
 function renderBuildingSlides(){var c=document.getElementById('buildingImage'),ind=document.getElementById('slideIndicators');c.querySelectorAll('.slide').forEach(function(s){s.remove();});var media=state.slideshow.media.filter(Boolean);if(media.length===0){var s=document.createElement('div');s.className='slide active';s.style.backgroundImage='url("https://images.unsplash.com/photo-1562774053-701439336967?w=1200")';c.insertBefore(s,c.firstChild);ind.innerHTML='';}else{media.forEach(function(item,idx){var isActive=idx===state.slideshow.currentIndex;var slide=document.createElement('div');slide.className='slide'+(isActive?' active':'');slide.style.backgroundImage='url("'+item+'")';c.insertBefore(slide,c.firstChild);});ind.innerHTML=media.map(function(_,idx){return'<div class="slide-indicator '+(idx===state.slideshow.currentIndex?'active':'')+'"></div>';}).join('');}}
 function startSlideshow(){if(slideshowInterval)clearInterval(slideshowInterval);var media=state.slideshow.media.filter(Boolean);if(media.length<=1)return;slideshowInterval=setInterval(function(){var imgs=state.slideshow.media.filter(Boolean);if(imgs.length<=1)return;state.slideshow.currentIndex=(state.slideshow.currentIndex+1)%imgs.length;document.querySelectorAll('#buildingImage .slide').forEach(function(s,idx){s.classList.toggle('active',idx===state.slideshow.currentIndex);});document.querySelectorAll('#slideIndicators .slide-indicator').forEach(function(ind,idx){ind.classList.toggle('active',idx===state.slideshow.currentIndex);});},state.slideshow.interval*1000);}
 function loadFB(){fetch(DB+'/settings.json').then(function(r){return r.json();}).then(function(d){if(!d)return;var s=JSON.stringify(d);if(s!==lastFB){lastFB=s;applyFB(d);}}).catch(function(e){console.log('FB:',e);});}
