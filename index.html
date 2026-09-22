@@ -15,8 +15,8 @@
 <style>
 :root{--bg-overlay:rgba(6,24,22,0.82);--bg-solid:#061512;--primary:#1a8a6f;--primary-dark:#0d5240;--primary-light:#4dd0a8;--accent:#f4c430;--accent-2:#ffd966;--accent-3:#ff8c42;--text:#fff;--text-muted:rgba(255,255,255,0.72);--card-bg:rgba(255,255,255,0.05);--card-border:rgba(255,255,255,0.12);--danger:#ff5252;--success:#4caf50;--transition:all 0.3s cubic-bezier(0.4,0,0.2,1);--primary-rgb:26,138,111;--primary-dark-rgb:13,82,64;--primary-light-rgb:77,208,168;--bg-solid-rgb:6,21,18;--accent-rgb:244,196,48;--accent3-rgb:255,140,66}
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden}
-body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);display:flex;flex-direction:column;height:100vh;overflow:hidden;background:var(--bg-solid)}
+html,body{margin:0;padding:0;width:100%;overflow:hidden}
+body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);display:flex;flex-direction:column;overflow:hidden;background:var(--bg-solid)}
 #wallpaper-layer{position:fixed;top:0;left:0;width:100vw;height:100vh;background-size:cover;background-position:center;background-repeat:no-repeat;z-index:0}
 #wallpaper-layer::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:var(--bg-overlay)}
 #wallpaper-video{position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:cover;z-index:0;display:none}
@@ -155,7 +155,12 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 <div class="alarm-modal" id="alarmModal"><div class="alarm-modal-content"><div class="alarm-icon"><i class="fas fa-bell"></i></div><h2 id="alarmModalTitle">Alarm!</h2><p id="alarmModalLabel">Waktunya</p><button onclick="stopAlarm()" style="background:linear-gradient(135deg,#ff5252,#c82333);color:#fff;padding:12px 24px;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;margin-top:8px"><i class="fas fa-stop"></i> Hentikan</button></div></div>
 <div class="toast" id="toast"><i class="fas fa-info-circle"></i><span id="toastMessage"></span></div>
 <script>
-if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
+// FIX FULLSCREEN: Set height = tinggi asli yang terlihat
+function setHeight(){var h=window.innerHeight;document.documentElement.style.height=h+'px';document.body.style.height=h+'px';document.body.style.minHeight=h+'px';document.body.style.maxHeight=h+'px';}
+window.addEventListener('resize',setHeight);
+window.addEventListener('orientationchange',function(){setTimeout(setHeight,100);});
+// Service Worker dimatikan untuk hindari cache
+// if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
 var DB="https://dispay-sekolah-default-rtdb.asia-southeast1.firebasedatabase.app";
 var themes=[{id:'islamic-green',bgSolid:'#061512',bgOverlay:'#061810',primary:'#1a8a6f',primaryDark:'#0d5240',primaryLight:'#4dd0a8',accent:'#f4c430',accent2:'#ffd966',accent3:'#ff8c42'},{id:'royal-blue',bgSolid:'#080f23',bgOverlay:'#0a1530',primary:'#2563eb',primaryDark:'#1e40af',primaryLight:'#60a5fa',accent:'#fbbf24',accent2:'#fcd34d',accent3:'#f97316'},{id:'royal-purple',bgSolid:'#140a23',bgOverlay:'#1a1030',primary:'#7c3aed',primaryDark:'#5b21b6',primaryLight:'#a78bfa',accent:'#fbbf24',accent2:'#fde047',accent3:'#fb7185'},{id:'sunset-orange',bgSolid:'#1e0f05',bgOverlay:'#2a1505',primary:'#ea580c',primaryDark:'#9a3412',primaryLight:'#fb923c',accent:'#facc15',accent2:'#fde047',accent3:'#dc2626'},{id:'crimson-red',bgSolid:'#1e0505',bgOverlay:'#2a0808',primary:'#dc2626',primaryDark:'#991b1b',primaryLight:'#f87171',accent:'#fbbf24',accent2:'#fcd34d',accent3:'#f97316'},{id:'teal-ocean',bgSolid:'#05191e',bgOverlay:'#05252a',primary:'#0d9488',primaryDark:'#115e59',primaryLight:'#5eead4',accent:'#f59e0b',accent2:'#fbbf24',accent3:'#fb7185'},{id:'dark-gold',bgSolid:'#140f05',bgOverlay:'#1a1508',primary:'#a16207',primaryDark:'#713f12',primaryLight:'#fde047',accent:'#facc15',accent2:'#fde047',accent3:'#ea580c'},{id:'midnight-indigo',bgSolid:'#0a0a1e',bgOverlay:'#0e1030',primary:'#4338ca',primaryDark:'#312e81',primaryLight:'#818cf8',accent:'#22d3ee',accent2:'#67e8f9',accent3:'#f472b6'}];
 var state={school:{name:'PPTQ JASMA DIGITAL',address:'Jl. Pendidikan No. 123',website:'www.pptq-jasma.sch.id',logo:'PJ',arabic:'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',motto:'Belajar - Beriman - Beramal'},theme:'islamic-green',customColors:{bgSolid:'#061512',bgOverlay:'#061810',primary:'#1a8a6f',primaryDark:'#0d5240',primaryLight:'#4dd0a8',accent:'#f4c430',accent2:'#ffd966',accent3:'#ff8c42'},wallpaper:{type:'preset',value:'gradient1',custom:null,overlay:82},youtubeUrl:'',ytOverlay:30,volume:80,announcements:{left:'Seluruh siswa wajib berpakaian seragam lengkap.',right:'Pendaftaran siswa baru dibuka.'},building:{title:'Gedung Utama Sekolah',subtitle:'Pusat kegiatan belajar mengajar'},slideshow:{media:[],interval:8,currentIndex:0},bells:{'masuk':{time:'07:00',label:'Jam Masuk',music:null,enabled:true},'istirahat1':{time:'09:30',label:'Istirahat 1',music:null,enabled:true},'ganti1':{time:'09:45',label:'Ganti 1',music:null,enabled:true},'ganti2':{time:'10:45',label:'Ganti 2',music:null,enabled:true},'istirahat2':{time:'11:30',label:'Istirahat 2',music:null,enabled:true},'ganti3':{time:'12:30',label:'Ganti 3',music:null,enabled:true},'ganti4':{time:'13:30',label:'Ganti 4',music:null,enabled:true},'ganti5':{time:'14:30',label:'Ganti 5',music:null,enabled:true},'pulang':{time:'15:30',label:'Pulang',music:null,enabled:true}},schedules:[]};
@@ -205,6 +210,7 @@ document.addEventListener('touchstart',function(){if(!audioUnlocked){try{unlocke
 var logoClickCount=0,logoClickTimer=null;
 document.getElementById('schoolLogo').addEventListener('click',function(e){e.stopPropagation();logoClickCount++;if(logoClickTimer)clearTimeout(logoClickTimer);logoClickTimer=setTimeout(function(){logoClickCount=0;},3000);if(logoClickCount>=5){logoClickCount=0;showToast('Atur setting di control.html (buka di PC)');}});
 function init(){
+setHeight();
 state.schedules=defaultSchedules;
 applyTheme();applySettings();applyBackground();renderBuildingSlides();createParticles();updateClock();
 setInterval(updateClock,1000);setInterval(createParticles,60000);
