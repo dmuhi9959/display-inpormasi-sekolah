@@ -28,12 +28,12 @@ body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);height:100vh;h
 .particles{position:fixed;inset:0;z-index:2;pointer-events:none;overflow:hidden}
 .particle{position:absolute;background:rgba(var(--accent-rgb),0.35);border-radius:50%;animation:float linear infinite}
 @keyframes float{0%{transform:translateY(100vh);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-10vh);opacity:0}}
-#audio-unlock{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.95);display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:20px}
+#audio-unlock{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.95);display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:20px;cursor:pointer}
 #audio-unlock.show{display:flex}
 #audio-unlock i{font-size:3rem;color:var(--accent);margin-bottom:20px}
 #audio-unlock h2{font-size:1.5rem;margin-bottom:10px}
 #audio-unlock p{color:var(--text-muted);margin-bottom:24px;font-size:0.9rem}
-#audio-unlock button{padding:16px 40px;background:linear-gradient(135deg,var(--accent),#e6a820);color:#1a1a1a;border:none;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer;font-family:inherit}
+#audio-unlock button{padding:20px 50px;background:linear-gradient(135deg,var(--accent),#e6a820);color:#1a1a1a;border:none;border-radius:16px;font-size:1.3rem;font-weight:700;cursor:pointer;font-family:inherit;margin-top:10px}
 #rotate-warning{position:fixed;inset:0;z-index:99999;background:#061512;display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:20px}
 #rotate-warning i{font-size:3rem;color:#f4c430;margin-bottom:20px;animation:rotateIcon 2s ease-in-out infinite}
 #rotate-warning h2{color:#f4c430;font-size:1.3rem;margin-bottom:10px}
@@ -132,7 +132,7 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 </head>
 <body>
 <div id="rotate-warning"><i class="fas fa-mobile-alt"></i><h2>Putar HP ke Mode Landscape</h2><p>Display sekolah tampil optimal dalam mode landscape</p></div>
-<div id="audio-unlock"><i class="fas fa-volume-up"></i><h2>Aktifkan Suara</h2><p>Ketuk tombol di bawah untuk mengaktifkan suara bell.</p><button id="unlockBtn">KETUK DI SINI</button></div>
+<div id="audio-unlock"><i class="fas fa-volume-up"></i><h2>Aktifkan Suara</h2><p>Ketuk layar di mana saja untuk lanjut</p><button id="unlockBtn">KETUK DI SINI</button></div>
 <div id="wallpaper-layer"></div>
 <video id="wallpaper-video" loop muted playsinline></video>
 <div id="youtube-bg"><iframe id="youtube-iframe" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe><div id="youtube-overlay"></div></div>
@@ -208,18 +208,18 @@ if(d.schedules)state.schedules=d.schedules;
 if(d.slideshow){state.slideshow.media=d.slideshow.images||[];state.slideshow.interval=d.slideshow.interval||8;state.slideshow.currentIndex=0;renderBuildingSlides();startSlideshow();}
 applyTheme();applySettings();applyBackground();renderScheduleLists();
 }
-var logoClickCount=0,logoClickTimer=null;
-document.getElementById('schoolLogo').addEventListener('click',function(){logoClickCount++;if(logoClickTimer)clearTimeout(logoClickTimer);logoClickTimer=setTimeout(function(){logoClickCount=0;},3000);if(logoClickCount>=5){logoClickCount=0;showToast('Atur setting di control.html (buka di PC)');}});
-document.getElementById('unlockBtn').addEventListener('click',function(){if(audioUnlocked)return;try{unlockedAudioCtx=new(window.AudioContext||window.webkitAudioContext)();if(unlockedAudioCtx.state==='suspended')unlockedAudioCtx.resume();audioUnlocked=true;}catch(e){}document.getElementById('audio-unlock').classList.remove('show');showToast('Suara aktif!');});
+document.getElementById('audio-unlock').addEventListener('click',function(){if(!audioUnlocked){try{unlockedAudioCtx=new(window.AudioContext||window.webkitAudioContext)();if(unlockedAudioCtx.state==='suspended')unlockedAudioCtx.resume();audioUnlocked=true;}catch(e){}}document.getElementById('audio-unlock').classList.remove('show');});
 document.addEventListener('click',function(){if(!audioUnlocked){try{unlockedAudioCtx=new(window.AudioContext||window.webkitAudioContext)();if(unlockedAudioCtx.state==='suspended')unlockedAudioCtx.resume();audioUnlocked=true;}catch(e){}}},{once:true});
 document.addEventListener('touchstart',function(){if(!audioUnlocked){try{unlockedAudioCtx=new(window.AudioContext||window.webkitAudioContext)();if(unlockedAudioCtx.state==='suspended')unlockedAudioCtx.resume();audioUnlocked=true;}catch(e){}}},{once:true});
+var logoClickCount=0,logoClickTimer=null;
+document.getElementById('schoolLogo').addEventListener('click',function(){logoClickCount++;if(logoClickTimer)clearTimeout(logoClickTimer);logoClickTimer=setTimeout(function(){logoClickCount=0;},3000);if(logoClickCount>=5){logoClickCount=0;showToast('Atur setting di control.html (buka di PC)');}});
 function isMobile(){return/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)||window.innerWidth<768;}
 function init(){
 state.schedules=defaultSchedules;
 applyTheme();applySettings();applyBackground();renderBuildingSlides();createParticles();updateClock();
 setInterval(updateClock,1000);setInterval(createParticles,60000);
 loadFB();setInterval(loadFB,5000);
-if(isMobile()){setTimeout(function(){if(!audioUnlocked){document.getElementById('audio-unlock').classList.add('show');}},500);}
+if(isMobile()){setTimeout(function(){if(!audioUnlocked){document.getElementById('audio-unlock').classList.add('show');setTimeout(function(){document.getElementById('audio-unlock').classList.remove('show');},5000);}},500);}
 }
 init();
 </script>
