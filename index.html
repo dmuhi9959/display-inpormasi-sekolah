@@ -16,7 +16,7 @@
 :root{--bg-overlay:rgba(6,24,22,0.82);--bg-solid:#061512;--primary:#1a8a6f;--primary-dark:#0d5240;--primary-light:#4dd0a8;--accent:#f4c430;--accent-2:#ffd966;--accent-3:#ff8c42;--text:#fff;--text-muted:rgba(255,255,255,0.72);--card-bg:rgba(255,255,255,0.05);--card-border:rgba(255,255,255,0.12);--danger:#ff5252;--success:#4caf50;--transition:all 0.3s cubic-bezier(0.4,0,0.2,1);--primary-rgb:26,138,111;--primary-dark-rgb:13,82,64;--primary-light-rgb:77,208,168;--bg-solid-rgb:6,21,18;--accent-rgb:244,196,48;--accent3-rgb:255,140,66}
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{margin:0;padding:0;width:100%;height:100vh;overflow:hidden}
-body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);height:100vh;overflow:hidden;background:var(--bg-solid)}
+body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);display:flex;flex-direction:column;height:100vh;overflow:hidden;background:var(--bg-solid)}
 #wallpaper-layer{position:fixed;top:0;left:0;width:100vw;height:100vh;background-size:cover;background-position:center;background-repeat:no-repeat;z-index:0}
 #wallpaper-layer::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:var(--bg-overlay)}
 #wallpaper-video{position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:cover;z-index:0;display:none}
@@ -47,8 +47,8 @@ body.bell-active .clock-widget,body.bell-active .activity-progress-mini,body.bel
 body.bell-active .clock-time{animation:textFlash 0.5s ease-in-out infinite}
 @keyframes textFlash{0%,100%{background:linear-gradient(135deg,#ff0000,#ff8c42);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 10px rgba(255,0,0,0.8))}50%{background:linear-gradient(135deg,#ffff00,#fff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 20px rgba(255,255,0,0.9))}}
 body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite}
-@keyframes secondsFlash{0%,100%{color:#ff0000}50%{color:#ffff00}}
-.display-container{position:relative;z-index:10;width:100vw;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+@keyframes secondsFlash{0%,100%{color:#ff0000}50%{color:#ffff0}}
+.display-container{position:relative;z-index:10;flex:1;display:flex;flex-direction:column;overflow:hidden}
 .display-header{flex-shrink:0;display:flex;justify-content:space-between;align-items:center;padding:clamp(6px,1.5vh,14px) clamp(10px,2vw,28px);background:linear-gradient(135deg,rgba(var(--primary-dark-rgb),0.95),rgba(var(--bg-solid-rgb),0.95));border-bottom:3px solid var(--accent);box-shadow:0 4px 24px rgba(0,0,0,0.4)}
 .header-left{display:flex;align-items:center;gap:clamp(6px,1vw,14px);min-width:0;flex:1}
 .school-logo{width:clamp(40px,5vh,56px);height:clamp(40px,5vh,56px);border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-3));display:flex;align-items:center;justify-content:center;font-size:clamp(1rem,1.5vh,1.4rem);color:#1a1a1a;font-weight:900;box-shadow:0 4px 16px rgba(var(--accent-rgb),0.4);flex-shrink:0;cursor:pointer}
