@@ -1,4 +1,4 @@
-const CACHE='display-v3';
+const CACHE='display-v4';
 const FILES=['./','./index.html','./manifest.json'];
 
 self.addEventListener('install',function(e){
