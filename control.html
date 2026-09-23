@@ -82,7 +82,7 @@ hr{border:none;border-top:1px solid rgba(255,255,255,0.1);margin:15px 0}
 <hr>
 <h3>Bell Sekolah</h3>
 <div class="info-box">
-    <i class="fas fa-info-circle"></i> Pilih suara bell dari dropdown di bawah ini.
+    <i class="fas fa-info-circle"></i> Atur Nama Bell, Waktu, dan Pilih Suara MP3 dari dropdown.
 </div>
 <div id="bellSlots"></div>
 
@@ -101,9 +101,7 @@ hr{border:none;border-top:1px solid rgba(255,255,255,0.1);margin:15px 0}
 <script>
 var DB="https://dispay-sekolah-default-rtdb.asia-southeast1.firebasedatabase.app";
 
-// ==================================================================
-// DAFTAR SUARA BELL (Sudah diisi 9 suara dari GitHub Anda)
-// ==================================================================
+// Daftar Suara MP3
 var bellLibrary = [
     {name: "Default Beep (Tanpa MP3)", url: ""},
     {name: "Bell 01", url: "https://cdn.jsdelivr.net/gh/dmuhi9959/display-inpormasi-sekolah@main/bel-1.mp3"},
@@ -124,16 +122,20 @@ function renderBells(){
     var h="";
     Object.keys(bells).forEach(function(k){
         var b=bells[k];
-        h+='<div class="br"><div class="bl">'+b.label+'</div><div class="bt"><input type="time" value="'+b.time+'" data-k="'+k+'" onchange="bells[this.dataset.k].time=this.value"><input type="checkbox" '+(b.enabled?"checked":"")+' data-k="'+k+'" onchange="bells[this.dataset.k].enabled=this.checked"><span style="font-size:0.8rem">Aktif</span></div>';
+        // Input Nama Bell (Baru)
+        h+='<div class="br"><label style="margin-top:0;color:#f4c430;font-weight:700">Nama Bell</label>';
+        h+='<input type="text" value="'+b.label+'" data-k="'+k+'" onchange="bells[this.dataset.k].label=this.value" style="margin-bottom:6px;font-weight:700">';
         
-        // Membuat Dropdown Bell
+        // Waktu & Aktif
+        h+='<div class="bt"><input type="time" value="'+b.time+'" data-k="'+k+'" onchange="bells[this.dataset.k].time=this.value"><input type="checkbox" '+(b.enabled?"checked":"")+' data-k="'+k+'" onchange="bells[this.dataset.k].enabled=this.checked"><span style="font-size:0.8rem">Aktif</span></div>';
+        
+        // Dropdown MP3
         h+='<select data-k="'+k+'" onchange="bells[this.dataset.k].musicUrl=this.value" style="margin-top:3px;font-size:0.8rem">';
         bellLibrary.forEach(function(bell){
             var selected = (b.musicUrl === bell.url) ? "selected" : "";
             h+='<option value="'+bell.url+'" '+selected+'>'+bell.name+'</option>';
         });
         
-        // Jika ada link lama yang belum ada di daftar, tetap tampilkan
         if(b.musicUrl && !bellLibrary.some(bell => bell.url === b.musicUrl)){
             h+='<option value="'+b.musicUrl+'" selected>Custom: '+b.musicUrl.substring(0, 25)+'...</option>';
         }
@@ -186,7 +188,7 @@ if(d.bgSettings){
     if(d.bgSettings.ytOverlay)setV("ytOverlay",d.bgSettings.ytOverlay);
 }
 if(d.colTitles){setV("colLeft",d.colTitles.left);setV("colRight",d.colTitles.right);}
-if(d.bells){Object.keys(d.bells).forEach(function(k){if(bells[k]){bells[k].time=d.bells[k].time;bells[k].enabled=d.bells[k].enabled;bells[k].musicUrl=d.bells[k].musicUrl||"";}});renderBells();}
+if(d.bells){Object.keys(d.bells).forEach(function(k){if(bells[k]){bells[k].time=d.bells[k].time;bells[k].label=d.bells[k].label;bells[k].enabled=d.bells[k].enabled;bells[k].musicUrl=d.bells[k].musicUrl||"";}});renderBells();}
 if(d.schedules){schedules=d.schedules;renderSchedules();}
 setSt("Data dimuat!","ok");
 }).catch(function(e){setSt("Error: "+e.message,"er");});
