@@ -18,6 +18,12 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{margin:0 !important;padding:0 !important;width:100% !important;max-width:100% !important;overflow:hidden;height:100%;height:100dvh}
 body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);display:flex;flex-direction:column;overflow:hidden;background:var(--bg-solid);overscroll-behavior:none}
+
+/* Layar Pembuka Unlock Suara */
+#sound-unlock{position:fixed;inset:0;z-index:99998;background:rgba(6,21,18,0.95);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;cursor:pointer;text-align:center;padding:20px}
+#sound-unlock .box i{font-size:3rem;color:var(--accent);margin-bottom:15px;animation:pulse 1.5s infinite}
+#sound-unlock .box p{font-size:1.1rem;font-weight:700}
+
 #wallpaper-layer{position:fixed;top:0;left:0;width:100vw;height:100vh;height:100dvh;background-size:cover;background-position:center;background-repeat:no-repeat;z-index:0;display:none}
 #wallpaper-layer.active{display:block}
 #wallpaper-layer::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:var(--bg-overlay)}
@@ -30,7 +36,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);display:flex;f
 .particle{position:absolute;background:rgba(var(--accent-rgb),0.35);border-radius:50%;animation:float linear infinite}
 @keyframes float{0%{transform:translateY(100vh);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-10vh);opacity:0}}
 
-/* Tombol Fullscreen */
 #fullscreenBtn{position:fixed;bottom:15px;right:15px;z-index:99999;background:rgba(0,0,0,0.5);color:var(--accent);border:1px solid var(--accent);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:1rem;cursor:pointer;backdrop-filter:blur(5px);transition:0.3s}
 #fullscreenBtn:hover{background:var(--accent);color:#000}
 
@@ -69,7 +74,6 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 .datetime-box .day-date{font-size:clamp(0.65rem,1.3vh,0.95rem);color:var(--accent);font-weight:700;text-transform:capitalize}
 .datetime-box .time{font-family:'Orbitron',sans-serif;font-size:clamp(0.8rem,1.8vh,1.3rem);font-weight:700;color:#fff;margin-top:1px;letter-spacing:1px}
 
-/* Layout Utama Grid */
 .main-content{flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr auto;grid-template-areas: "left right" "center center";gap:clamp(8px,1.5vw,20px);padding:clamp(8px,1.5vh,16px) clamp(8px,2vw,20px);overflow:hidden;min-height:0;min-width:0;position:relative;z-index:10;width:100%}
 .schedule-column.left{grid-area:left}
 .schedule-column.right{grid-area:right}
@@ -89,7 +93,6 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 .schedule-card .class-subject{font-size:clamp(0.7rem,1.2vh,0.9rem);color:var(--text-muted);font-weight:500}
 .schedule-card .class-subject i{color:var(--primary-light);margin-right:3px}
 
-/* Jam & Progress Kegiatan - Rapi Kiri */
 .center-column{grid-area:center;display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:20px;padding:10px 20px;border-radius:12px;background:linear-gradient(135deg,rgba(var(--primary-dark-rgb),0.6),rgba(var(--bg-solid-rgb),0.6));border:1px solid var(--card-border);backdrop-filter:blur(10px);flex-shrink:0}
 .clock-widget{background:transparent;border:none;padding:0;border-radius:0;flex:0 0 auto;box-shadow:none;display:flex;align-items:center;gap:8px}
 .clock-widget .clock-time{font-family:'Orbitron',sans-serif;font-size:clamp(1.2rem,2.5vh,1.8rem);font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
@@ -104,7 +107,6 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 .progress-bar-mini-fill::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);animation:shimmer 2s linear infinite}
 @keyframes shimmer{to{transform:translateX(100%)}}
 
-/* Footer Running Text (Hanya 1) */
 .display-footer{flex-shrink:0;background:linear-gradient(135deg,rgba(var(--primary-dark-rgb),0.95),rgba(var(--bg-solid-rgb),0.95));border-top:3px solid var(--accent);padding:clamp(4px,1vh,10px) clamp(8px,2vw,20px);display:grid;grid-template-columns:1fr;gap:12px;position:relative;z-index:10;width:100%}
 .footer-section{display:flex;align-items:center;gap:10px;padding:5px 12px;background:rgba(0,0,0,0.3);border-radius:8px;overflow:hidden}
 .footer-section .footer-icon{width:clamp(24px,3vh,32px);height:clamp(24px,3vh,32px);border-radius:6px;background:var(--accent);color:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:clamp(0.6rem,1.2vh,0.85rem);flex-shrink:0}
@@ -123,10 +125,7 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 .alarm-modal p{color:var(--text-muted);margin-bottom:18px}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:rgba(0,0,0,0.2)}::-webkit-scrollbar-thumb{background:rgba(var(--accent-rgb),0.3);border-radius:10px}
 
-/* Tampilan TV / Tablet */
 @media(max-width:1100px){.main-content{grid-template-columns:1fr 1fr}}
-
-/* Tampilan HP Landscape - 2 Kolom seperti PC tanpa Scroll */
 @media(max-width:768px) and (orientation:landscape){
     .header-center{display:none}
     .school-info .subtitle span:nth-child(2){display:none}
@@ -135,30 +134,16 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
     .school-info .subtitle{font-size:0.6rem}
     .datetime-box{padding:2px 8px}
     .datetime-box .time{font-size:0.9rem}
-    
-    .main-content{
-        grid-template-columns:1fr 1fr;
-        grid-template-rows:1fr auto;
-        grid-template-areas: "left right" "center center";
-        padding:5px;
-        gap:6px;
-        overflow:hidden;
-    }
+    .main-content{grid-template-columns:1fr 1fr;grid-template-rows:1fr auto;grid-template-areas: "left right" "center center";padding:5px;gap:6px;overflow:hidden;}
     .schedule-column{min-height:0; height:100%; overflow:hidden;}
     .schedule-list{overflow-y:auto; height:100%; padding-right:2px;}
-    
     .column-title{padding:4px 8px; font-size:0.7rem;}
     .schedule-card{padding:6px 8px; margin-bottom:4px;}
     .schedule-card .class-name{font-size:0.75rem; margin-bottom:2px;}
     .schedule-card .class-name .badge{font-size:0.5rem; padding:2px 5px;}
     .schedule-card .class-time{font-size:0.65rem; margin-bottom:1px;}
     .schedule-card .class-subject{font-size:0.65rem;}
-
-    .center-column{
-        padding:6px 12px;
-        gap:10px;
-        justify-content:flex-start;
-    }
+    .center-column{padding:6px 12px;gap:10px;justify-content:flex-start;}
     .clock-widget .clock-time{font-size:1rem;}
     .clock-widget .clock-seconds{font-size:0.8rem;}
     .clock-widget .clock-label{font-size:0.5rem;}
@@ -166,11 +151,8 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
     .activity-progress-mini{margin-left:10px;}
     .activity-progress-mini .label{font-size:0.55rem; margin-bottom:4px;}
     .progress-bar-mini{height:4px;}
-
     .display-footer{grid-template-columns:1fr; padding:3px 8px}
 }
-
-/* Tampilan HP Portrait - Minta dirotate */
 @media(max-width:768px) and (orientation:portrait){
     #rotate-warning{display:flex}
     .display-header{display:none}
@@ -180,6 +162,15 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 </style>
 </head>
 <body>
+
+<!-- Layar Klik untuk Unlock Suara -->
+<div id="sound-unlock" onclick="unlockSoundAndFullscreen()">
+    <div class="box">
+        <i class="fas fa-volume-up"></i>
+        <p>Klik Di Mana Saja Untuk Mengaktifkan Suara & Layar Penuh</p>
+    </div>
+</div>
+
 <button id="fullscreenBtn" onclick="toggleFullscreen()"><i class="fas fa-expand"></i></button>
 <div id="rotate-warning"><i class="fas fa-mobile-alt"></i><h2>Putar HP ke Mode Landscape</h2><p>Display tampil optimal dalam mode landscape</p></div>
 <div id="wallpaper-layer"></div>
@@ -196,7 +187,6 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 <div class="main-content">
 <div class="schedule-column left"><div class="column-title" id="colLeftTitle"><i class="fas fa-calendar-alt"></i> JADWAL PELAJARAN</div><div class="schedule-list" id="scheduleListLeft"></div></div>
 <div class="schedule-column right"><div class="column-title" id="colRightTitle"><i class="fas fa-calendar-alt"></i> JADWAL PELAJARAN</div><div class="schedule-list" id="scheduleListRight"></div></div>
-
 <div class="center-column">
 <div class="clock-widget">
     <div class="clock-icon"><i class="fas fa-clock"></i></div>
@@ -208,13 +198,12 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 <div class="activity-progress-mini"><div class="label"><span id="currentActivityLabel">Kegiatan Saat Ini</span><span id="activityTimeLabel">--:--</span></div><div class="progress-bar-mini"><div class="progress-bar-mini-fill" id="progressBar" style="width:0%"></div></div></div>
 </div>
 </div>
-
 <footer class="display-footer">
 <div class="footer-section"><div class="footer-icon"><i class="fas fa-bullhorn"></i></div><div class="footer-text"><div class="ticker-text"><strong>PENGUMUMAN:</strong> <span id="footerAnnouncement1">Seluruh siswa wajib berpakaian seragam lengkap.</span></div></div></div>
 </footer>
-
 <div class="alarm-modal" id="alarmModal"><div class="alarm-modal-content"><div class="alarm-icon"><i class="fas fa-bell"></i></div><h2 id="alarmModalTitle">Alarm!</h2><p id="alarmModalLabel">Waktunya</p><button onclick="stopAlarm()" style="background:linear-gradient(135deg,#ff5252,#c82333);color:#fff;padding:12px 24px;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;margin-top:8px"><i class="fas fa-stop"></i> Hentikan</button></div></div>
 <div class="toast" id="toast"><i class="fas fa-info-circle"></i><span id="toastMessage"></span></div>
+
 <script>
 function setHeight(){var h=window.innerHeight;document.documentElement.style.height=h+'px';document.body.style.height=h+'px';document.body.style.minHeight=h+'px';document.body.style.maxHeight=h+'px';}
 window.addEventListener('resize',setHeight);
@@ -225,7 +214,6 @@ var state={school:{name:'PPTQ JASMA DIGITAL',address:'Jl. Pendidikan No. 123',we
 var defaultSchedules=[{id:1,class:'KELAS 7-1',subject:'B. JERMAN',start:'05:30',end:'06:30',column:'left'},{id:2,class:'KELAS 7-2',subject:'B. ARAB',start:'05:30',end:'07:15',column:'left'},{id:3,class:'KELAS 7-3',subject:'TAHSIN',start:'06:30',end:'07:30',column:'left'},{id:4,class:'KELAS 7-4',subject:'MATEMATIKA',start:'07:30',end:'09:00',column:'left'},{id:5,class:'KELAS 7-5',subject:'IPA',start:'09:00',end:'10:30',column:'left'},{id:6,class:'KELAS 8-1',subject:'B. INGGRIS',start:'05:30',end:'06:30',column:'right'},{id:7,class:'KELAS 8-3',subject:'B. TURKEY',start:'05:30',end:'07:15',column:'right'},{id:8,class:'KELAS 8-2',subject:'FIQH',start:'06:30',end:'07:30',column:'right'},{id:9,class:'KELAS 9-1',subject:'AKIDAH',start:'07:30',end:'09:00',column:'right'},{id:10,class:'KELAS 9-2',subject:'PKn',start:'09:00',end:'10:30',column:'right'}];
 var lastFB=null;var audioUnlocked=false,unlockedAudioCtx=null;var alarmAudio=null,beepCtx=null,beepInterval=null,beepCount=0;var bellTriggered={};
 var bgSlides=[];var bgIndex=0;var bgInterval=null;
-
 var days=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];var months=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
 function hexToRgb(h){return{r:parseInt(h.slice(1,3),16),g:parseInt(h.slice(3,5),16),b:parseInt(h.slice(5,7),16)}}
 function hexToRgbStr(h){var r=hexToRgb(h);return r.r+', '+r.g+', '+r.b}
@@ -265,7 +253,6 @@ function applyBackground(){
     var wp=document.getElementById('wallpaper-layer');
     var yt=document.getElementById('youtube-bg');
     var yi=document.getElementById('youtube-iframe');
-    
     if(bgSlides.length===0){
         yt.classList.remove('active');
         wp.classList.remove('active');
@@ -273,9 +260,7 @@ function applyBackground(){
         document.body.style.background=state.customColors.bgSolid;
         return;
     }
-    
     var current=bgSlides[bgIndex];
-    
     if(current.type==='youtube'){
         var vid=parseYouTubeUrl(current.url);
         if(vid){
@@ -288,7 +273,7 @@ function applyBackground(){
         }
     } else if(current.type==='image'){
         yt.classList.remove('active');
-        yi.src=''; // Stop YouTube
+        yi.src='';
         wp.style.display='block';
         wp.style.backgroundImage='url("'+current.url+'")';
         wp.style.backgroundSize='cover';
@@ -302,7 +287,6 @@ function applyBackground(){
 function startBgSlideshow(){
     if(bgInterval) clearInterval(bgInterval);
     if(bgSlides.length<=1) return;
-    
     bgInterval=setInterval(function(){
         bgIndex=(bgIndex+1)%bgSlides.length;
         applyBackground();
@@ -316,7 +300,33 @@ function renderScheduleLists(){var cur=getCurrentSchedules(),nxt=getNextSchedule
 function updateActivity(){var cur=getCurrentSchedules(),nxt=getNextSchedules();if(cur.length>0){var f=cur[0];document.getElementById('currentActivityLabel').textContent=f.class+' - '+f.subject;document.getElementById('activityTimeLabel').textContent=f.start+' - '+f.end;var n=new Date(),cm=n.getHours()*60+n.getMinutes()+n.getSeconds()/60,sm=timeToMinutes(f.start),em=timeToMinutes(f.end);document.getElementById('progressBar').style.width=Math.min(100,Math.max(0,((cm-sm)/(em-sm))*100))+'%';}else{document.getElementById('currentActivityLabel').textContent='Tidak Ada Kegiatan';document.getElementById('activityTimeLabel').textContent='--:--';document.getElementById('progressBar').style.width='0%';}renderScheduleLists();}
 function updateClock(){var n=new Date();document.getElementById('dayDate').textContent=days[n.getDay()]+', '+n.getDate()+' '+months[n.getMonth()]+' '+n.getFullYear();var h=String(n.getHours()).padStart(2,'0'),m=String(n.getMinutes()).padStart(2,'0'),s=String(n.getSeconds()).padStart(2,'0');document.getElementById('currentTime').textContent=h+':'+m+':'+s;document.getElementById('clockTime').textContent=h+':'+m;document.getElementById('clockSeconds').textContent=s;updateActivity();checkBells();}
 function checkBells(){var n=new Date(),t=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');if(n.getSeconds()!==0)return;Object.keys(state.bells).forEach(function(k){var b=state.bells[k];if(b.enabled&&b.time===t&&!bellTriggered[k]){triggerBell(k,b);bellTriggered[k]=true;setTimeout(function(){bellTriggered[k]=false;},65000);}});}
-function triggerBell(key,bell){stopAlarmAudio();document.body.classList.add('bell-active');document.getElementById('alarmModalTitle').textContent=bell.label;document.getElementById('alarmModalLabel').textContent='Pukul '+bell.time;document.getElementById('alarmModal').classList.add('show');if(bell.music){alarmAudio=new Audio(bell.music);alarmAudio.volume=state.volume/100;alarmAudio.loop=false;alarmAudio.addEventListener('ended',function(){stopAlarm();});alarmAudio.play().catch(function(){startBeep();});}else{startBeep();}}
+
+// Fungsi Bell (Diperbaiki agar mau bunyi MP3)
+function triggerBell(key,bell){
+    stopAlarmAudio();
+    document.body.classList.add('bell-active');
+    document.getElementById('alarmModalTitle').textContent=bell.label;
+    document.getElementById('alarmModalLabel').textContent='Pukul '+bell.time;
+    document.getElementById('alarmModal').classList.add('show');
+    
+    if(bell.music && bell.music !== ""){
+        alarmAudio=new Audio(bell.music);
+        alarmAudio.volume=state.volume/100;
+        alarmAudio.loop=false;
+        alarmAudio.addEventListener('ended',function(){stopAlarm();});
+        
+        // Paksa resume AudioContext sebelum play
+        if(unlockedAudioCtx && unlockedAudioCtx.state === 'suspended') unlockedAudioCtx.resume();
+        
+        alarmAudio.play().catch(function(e){
+            console.log("Gagal play MP3, fallback ke beep:", e);
+            startBeep(); // Jika MP3 diblokir, pakai suara beep internal
+        });
+    }else{
+        startBeep();
+    }
+}
+
 function startBeep(){beepCount=0;var ctx=unlockedAudioCtx;if(!ctx){try{ctx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){return;}}if(ctx.state==='suspended')ctx.resume();var vol=state.volume/100;function pb(){if(beepCount>=10){stopAlarm();return;}beepCount++;try{var o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=880;o.type='sine';g.gain.setValueAtTime(vol,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.5);o.start();o.stop(ctx.currentTime+0.5);}catch(e){}}pb();beepInterval=setInterval(pb,1000);}
 function stopAlarmAudio(){if(alarmAudio){try{alarmAudio.pause();alarmAudio.currentTime=0;}catch(e){}alarmAudio=null;}if(beepInterval){clearInterval(beepInterval);beepInterval=null;}beepCount=0;}
 function stopAlarm(){stopAlarmAudio();document.body.classList.remove('bell-active');document.getElementById('alarmModal').classList.remove('show');}
@@ -331,8 +341,6 @@ if(d.bgSettings){
     state.bgSettings.images=d.bgSettings.images||[];
     state.bgSettings.interval=d.bgSettings.interval||10;
     state.bgSettings.ytOverlay=d.bgSettings.ytOverlay||30;
-    
-    // Build slides array
     bgSlides=[];
     if(state.bgSettings.youtubeUrl){bgSlides.push({type:'youtube',url:state.bgSettings.youtubeUrl});}
     state.bgSettings.images.forEach(function(img){if(img)bgSlides.push({type:'image',url:img});});
@@ -348,14 +356,37 @@ if(d.schedules)state.schedules=d.schedules;
 applyTheme();applySettings();renderScheduleLists();
 }
 
-// Fungsi Fullscreen untuk HP & TV
+// Fungsi Unlock Suara & Fullscreen
+function unlockSoundAndFullscreen() {
+    var overlay = document.getElementById('sound-unlock');
+    if(overlay) overlay.style.display = 'none';
+    
+    if(!audioUnlocked){
+        try {
+            unlockedAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            if(unlockedAudioCtx.state === 'suspended') unlockedAudioCtx.resume();
+            
+            // Dummy play untuk unlock HTML5 Audio
+            var dummyAudio = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==');
+            dummyAudio.play().then(function(){ dummyAudio.pause(); }).catch(function(){});
+            
+            audioUnlocked = true;
+        } catch(e) {}
+    }
+    
+    // Sekalian buka Fullscreen
+    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        toggleFullscreen();
+    }
+}
+
 function toggleFullscreen() {
     var elem = document.documentElement;
     var btn = document.getElementById('fullscreenBtn');
     if (!document.fullscreenElement && !document.webkitFullscreenElement) {
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
-        } else if (elem.webkitRequestFullscreen) { /* Safari & Webkit TV */
+        } else if (elem.webkitRequestFullscreen) {
             elem.webkitRequestFullscreen();
         }
         btn.innerHTML = '<i class="fas fa-compress"></i>';
@@ -375,8 +406,6 @@ document.addEventListener('fullscreenchange', function() {
     }
 });
 
-document.addEventListener('click',function(){if(!audioUnlocked){try{unlockedAudioCtx=new(window.AudioContext||window.webkitAudioContext)();if(unlockedAudioCtx.state==='suspended')unlockedAudioCtx.resume();audioUnlocked=true;}catch(e){}}});
-document.addEventListener('touchstart',function(){if(!audioUnlocked){try{unlockedAudioCtx=new(window.AudioContext||window.webkitAudioContext)();if(unlockedAudioCtx.state==='suspended')unlockedAudioCtx.resume();audioUnlocked=true;}catch(e){}}});
 var logoClickCount=0,logoClickTimer=null;
 document.getElementById('schoolLogo').addEventListener('click',function(e){e.stopPropagation();logoClickCount++;if(logoClickTimer)clearTimeout(logoClickTimer);logoClickTimer=setTimeout(function(){logoClickCount=0;},3000);if(logoClickCount>=5){logoClickCount=0;showToast('Atur setting di control.html (buka di PC)');}});
 function init(){
