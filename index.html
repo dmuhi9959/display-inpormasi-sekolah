@@ -90,15 +90,15 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 .schedule-card .class-subject{font-size:clamp(0.7rem,1.2vh,0.9rem);color:var(--text-muted);font-weight:500}
 .schedule-card .class-subject i{color:var(--primary-light);margin-right:3px}
 
-/* Jam & Progress Kegiatan */
-.center-column{grid-area:center;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:20px;padding:12px 20px;border-radius:12px;background:linear-gradient(135deg,rgba(var(--primary-dark-rgb),0.6),rgba(var(--bg-solid-rgb),0.6));border:1px solid var(--card-border);backdrop-filter:blur(10px);flex-shrink:0}
-.clock-widget{background:transparent;border:none;padding:0;border-radius:0;flex:0 0 auto;box-shadow:none}
-.clock-widget .clock-time{font-family:'Orbitron',sans-serif;font-size:clamp(1.5rem,3.5vh,2.5rem);font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
-.clock-widget .clock-seconds{font-family:'Orbitron',sans-serif;font-size:clamp(1rem,2vh,1.5rem);color:var(--accent-3)}
-.clock-widget .clock-label{font-size:clamp(0.6rem,1vh,0.8rem);color:var(--text-muted);text-transform:uppercase;letter-spacing:2px;margin-top:3px}
-.clock-widget .clock-icon{font-size:clamp(1.2rem,2.5vh,2rem);color:var(--accent);animation:pulse 2s ease-in-out infinite}
+/* Jam & Progress Kegiatan - Rapi Kiri */
+.center-column{grid-area:center;display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:20px;padding:10px 20px;border-radius:12px;background:linear-gradient(135deg,rgba(var(--primary-dark-rgb),0.6),rgba(var(--bg-solid-rgb),0.6));border:1px solid var(--card-border);backdrop-filter:blur(10px);flex-shrink:0}
+.clock-widget{background:transparent;border:none;padding:0;border-radius:0;flex:0 0 auto;box-shadow:none;display:flex;align-items:center;gap:8px}
+.clock-widget .clock-time{font-family:'Orbitron',sans-serif;font-size:clamp(1.2rem,2.5vh,1.8rem);font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.clock-widget .clock-seconds{font-family:'Orbitron',sans-serif;font-size:clamp(0.8rem,1.5vh,1.1rem);color:var(--accent-3)}
+.clock-widget .clock-label{font-size:clamp(0.55rem,0.9vh,0.7rem);color:var(--text-muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:2px}
+.clock-widget .clock-icon{font-size:clamp(1rem,1.8vh,1.4rem);color:var(--accent);animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.6;transform:scale(0.95)}}
-.activity-progress-mini{background:transparent;border:none;padding:0;border-radius:0;flex:1;box-shadow:none}
+.activity-progress-mini{background:transparent;border:none;padding:0;border-radius:0;flex:1;margin-left:20px;box-shadow:none}
 .activity-progress-mini .label{font-size:clamp(0.6rem,1vh,0.8rem);color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;display:flex;justify-content:space-between;gap:6px}
 .progress-bar-mini{height:8px;background:rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;position:relative}
 .progress-bar-mini-fill{height:100%;background:linear-gradient(90deg,var(--primary-light),var(--accent));border-radius:10px;transition:width 1s linear;position:relative}
@@ -158,11 +158,13 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
     .center-column{
         padding:6px 12px;
         gap:10px;
+        justify-content:flex-start;
     }
-    .clock-widget .clock-time{font-size:1.2rem;}
-    .clock-widget .clock-seconds{font-size:0.9rem;}
-    .clock-widget .clock-label{font-size:0.55rem;}
-    .clock-widget .clock-icon{font-size:1rem;}
+    .clock-widget .clock-time{font-size:1rem;}
+    .clock-widget .clock-seconds{font-size:0.8rem;}
+    .clock-widget .clock-label{font-size:0.5rem;}
+    .clock-widget .clock-icon{font-size:0.8rem;}
+    .activity-progress-mini{margin-left:10px;}
     .activity-progress-mini .label{font-size:0.55rem; margin-bottom:4px;}
     .progress-bar-mini{height:4px;}
 
@@ -198,7 +200,13 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 <div class="schedule-column right"><div class="column-title" id="colRightTitle"><i class="fas fa-calendar-alt"></i> JADWAL PELAJARAN</div><div class="schedule-list" id="scheduleListRight"></div></div>
 
 <div class="center-column">
-<div class="clock-widget"><div><div class="clock-time" id="clockTime">00:00</div><div class="clock-label">Waktu Sekarang</div></div><div class="clock-seconds" id="clockSeconds">00</div><div class="clock-icon"><i class="fas fa-clock"></i></div></div>
+<div class="clock-widget">
+    <div class="clock-icon"><i class="fas fa-clock"></i></div>
+    <div>
+        <div style="display:flex;align-items:baseline;gap:4px"><div class="clock-time" id="clockTime">00:00</div><div class="clock-seconds" id="clockSeconds">00</div></div>
+        <div class="clock-label">Waktu Sekarang</div>
+    </div>
+</div>
 <div class="activity-progress-mini"><div class="label"><span id="currentActivityLabel">Kegiatan Saat Ini</span><span id="activityTimeLabel">--:--</span></div><div class="progress-bar-mini"><div class="progress-bar-mini-fill" id="progressBar" style="width:0%"></div></div></div>
 </div>
 </div>
