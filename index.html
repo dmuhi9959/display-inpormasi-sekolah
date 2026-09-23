@@ -2,42 +2,48 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#1a8a6f">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Display Sekolah">
+<meta name="fullscreen" content="yes">
 <title>Display Sekolah</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root{--bg-overlay:rgba(6,24,22,0.82);--bg-solid:#061512;--primary:#1a8a6f;--primary-dark:#0d5240;--primary-light:#4dd0a8;--accent:#f4c430;--accent-2:#ffd966;--accent-3:#ff8c42;--text:#fff;--text-muted:rgba(255,255,255,0.72);--card-bg:rgba(255,255,255,0.05);--card-border:rgba(255,255,255,0.12);--danger:#ff5252;--success:#4caf50;--transition:all 0.3s cubic-bezier(0.4,0,0.2,1);--primary-rgb:26,138,111;--primary-dark-rgb:13,82,64;--primary-light-rgb:77,208,168;--bg-solid-rgb:6,21,18;--accent-rgb:244,196,48;--accent3-rgb:255,140,66}
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{margin:0;padding:0;width:100%;overflow:hidden}
+html,body{margin:0;padding:0;width:100%;overflow:hidden;height:100%;height:100dvh}
 body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);display:flex;flex-direction:column;overflow:hidden;background:var(--bg-solid)}
-#wallpaper-layer{position:fixed;top:0;left:0;width:100vw;height:100vh;background-size:cover;background-position:center;background-repeat:no-repeat;z-index:0}
+#wallpaper-layer{position:fixed;top:0;left:0;width:100vw;height:100vh;height:100dvh;background-size:cover;background-position:center;background-repeat:no-repeat;z-index:0}
 #wallpaper-layer::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:var(--bg-overlay)}
-#wallpaper-video{position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:cover;z-index:0;display:none}
+#wallpaper-video{position:fixed;top:0;left:0;width:100vw;height:100vh;height:100dvh;object-fit:cover;z-index:0;display:none}
 #wallpaper-video.active{display:block}
-#youtube-bg{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;display:none;overflow:hidden}
+#youtube-bg{position:fixed;top:0;left:0;width:100vw;height:100vh;height:100dvh;z-index:0;display:none;overflow:hidden}
 #youtube-bg.active{display:block}
-#youtube-bg iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100vw;height:56.25vw;min-height:100vh;min-width:177.78vh;border:0;z-index:1;pointer-events:none}
+#youtube-bg iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100vw;height:56.25vw;min-height:100vh;min-height:100dvh;min-width:177.78vh;border:0;z-index:1;pointer-events:none}
 #youtube-overlay{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none}
-.pattern-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:1;pointer-events:none;background-image:radial-gradient(circle at 15% 25%,rgba(var(--primary-rgb),0.18) 0%,transparent 40%),radial-gradient(circle at 85% 75%,rgba(var(--accent-rgb),0.12) 0%,transparent 40%)}
-.particles{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:2;pointer-events:none;overflow:hidden}
+.pattern-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;height:100dvh;z-index:1;pointer-events:none;background-image:radial-gradient(circle at 15% 25%,rgba(var(--primary-rgb),0.18) 0%,transparent 40%),radial-gradient(circle at 85% 75%,rgba(var(--accent-rgb),0.12) 0%,transparent 40%)}
+.particles{position:fixed;top:0;left:0;width:100vw;height:100vh;height:100dvh;z-index:2;pointer-events:none;overflow:hidden}
 .particle{position:absolute;background:rgba(var(--accent-rgb),0.35);border-radius:50%;animation:float linear infinite}
 @keyframes float{0%{transform:translateY(100vh);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-10vh);opacity:0}}
-#rotate-warning{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99999;background:#061512;display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:20px}
+
+/* Tombol Fullscreen */
+#fullscreenBtn{position:fixed;bottom:15px;right:15px;z-index:99999;background:rgba(0,0,0,0.5);color:var(--accent);border:1px solid var(--accent);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:1rem;cursor:pointer;backdrop-filter:blur(5px);transition:0.3s}
+#fullscreenBtn:hover{background:var(--accent);color:#000}
+
+#rotate-warning{position:fixed;top:0;left:0;width:100vw;height:100vh;height:100dvh;z-index:99999;background:#061512;display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:20px}
 #rotate-warning i{font-size:3rem;color:#f4c430;margin-bottom:20px;animation:rotateIcon 2s ease-in-out infinite}
 #rotate-warning h2{color:#f4c430;font-size:1.3rem;margin-bottom:10px}
 #rotate-warning p{color:rgba(255,255,255,0.6);font-size:0.9rem}
 @keyframes rotateIcon{0%,100%{transform:rotate(0deg)}50%{transform:rotate(90deg)}}
-.bell-flash-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99;pointer-events:none;display:none}
+.bell-flash-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;height:100dvh;z-index:99;pointer-events:none;display:none}
 body.bell-active .bell-flash-overlay{display:block;background:rgba(255,0,0,0.15);animation:bellFlash 0.6s ease-in-out infinite}
 @keyframes bellFlash{0%,100%{opacity:0.2}50%{opacity:0.6}}
-.bell-border{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99;pointer-events:none;display:none;border:8px solid var(--danger)}
+.bell-border{position:fixed;top:0;left:0;width:100vw;height:100vh;height:100dvh;z-index:99;pointer-events:none;display:none;border:8px solid var(--danger)}
 body.bell-active .bell-border{display:block;animation:borderFlash 0.5s ease-in-out infinite}
 @keyframes borderFlash{0%,100%{border-color:#ff0000;box-shadow:inset 0 0 80px rgba(255,0,0,0.5),0 0 40px rgba(255,0,0,0.4)}50%{border-color:#ffff00;box-shadow:inset 0 0 120px rgba(255,200,0,0.7),0 0 80px rgba(255,200,0,0.6)}}
 body.bell-active .display-header{animation:headerFlash 0.5s ease-in-out infinite}
@@ -49,7 +55,7 @@ body.bell-active .clock-time{animation:textFlash 0.5s ease-in-out infinite}
 body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite}
 @keyframes secondsFlash{0%,100%{color:#ff0000}50%{color:#ffff00}}
 .display-header{flex-shrink:0;display:flex;justify-content:space-between;align-items:center;padding:clamp(6px,1.5vh,14px) clamp(10px,2vw,28px);background:linear-gradient(135deg,rgba(var(--primary-dark-rgb),0.95),rgba(var(--bg-solid-rgb),0.95));border-bottom:3px solid var(--accent);box-shadow:0 4px 24px rgba(0,0,0,0.4);position:relative;z-index:10}
-.header-left{display:flex;align-items:center;gap:clamp(6px,1vw,14px);min-width:0;min-width:0;flex:1}
+.header-left{display:flex;align-items:center;gap:clamp(6px,1vw,14px);min-width:0;flex:1}
 .school-logo{width:clamp(40px,5vh,56px);height:clamp(40px,5vh,56px);border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-3));display:flex;align-items:center;justify-content:center;font-size:clamp(1rem,1.5vh,1.4rem);color:#1a1a1a;font-weight:900;box-shadow:0 4px 16px rgba(var(--accent-rgb),0.4);flex-shrink:0;cursor:pointer}
 .school-info{min-width:0;overflow:hidden;flex:1}
 .school-info h1{font-size:clamp(0.85rem,2.2vh,1.4rem);font-weight:800;line-height:1.1;letter-spacing:-0.3px;background:linear-gradient(90deg,#fff,var(--accent-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -112,7 +118,7 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 @keyframes scrollText{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
 .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-100px);background:linear-gradient(135deg,#0a1f1a,#1a2e28);border:1px solid var(--accent);color:var(--text);padding:10px 20px;border-radius:10px;z-index:200;transition:transform 0.3s ease;display:flex;align-items:center;gap:8px;box-shadow:0 8px 32px rgba(0,0,0,0.5);font-size:0.8rem;max-width:90%}
 .toast.show{transform:translateX(-50%) translateY(0)}
-.alarm-modal{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);z-index:150;display:none;align-items:center;justify-content:center;padding:20px}
+.alarm-modal{position:fixed;top:0;left:0;width:100vw;height:100vh;height:100dvh;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);z-index:150;display:none;align-items:center;justify-content:center;padding:20px}
 .alarm-modal.show{display:flex}
 .alarm-modal-content{background:linear-gradient(135deg,#0a1f1a,#1a2e28);border:2px solid var(--danger);border-radius:20px;padding:30px;text-align:center;max-width:350px;width:100%;box-shadow:0 16px 64px rgba(255,0,0,0.6)}
 .alarm-icon{width:64px;height:64px;margin:0 auto 14px;border-radius:50%;background:linear-gradient(135deg,var(--danger),var(--accent-3));display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:#fff;animation:ring 0.5s ease-in-out infinite;box-shadow:0 0 30px rgba(255,0,0,0.6)}
@@ -126,6 +132,7 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 </style>
 </head>
 <body>
+<button id="fullscreenBtn" onclick="toggleFullscreen()"><i class="fas fa-expand"></i></button>
 <div id="rotate-warning"><i class="fas fa-mobile-alt"></i><h2>Putar HP ke Mode Landscape</h2><p>Display tampil optimal dalam mode landscape</p></div>
 <div id="wallpaper-layer"></div>
 <video id="wallpaper-video" loop muted playsinline></video>
@@ -155,13 +162,13 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 <div class="alarm-modal" id="alarmModal"><div class="alarm-modal-content"><div class="alarm-icon"><i class="fas fa-bell"></i></div><h2 id="alarmModalTitle">Alarm!</h2><p id="alarmModalLabel">Waktunya</p><button onclick="stopAlarm()" style="background:linear-gradient(135deg,#ff5252,#c82333);color:#fff;padding:12px 24px;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;margin-top:8px"><i class="fas fa-stop"></i> Hentikan</button></div></div>
 <div class="toast" id="toast"><i class="fas fa-info-circle"></i><span id="toastMessage"></span></div>
 <script>
-// Service Worker dihapus untuk hindari cache
+// Service Worker dihapus
 // if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
 function setHeight(){var h=window.innerHeight;document.documentElement.style.height=h+'px';document.body.style.height=h+'px';document.body.style.minHeight=h+'px';document.body.style.maxHeight=h+'px';}
 window.addEventListener('resize',setHeight);
 window.addEventListener('orientationchange',function(){setTimeout(setHeight,100);});
 var DB="https://dispay-sekolah-default-rtdb.asia-southeast1.firebasedatabase.app";
-var themes=[{id:'islamic-green',bgSolid:'#061512',bgOverlay:'#061810',primary:'#1a8a6f',primaryDark:'#0d5240',primaryLight:'#4dd0a8',accent:'#f4c430',accent2:'#ffd966',accent3:'#ff8c42'},{id:'royal-blue',bgSolid:'#080f23',bgOverlay:'#0a1530',primary:'#2563eb',primaryDark:'#1e40af',primaryLight:'#60a5fa',accent:'#fbbf24',accent2:'#fcd34d',accent3:'#f97316'},{id:'royal-purple',bgSolid:'#140a23',bgOverlay:'#1a1030',primary:'#7c3aed',primaryDark:'#5b21b6',primaryLight:'#a78bfa',accent:'#fbbf24',accent2:'#fde047',accent3:'#fb7185'},{id:'sunset-orange',bgSolid:'#1e0f05',bgOverlay:'#2a1505',primary:'#ea580c',primaryDark:'#9a3412',primaryLight:'#fb923c',accent:'#facc15',accent2:'#fde047',accent3:'#dc2626'},{id:'crimson-red',bgSolid:'#1e0505',bgOverlay:'#2a0808',primary:'#dc2626',primaryDark:'#991b1b',primaryLight:'#f87171',accent:'#fbbf24',accent2:'#fcd34d',accent3:'#f97316'},{id:'teal-ocean',bgSolid:'#05191e',bgOverlay:'#05252a',primary:'#0d9488',primaryDark:'#115e59',primaryLight:'#5eead4',accent:'#f59e0b',accent2:'#fbbf24',accent3:'#fb7185'},{id:'dark-gold',bgSolid:'#140f05',bgOverlay:'#1a1508',primary:'#a16207',primaryDark:'#713f12',primaryLight:'#fde047',accent:'#facc15',accent2:'#fde047',accent3:'#ea580c'},{id:'midnight-indigo',bgSolid:'#0a0a1e',bgOverlay:'#0e1030',primary:'#4338ca',primaryDark:'#312e81',primaryLight:'#818cf8',accent:'#22d3ee',accent2:'#67e8f9',accent3:'#f472b6'}];
+var themes=[{id:'islamic-green',bgSolid:'#061512',bgOverlay:'#061810',primary:'#1a8a6f',primaryDark:'#0d5240',primaryLight:'#4dd0a8',accent:'#f4c430',accent2:'#ffd966',accent3:'#ff8c42'},{id:'royal-blue',bgSolid:'#080f23',bgOverlay:'#0a1530',primary:'#256eb',primaryDark:'#1e40af',primaryLight:'#60a5fa',accent:'#fbbf24',accent2:'#fcd34d',accent3:'#f97316'},{id:'royal-purple',bgSolid:'#140a23',bgOverlay:'#1a1030',primary:'#7c3aed',primaryDark:'#5b21b6',primaryLight:'#a78bfa',accent:'#fbbf24',accent2:'#fde047',accent3:'#fb7185'},{id:'sunset-orange',bgSolid:'#1e0f05',bgOverlay:'#2a1505',primary:'#ea580c',primaryDark:'#9a3412',primaryLight:'#fb923c',accent:'#facc15',accent2:'#fde047',accent3:'#dc2626'},{id:'crimson-red',bgSolid:'#1e0505',bgOverlay:'#2a0808',primary:'#dc2626',primaryDark:'#991b1b',primaryLight:'#f87171',accent:'#fbbf24',accent2:'#fcd34d',accent3:'#f97316'},{id:'teal-ocean',bgSolid:'#05191e',bgOverlay:'#05252a',primary:'#0d9488',primaryDark:'#115e59',primaryLight:'#5eead4',accent:'#f59e0b',accent2:'#fbbf24',accent3:'#fb7185'},{id:'dark-gold',bgSolid:'#140f05',bgOverlay:'#1a1508',primary:'#a16207',primaryDark:'#713f12',primaryLight:'#fde047',accent:'#facc15',accent2:'#fde047',accent3:'#ea580c'},{id:'midnight-indigo',bgSolid:'#0a0a1e',bgOverlay:'#0e1030',primary:'#4338ca',primaryDark:'#312e81',primaryLight:'#818cf8',accent:'#22d3ee',accent2:'#67e8f9',accent3:'#f472b6'}];
 var state={school:{name:'PPTQ JASMA DIGITAL',address:'Jl. Pendidikan No. 123',website:'www.pptq-jasma.sch.id',logo:'PJ',arabic:'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',motto:'Belajar - Beriman - Beramal'},theme:'islamic-green',customColors:{bgSolid:'#061512',bgOverlay:'#061810',primary:'#1a8a6f',primaryDark:'#0d5240',primaryLight:'#4dd0a8',accent:'#f4c430',accent2:'#ffd966',accent3:'#ff8c42'},wallpaper:{type:'preset',value:'gradient1',custom:null,overlay:82},youtubeUrl:'',ytOverlay:30,volume:80,announcements:{left:'Seluruh siswa wajib berpakaian seragam lengkap.',right:'Pendaftaran siswa baru dibuka.'},building:{title:'Gedung Utama Sekolah',subtitle:'Pusat kegiatan belajar mengajar'},slideshow:{media:[],interval:8,currentIndex:0},bells:{'masuk':{time:'07:00',label:'Jam Masuk',music:null,enabled:true},'istirahat1':{time:'09:30',label:'Istirahat 1',music:null,enabled:true},'ganti1':{time:'09:45',label:'Ganti 1',music:null,enabled:true},'ganti2':{time:'10:45',label:'Ganti 2',music:null,enabled:true},'istirahat2':{time:'11:30',label:'Istirahat 2',music:null,enabled:true},'ganti3':{time:'12:30',label:'Ganti 3',music:null,enabled:true},'ganti4':{time:'13:30',label:'Ganti 4',music:null,enabled:true},'ganti5':{time:'14:30',label:'Ganti 5',music:null,enabled:true},'pulang':{time:'15:30',label:'Pulang',music:null,enabled:true}},schedules:[]};
 var defaultSchedules=[{id:1,class:'KELAS 7-1',subject:'B. JERMAN',start:'05:30',end:'06:30',column:'left'},{id:2,class:'KELAS 7-2',subject:'B. ARAB',start:'05:30',end:'07:15',column:'left'},{id:3,class:'KELAS 7-3',subject:'TAHSIN',start:'06:30',end:'07:30',column:'left'},{id:4,class:'KELAS 7-4',subject:'MATEMATIKA',start:'07:30',end:'09:00',column:'left'},{id:5,class:'KELAS 7-5',subject:'IPA',start:'09:00',end:'10:30',column:'left'},{id:6,class:'KELAS 8-1',subject:'B. INGGRIS',start:'05:30',end:'06:30',column:'right'},{id:7,class:'KELAS 8-3',subject:'B. TURKEY',start:'05:30',end:'07:15',column:'right'},{id:8,class:'KELAS 8-2',subject:'FIQH',start:'06:30',end:'07:30',column:'right'},{id:9,class:'KELAS 9-1',subject:'AKIDAH',start:'07:30',end:'09:00',column:'right'},{id:10,class:'KELAS 9-2',subject:'PKn',start:'09:00',end:'10:30',column:'right'}];
 var lastFB=null;var audioUnlocked=false,unlockedAudioCtx=null;var alarmAudio=null,beepCtx=null,beepInterval=null,beepCount=0;var bellTriggered={};var slideshowInterval=null;
@@ -204,6 +211,34 @@ if(d.schedules)state.schedules=d.schedules;
 if(d.slideshow){state.slideshow.media=d.slideshow.images||[];state.slideshow.interval=d.slideshow.interval||8;state.slideshow.currentIndex=0;renderBuildingSlides();startSlideshow();}
 applyTheme();applySettings();applyBackground();renderScheduleLists();
 }
+
+// Fungsi Fullscreen untuk HP & TV
+function toggleFullscreen() {
+    var elem = document.documentElement;
+    var btn = document.getElementById('fullscreenBtn');
+    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) { /* Safari & Webkit TV */
+            elem.webkitRequestFullscreen();
+        }
+        btn.innerHTML = '<i class="fas fa-compress"></i>';
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        }
+        btn.innerHTML = '<i class="fas fa-expand"></i>';
+    }
+}
+document.addEventListener('fullscreenchange', function() {
+    var btn = document.getElementById('fullscreenBtn');
+    if (!document.fullscreenElement) {
+        btn.innerHTML = '<i class="fas fa-expand"></i>';
+    }
+});
+
 document.addEventListener('click',function(){if(!audioUnlocked){try{unlockedAudioCtx=new(window.AudioContext||window.webkitAudioContext)();if(unlockedAudioCtx.state==='suspended')unlockedAudioCtx.resume();audioUnlocked=true;}catch(e){}}});
 document.addEventListener('touchstart',function(){if(!audioUnlocked){try{unlockedAudioCtx=new(window.AudioContext||window.webkitAudioContext)();if(unlockedAudioCtx.state==='suspended')unlockedAudioCtx.resume();audioUnlocked=true;}catch(e){}}});
 var logoClickCount=0,logoClickTimer=null;
