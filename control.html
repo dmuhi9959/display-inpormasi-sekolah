@@ -102,25 +102,19 @@ hr{border:none;border-top:1px solid rgba(255,255,255,0.1);margin:15px 0}
 var DB="https://dispay-sekolah-default-rtdb.asia-southeast1.firebasedatabase.app";
 
 // ==================================================================
-// DAFTAR SUARA BELL (Sudah disiapkan 15 slot, tinggal ganti URL-nya)
+// DAFTAR SUARA BELL (Sudah diisi 9 suara dari GitHub Anda)
 // ==================================================================
 var bellLibrary = [
     {name: "Default Beep (Tanpa MP3)", url: ""},
-    {name: "Bell 01", url: "URL_MP3_ANDA_DI_SINI"},
-    {name: "Bell 02", url: "URL_MP3_ANDA_DI_SINI"},
-    {name: "Bell 03", url: "URL_MP3_ANDA_DI_SINI"},
-    {name: "Bell 04", url: "URL_MP3_ANDA_DI_SINI"},
-    {name: "Bell 05", url: "URL_MP3_ANDA_DI_SINI"},
-    {name: "Bell 06", url: "URL_MP3_ANDA_DI_SINI"},
-    {name: "Bell 07", url: "URL_MP3_ANDA_DI_SINI"},
-    {name: "Bell 08", url: "URL_MP3_ANDA_DI_SINI"},
-    {name: "Bell 09", url: "URL_MP3_ANDA_DI_SINI"},
-    {name: "Bell 10", url: "URL_MP3_ANDA_DI_SINI"},
-    {name: "Bell 11", url: "URL_MP3_ANDA_DI_SINI"},
-    {name: "Bell 12", url: "URL_MP3_ANDA_DI_SINI"},
-    {name: "Bell 13", url: "URL_MP3_ANDA_DI_SINI"},
-    {name: "Bell 14", url: "URL_MP3_ANDA_DI_SINI"},
-    {name: "Bell 15", url: "URL_MP3_ANDA_DI_SINI"}
+    {name: "Bell 01", url: "https://cdn.jsdelivr.net/gh/dmuhi9959/display-inpormasi-sekolah@main/bel-1.mp3"},
+    {name: "Indonesia Raya 1", url: "https://cdn.jsdelivr.net/gh/dmuhi9959/display-inpormasi-sekolah@main/bel-indonesia-raya.mp3"},
+    {name: "Indonesia Raya 2", url: "https://cdn.jsdelivr.net/gh/dmuhi9959/display-inpormasi-sekolah@main/bel-indonesia-raya2.mp3"},
+    {name: "Istirahat", url: "https://cdn.jsdelivr.net/gh/dmuhi9959/display-inpormasi-sekolah@main/bel-istirahat.mp3"},
+    {name: "Pergantian Jam Pelajaran", url: "https://cdn.jsdelivr.net/gh/dmuhi9959/display-inpormasi-sekolah@main/bel-pergantian-jam-pelajaran.mp3"},
+    {name: "Pulang Sekolah", url: "https://cdn.jsdelivr.net/gh/dmuhi9959/display-inpormasi-sekolah@main/bel-pulang-sekolah.mp3"},
+    {name: "Tanda Masuk Ujian", url: "https://cdn.jsdelivr.net/gh/dmuhi9959/display-inpormasi-sekolah@main/bel-tanda-masuk-ujian.mp3"},
+    {name: "Tanda Selesai Ujian", url: "https://cdn.jsdelivr.net/gh/dmuhi9959/display-inpormasi-sekolah@main/bel-tanda-selesai-ujian.mp3"},
+    {name: "Upacara", url: "https://cdn.jsdelivr.net/gh/dmuhi9959/display-inpormasi-sekolah@main/bel-upacara.mp3"}
 ];
 
 var bells={masuk:{time:"07:00",label:"Jam Masuk",enabled:true,musicUrl:""},istirahat1:{time:"09:30",label:"Istirahat 1",enabled:true,musicUrl:""},ganti1:{time:"09:45",label:"Ganti 1",enabled:true,musicUrl:""},ganti2:{time:"10:45",label:"Ganti 2",enabled:true,musicUrl:""},istirahat2:{time:"11:30",label:"Istirahat 2",enabled:true,musicUrl:""},ganti3:{time:"12:30",label:"Ganti 3",enabled:true,musicUrl:""},ganti4:{time:"13:30",label:"Ganti 4",enabled:true,musicUrl:""},ganti5:{time:"14:30",label:"Ganti 5",enabled:true,musicUrl:""},pulang:{time:"15:30",label:"Pulang",enabled:true,musicUrl:""}};
