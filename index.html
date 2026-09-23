@@ -70,8 +70,10 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 .datetime-box .day-date{font-size:clamp(0.65rem,1.3vh,0.95rem);color:var(--accent);font-weight:700;text-transform:capitalize}
 .datetime-box .time{font-family:'Orbitron',sans-serif;font-size:clamp(0.8rem,1.8vh,1.3rem);font-weight:700;color:#fff;margin-top:1px;letter-spacing:1px}
 
-/* Layout Utama */
-.main-content{flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr auto;gap:clamp(8px,1.5vw,20px);padding:clamp(8px,1.5vh,16px) clamp(8px,2vw,20px);overflow:hidden;min-height:0;min-width:0;position:relative;z-index:10;width:100%}
+/* Layout Utama Grid */
+.main-content{flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr auto;grid-template-areas: "left right" "center center";gap:clamp(8px,1.5vw,20px);padding:clamp(8px,1.5vh,16px) clamp(8px,2vw,20px);overflow:hidden;min-height:0;min-width:0;position:relative;z-index:10;width:100%}
+.schedule-column.left{grid-area:left}
+.schedule-column.right{grid-area:right}
 .schedule-column{display:flex;flex-direction:column;gap:8px;overflow:hidden;min-height:0;min-width:0}
 .column-title{background:linear-gradient(135deg,var(--primary-dark),var(--primary));padding:clamp(8px,1.2vh,12px) clamp(8px,1.5vw,16px);border-radius:8px;text-align:center;font-weight:700;font-size:clamp(0.7rem,1.5vh,1rem);text-transform:uppercase;letter-spacing:1.5px;box-shadow:0 4px 12px rgba(0,0,0,0.3);border:1px solid rgba(var(--accent-rgb),0.3);display:flex;align-items:center;justify-content:center;gap:8px;flex-shrink:0}
 .column-title i{color:var(--accent)}
@@ -89,7 +91,7 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 .schedule-card .class-subject i{color:var(--primary-light);margin-right:3px}
 
 /* Jam & Progress Kegiatan */
-.center-column{grid-column:1 / -1;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:20px;padding:12px 20px;border-radius:12px;background:linear-gradient(135deg,rgba(var(--primary-dark-rgb),0.6),rgba(var(--bg-solid-rgb),0.6));border:1px solid var(--card-border);backdrop-filter:blur(10px);flex-shrink:0}
+.center-column{grid-area:center;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:20px;padding:12px 20px;border-radius:12px;background:linear-gradient(135deg,rgba(var(--primary-dark-rgb),0.6),rgba(var(--bg-solid-rgb),0.6));border:1px solid var(--card-border);backdrop-filter:blur(10px);flex-shrink:0}
 .clock-widget{background:transparent;border:none;padding:0;border-radius:0;flex:0 0 auto;box-shadow:none}
 .clock-widget .clock-time{font-family:'Orbitron',sans-serif;font-size:clamp(1.5rem,3.5vh,2.5rem);font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
 .clock-widget .clock-seconds{font-family:'Orbitron',sans-serif;font-size:clamp(1rem,2vh,1.5rem);color:var(--accent-3)}
@@ -125,24 +127,46 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 /* Tampilan TV / Tablet */
 @media(max-width:1100px){.main-content{grid-template-columns:1fr 1fr}}
 
-/* Tampilan HP Landscape - Jadi 1 Kolom Penuh agar tidak sempit */
+/* Tampilan HP Landscape - 2 Kolom seperti PC tanpa Scroll */
 @media(max-width:768px) and (orientation:landscape){
     .header-center{display:none}
+    .school-info .subtitle span:nth-child(2){display:none} /* sembunyikan web url di header */
+    .display-header{padding:4px 10px}
+    .school-info h1{font-size:0.9rem}
+    .school-info .subtitle{font-size:0.6rem}
+    .datetime-box{padding:2px 8px}
+    .datetime-box .time{font-size:0.9rem}
+    
     .main-content{
-        grid-template-columns:1fr; /* PAKSA 1 KOLOM SAJA */
-        grid-template-rows:auto auto auto;
-        padding:8px;
-        gap:10px;
-        overflow-y:auto; /* Bisa di-scroll ke bawah */
+        grid-template-columns:1fr 1fr;
+        grid-template-rows:1fr auto;
+        grid-template-areas: "left right" "center center";
+        padding:5px;
+        gap:6px;
+        overflow:hidden;
     }
-    .schedule-column{width:100%; min-height:200px;}
+    .schedule-column{min-height:0; height:100%; overflow:hidden;}
+    .schedule-list{overflow-y:auto; height:100%; padding-right:2px;}
+    
+    .column-title{padding:4px 8px; font-size:0.7rem;}
+    .schedule-card{padding:6px 8px; margin-bottom:4px;}
+    .schedule-card .class-name{font-size:0.75rem; margin-bottom:2px;}
+    .schedule-card .class-name .badge{font-size:0.5rem; padding:2px 5px;}
+    .schedule-card .class-time{font-size:0.65rem; margin-bottom:1px;}
+    .schedule-card .class-subject{font-size:0.65rem;}
+
     .center-column{
-        grid-column:1 / -1;
-        flex-direction:column;
+        padding:6px 12px;
         gap:10px;
-        padding:12px;
     }
-    .display-footer{grid-template-columns:1fr;padding:4px 8px}
+    .clock-widget .clock-time{font-size:1.2rem;}
+    .clock-widget .clock-seconds{font-size:0.9rem;}
+    .clock-widget .clock-label{font-size:0.55rem;}
+    .clock-widget .clock-icon{font-size:1rem;}
+    .activity-progress-mini .label{font-size:0.55rem; margin-bottom:4px;}
+    .progress-bar-mini{height:4px;}
+
+    .display-footer{grid-template-columns:1fr; padding:3px 8px}
 }
 
 /* Tampilan HP Portrait - Minta dirotate */
@@ -170,8 +194,8 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 <div class="header-right"><div class="datetime-box"><div class="day-date" id="dayDate"></div><div class="time" id="currentTime">00:00:00</div></div></div>
 </header>
 <div class="main-content">
-<div class="schedule-column"><div class="column-title" id="colLeftTitle"><i class="fas fa-calendar-alt"></i> JADWAL PELAJARAN</div><div class="schedule-list" id="scheduleListLeft"></div></div>
-<div class="schedule-column"><div class="column-title" id="colRightTitle"><i class="fas fa-calendar-alt"></i> JADWAL PELAJARAN</div><div class="schedule-list" id="scheduleListRight"></div></div>
+<div class="schedule-column left"><div class="column-title" id="colLeftTitle"><i class="fas fa-calendar-alt"></i> JADWAL PELAJARAN</div><div class="schedule-list" id="scheduleListLeft"></div></div>
+<div class="schedule-column right"><div class="column-title" id="colRightTitle"><i class="fas fa-calendar-alt"></i> JADWAL PELAJARAN</div><div class="schedule-list" id="scheduleListRight"></div></div>
 
 <div class="center-column">
 <div class="clock-widget"><div><div class="clock-time" id="clockTime">00:00</div><div class="clock-label">Waktu Sekarang</div></div><div class="clock-seconds" id="clockSeconds">00</div><div class="clock-icon"><i class="fas fa-clock"></i></div></div>
