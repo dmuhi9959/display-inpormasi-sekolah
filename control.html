@@ -32,6 +32,7 @@ hr{border:none;border-top:1px solid rgba(255,255,255,0.1);margin:15px 0}
 .db{background:rgba(255,82,82,0.1);color:#ff5252;border:1px solid rgba(255,82,82,0.2);padding:6px;border-radius:6px;cursor:pointer;font-size:0.75rem;font-family:inherit;margin-top:4px;width:100%}
 .db:hover{background:#ff5252;color:#fff}
 .bg-section{background:rgba(244,196,48,0.05);border:1px solid rgba(244,196,48,0.15);border-radius:8px;padding:10px;margin-bottom:6px}
+.info-box{background:rgba(77,208,168,0.1);border:1px solid rgba(77,208,168,0.3);color:#4dd0a8;padding:10px;border-radius:8px;font-size:0.8rem;margin-bottom:10px}
 </style>
 </head>
 <body>
@@ -80,6 +81,9 @@ hr{border:none;border-top:1px solid rgba(255,255,255,0.1);margin:15px 0}
 
 <hr>
 <h3>Bell Sekolah</h3>
+<div class="info-box">
+    <i class="fas fa-info-circle"></i> Pilih suara bell dari dropdown. Jika ingin menambah bell baru, edit array <b>bellLibrary</b> di dalam kode.
+</div>
 <div id="bellSlots"></div>
 
 <hr>
@@ -96,10 +100,43 @@ hr{border:none;border-top:1px solid rgba(255,255,255,0.1);margin:15px 0}
 
 <script>
 var DB="https://dispay-sekolah-default-rtdb.asia-southeast1.firebasedatabase.app";
+
+// =======================================================
+// DAFTAR SUARA BELL (TAMBAHKAN LINK GITHUB ANDA DI SINI)
+// =======================================================
+var bellLibrary = [
+    {name: "Default Beep (Tanpa MP3)", url: ""},
+    {name: "Bell Masuk (Contoh)", url: "https://cdn.jsdelivr.net/gh/username/repo@main/bell-masuk.mp3"},
+    {name: "Bell Istirahat (Contoh)", url: "https://cdn.jsdelivr.net/gh/username/repo@main/bell-istirahat.mp3"},
+    {name: "Bell Pulang (Contoh)", url: "https://cdn.jsdelivr.net/gh/username/repo@main/bell-pulang.mp3"}
+    // Contoh menambahkan baris baru:
+    // ,{name: "Bell Sholat", url: "https://cdn.jsdelivr.net/gh/namaanda/namarepo@main/sholat.mp3"}
+];
+
 var bells={masuk:{time:"07:00",label:"Jam Masuk",enabled:true,musicUrl:""},istirahat1:{time:"09:30",label:"Istirahat 1",enabled:true,musicUrl:""},ganti1:{time:"09:45",label:"Ganti 1",enabled:true,musicUrl:""},ganti2:{time:"10:45",label:"Ganti 2",enabled:true,musicUrl:""},istirahat2:{time:"11:30",label:"Istirahat 2",enabled:true,musicUrl:""},ganti3:{time:"12:30",label:"Ganti 3",enabled:true,musicUrl:""},ganti4:{time:"13:30",label:"Ganti 4",enabled:true,musicUrl:""},ganti5:{time:"14:30",label:"Ganti 5",enabled:true,musicUrl:""},pulang:{time:"15:30",label:"Pulang",enabled:true,musicUrl:""}};
 var schedules=[];
 
-function renderBells(){var h="";Object.keys(bells).forEach(function(k){var b=bells[k];h+='<div class="br"><div class="bl">'+b.label+'</div><div class="bt"><input type="time" value="'+b.time+'" data-k="'+k+'" onchange="bells[this.dataset.k].time=this.value"><input type="checkbox" '+(b.enabled?"checked":"")+' data-k="'+k+'" onchange="bells[this.dataset.k].enabled=this.checked"><span style="font-size:0.8rem">Aktif</span></div><input type="text" value="'+(b.musicUrl||"")+'" data-k="'+k+'" placeholder="URL MP3" onchange="bells[this.dataset.k].musicUrl=this.value" style="margin-top:3px;font-size:0.8rem"></div>';});document.getElementById("bellSlots").innerHTML=h;}
+function renderBells(){
+    var h="";
+    Object.keys(bells).forEach(function(k){
+        var b=bells[k];
+        h+='<div class="br"><div class="bl">'+b.label+'</div><div class="bt"><input type="time" value="'+b.time+'" data-k="'+k+'" onchange="bells[this.dataset.k].time=this.value"><input type="checkbox" '+(b.enabled?"checked":"")+' data-k="'+k+'" onchange="bells[this.dataset.k].enabled=this.checked"><span style="font-size:0.8rem">Aktif</span></div>';
+        
+        // Membuat Dropdown Bell
+        h+='<select data-k="'+k+'" onchange="bells[this.dataset.k].musicUrl=this.value" style="margin-top:3px;font-size:0.8rem">';
+        bellLibrary.forEach(function(bell){
+            var selected = (b.musicUrl === bell.url) ? "selected" : "";
+            h+='<option value="'+bell.url+'" '+selected+'>'+bell.name+'</option>';
+        });
+        
+        // Jika ada link lama yang belum ada di daftar, tetap tampilkan
+        if(b.musicUrl && !bellLibrary.some(bell => bell.url === b.musicUrl)){
+            h+='<option value="'+b.musicUrl+'" selected>Custom: '+b.musicUrl.substring(0, 25)+'...</option>';
+        }
+        h+='</select></div>';
+    });
+    document.getElementById("bellSlots").innerHTML=h;
+}
 
 function addSchedule(){schedules.push({class:"KELAS ",subject:"Mapel",start:"07:00",end:"08:00",column:"left"});renderSchedules();}
 function deleteSchedule(i){schedules.splice(i,1);renderSchedules();}
