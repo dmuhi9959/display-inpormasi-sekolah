@@ -70,7 +70,7 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 .datetime-box .day-date{font-size:clamp(0.65rem,1.3vh,0.95rem);color:var(--accent);font-weight:700;text-transform:capitalize}
 .datetime-box .time{font-family:'Orbitron',sans-serif;font-size:clamp(0.8rem,1.8vh,1.3rem);font-weight:700;color:#fff;margin-top:1px;letter-spacing:1px}
 
-/* Layout Utama jadi 2 Kolom Penuh */
+/* Layout Utama */
 .main-content{flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr auto;gap:clamp(8px,1.5vw,20px);padding:clamp(8px,1.5vh,16px) clamp(8px,2vw,20px);overflow:hidden;min-height:0;min-width:0;position:relative;z-index:10;width:100%}
 .schedule-column{display:flex;flex-direction:column;gap:8px;overflow:hidden;min-height:0;min-width:0}
 .column-title{background:linear-gradient(135deg,var(--primary-dark),var(--primary));padding:clamp(8px,1.2vh,12px) clamp(8px,1.5vw,16px);border-radius:8px;text-align:center;font-weight:700;font-size:clamp(0.7rem,1.5vh,1rem);text-transform:uppercase;letter-spacing:1.5px;box-shadow:0 4px 12px rgba(0,0,0,0.3);border:1px solid rgba(var(--accent-rgb),0.3);display:flex;align-items:center;justify-content:center;gap:8px;flex-shrink:0}
@@ -88,17 +88,14 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 .schedule-card .class-subject{font-size:clamp(0.7rem,1.2vh,0.9rem);color:var(--text-muted);font-weight:500}
 .schedule-card .class-subject i{color:var(--primary-light);margin-right:3px}
 
-/* Foto tengah dihilangkan, Jam & Progress dipindah ke bawah */
+/* Jam & Progress Kegiatan */
 .center-column{grid-column:1 / -1;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:20px;padding:12px 20px;border-radius:12px;background:linear-gradient(135deg,rgba(var(--primary-dark-rgb),0.6),rgba(var(--bg-solid-rgb),0.6));border:1px solid var(--card-border);backdrop-filter:blur(10px);flex-shrink:0}
-.building-image{display:none !important} /* Sembunyikan wallpaper tengah */
-
 .clock-widget{background:transparent;border:none;padding:0;border-radius:0;flex:0 0 auto;box-shadow:none}
 .clock-widget .clock-time{font-family:'Orbitron',sans-serif;font-size:clamp(1.5rem,3.5vh,2.5rem);font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
 .clock-widget .clock-seconds{font-family:'Orbitron',sans-serif;font-size:clamp(1rem,2vh,1.5rem);color:var(--accent-3)}
 .clock-widget .clock-label{font-size:clamp(0.6rem,1vh,0.8rem);color:var(--text-muted);text-transform:uppercase;letter-spacing:2px;margin-top:3px}
 .clock-widget .clock-icon{font-size:clamp(1.2rem,2.5vh,2rem);color:var(--accent);animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.6;transform:scale(0.95)}}
-
 .activity-progress-mini{background:transparent;border:none;padding:0;border-radius:0;flex:1;box-shadow:none}
 .activity-progress-mini .label{font-size:clamp(0.6rem,1vh,0.8rem);color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;display:flex;justify-content:space-between;gap:6px}
 .progress-bar-mini{height:8px;background:rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;position:relative}
@@ -124,9 +121,37 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 .alarm-modal h2{font-size:1.4rem;margin-bottom:6px;color:#fff}
 .alarm-modal p{color:var(--text-muted);margin-bottom:18px}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:rgba(0,0,0,0.2)}::-webkit-scrollbar-thumb{background:rgba(var(--accent-rgb),0.3);border-radius:10px}
+
+/* Tampilan TV / Tablet */
 @media(max-width:1100px){.main-content{grid-template-columns:1fr 1fr}}
-@media(max-width:768px) and (orientation:landscape){.header-center{display:none}.main-content{grid-template-columns:1fr;grid-template-rows:1fr auto auto;gap:6px;padding:6px 8px}.schedule-column:nth-child(3){display:none}.center-column{grid-column:1}.display-footer{grid-template-columns:1fr;padding:4px 8px}}
-@media(max-width:768px) and (orientation:portrait){#rotate-warning{display:flex}.display-header{display:none}.main-content{display:none}.display-footer{display:none}}
+
+/* Tampilan HP Landscape - Jadi 1 Kolom Penuh agar tidak sempit */
+@media(max-width:768px) and (orientation:landscape){
+    .header-center{display:none}
+    .main-content{
+        grid-template-columns:1fr; /* PAKSA 1 KOLOM SAJA */
+        grid-template-rows:auto auto auto;
+        padding:8px;
+        gap:10px;
+        overflow-y:auto; /* Bisa di-scroll ke bawah */
+    }
+    .schedule-column{width:100%; min-height:200px;}
+    .center-column{
+        grid-column:1 / -1;
+        flex-direction:column;
+        gap:10px;
+        padding:12px;
+    }
+    .display-footer{grid-template-columns:1fr;padding:4px 8px}
+}
+
+/* Tampilan HP Portrait - Minta dirotate */
+@media(max-width:768px) and (orientation:portrait){
+    #rotate-warning{display:flex}
+    .display-header{display:none}
+    .main-content{display:none}
+    .display-footer{display:none}
+}
 </style>
 </head>
 <body>
@@ -161,7 +186,6 @@ body.bell-active .clock-seconds{animation:secondsFlash 0.5s ease-in-out infinite
 <div class="alarm-modal" id="alarmModal"><div class="alarm-modal-content"><div class="alarm-icon"><i class="fas fa-bell"></i></div><h2 id="alarmModalTitle">Alarm!</h2><p id="alarmModalLabel">Waktunya</p><button onclick="stopAlarm()" style="background:linear-gradient(135deg,#ff5252,#c82333);color:#fff;padding:12px 24px;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;margin-top:8px"><i class="fas fa-stop"></i> Hentikan</button></div></div>
 <div class="toast" id="toast"><i class="fas fa-info-circle"></i><span id="toastMessage"></span></div>
 <script>
-// Service Worker dihapus
 function setHeight(){var h=window.innerHeight;document.documentElement.style.height=h+'px';document.body.style.height=h+'px';document.body.style.minHeight=h+'px';document.body.style.maxHeight=h+'px';}
 window.addEventListener('resize',setHeight);
 window.addEventListener('orientationchange',function(){setTimeout(setHeight,100);});
@@ -191,8 +215,6 @@ function stopAlarmAudio(){if(alarmAudio){try{alarmAudio.pause();alarmAudio.curre
 function stopAlarm(){stopAlarmAudio();document.body.classList.remove('bell-active');document.getElementById('alarmModal').classList.remove('show');}
 function showToast(msg){var t=document.getElementById('toast');document.getElementById('toastMessage').textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},3000);}
 function createParticles(){var c=document.getElementById('particles');c.innerHTML='';for(var i=0;i<12;i++){var p=document.createElement('div');p.className='particle';var sz=Math.random()*4+2;p.style.width=sz+'px';p.style.height=sz+'px';p.style.left=Math.random()*100+'%';p.style.animationDuration=(Math.random()*20+15)+'s';p.style.animationDelay=Math.random()*20+'s';p.style.opacity=Math.random()*0.4+0.15;c.appendChild(p);}}
-function renderBuildingSlides(){ /* Dimatikan karena layout berubah */ }
-function startSlideshow(){ /* Dimatikan karena layout berubah */ }
 function loadFB(){fetch(DB+'/settings.json').then(function(r){return r.json();}).then(function(d){if(!d)return;var s=JSON.stringify(d);if(s!==lastFB){lastFB=s;applyFB(d);}}).catch(function(e){console.log('FB:',e);});}
 function applyFB(d){
 if(d.school)state.school=d.school;
@@ -206,7 +228,6 @@ if(d.announcements)state.announcements=d.announcements;
 if(d.colTitles){document.getElementById('colLeftTitle').innerHTML='<i class="fas fa-calendar-alt"></i> '+d.colTitles.left;document.getElementById('colRightTitle').innerHTML='<i class="fas fa-calendar-alt"></i> '+d.colTitles.right;}
 if(d.bells){Object.keys(d.bells).forEach(function(k){if(state.bells[k]){state.bells[k].time=d.bells[k].time;state.bells[k].label=d.bells[k].label;state.bells[k].enabled=d.bells[k].enabled;if(d.bells[k].musicUrl)state.bells[k].music=d.bells[k].musicUrl;}});}
 if(d.schedules)state.schedules=d.schedules;
-if(d.slideshow){state.slideshow.media=d.slideshow.images||[];state.slideshow.interval=d.slideshow.interval||8;state.slideshow.currentIndex=0;}
 applyTheme();applySettings();applyBackground();renderScheduleLists();
 }
 
