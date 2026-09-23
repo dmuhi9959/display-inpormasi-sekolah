@@ -31,7 +31,7 @@ hr{border:none;border-top:1px solid rgba(255,255,255,0.1);margin:15px 0}
 .ld{background:rgba(244,196,48,0.15);color:#f4c430}
 .db{background:rgba(255,82,82,0.1);color:#ff5252;border:1px solid rgba(255,82,82,0.2);padding:6px;border-radius:6px;cursor:pointer;font-size:0.75rem;font-family:inherit;margin-top:4px;width:100%}
 .db:hover{background:#ff5252;color:#fff}
-.slide-section{background:rgba(244,196,48,0.05);border:1px solid rgba(244,196,48,0.15);border-radius:8px;padding:10px;margin-bottom:6px}
+.bg-section{background:rgba(244,196,48,0.05);border:1px solid rgba(244,196,48,0.15);border-radius:8px;padding:10px;margin-bottom:6px}
 </style>
 </head>
 <body>
@@ -49,8 +49,7 @@ hr{border:none;border-top:1px solid rgba(255,255,255,0.1);margin:15px 0}
 <hr>
 <h3>Pengumuman</h3>
 <label>Volume Bell (%)</label><input type="range" id="volume" min="0" max="100" value="80">
-<label>Pengumuman 1</label><textarea id="announcement1">Seluruh siswa wajib berpakaian seragam lengkap.</textarea>
-<label>Pengumuman 2</label><textarea id="announcement2">Pendaftaran siswa baru dibuka.</textarea>
+<label>Pengumuman (Running Text)</label><textarea id="announcement1">Seluruh siswa wajib berpakaian seragam lengkap.</textarea>
 
 <hr>
 <h3>Tema</h3>
@@ -66,29 +65,17 @@ hr{border:none;border-top:1px solid rgba(255,255,255,0.1);margin:15px 0}
 </select>
 
 <hr>
-<h3>Wallpaper Background</h3>
-<label>URL Gambar Wallpaper (background)</label><input id="wallpaperUrl" placeholder="https://... (gambar, bukan YouTube)">
-
-<hr>
-<h3>YouTube Background</h3>
-<label>URL YouTube (background video)</label><input id="youtubeUrl" placeholder="https://www.youtube.com/watch?v=...">
-<label>Transparansi YouTube (%)</label><input type="range" id="ytOverlay" min="0" max="80" value="30">
-
-<hr>
-<h3>Foto Gedung (Tengah Display)</h3>
-<label>Judul Foto</label><input id="buildingTitle" value="Gedung Utama Sekolah">
-<label>Subtitle Foto</label><input id="buildingSubtitle" value="Pusat kegiatan belajar mengajar">
-
-<hr>
-<h3>Slideshow Foto (Maks 5)</h3>
-<p style="font-size:0.7rem;color:rgba(255,255,255,0.3);margin-bottom:8px">Masukkan URL foto. Foto akan ganti otomatis di tengah display.</p>
-<div class="slide-section">
-<label>Foto 1</label><input id="slide1" placeholder="https://...">
-<label>Foto 2</label><input id="slide2" placeholder="https://...">
-<label>Foto 3</label><input id="slide3" placeholder="https://...">
-<label>Foto 4</label><input id="slide4" placeholder="https://...">
-<label>Foto 5</label><input id="slide5" placeholder="https://...">
-<label>Interval Ganti Foto (detik)</label><input type="range" id="slideInterval" min="3" max="30" value="8">
+<h3>Background Slideshow (YouTube & Wallpaper)</h3>
+<p style="font-size:0.7rem;color:rgba(255,255,255,0.3);margin-bottom:8px">Masukkan URL YouTube dan URL Gambar. Akan bergantian otomatis sesuai interval waktu.</p>
+<div class="bg-section">
+<label>URL YouTube (Background Video)</label><input id="bgYoutube" placeholder="https://www.youtube.com/watch?v=...">
+<label>Wallpaper 1</label><input id="bgImg1" placeholder="https://... (gambar)">
+<label>Wallpaper 2</label><input id="bgImg2" placeholder="https://...">
+<label>Wallpaper 3</label><input id="bgImg3" placeholder="https://...">
+<label>Wallpaper 4</label><input id="bgImg4" placeholder="https://...">
+<label>Wallpaper 5</label><input id="bgImg5" placeholder="https://...">
+<label>Interval Ganti Background (detik)</label><input type="range" id="bgInterval" min="5" max="60" value="10">
+<label>Transparansi Background (%)</label><input type="range" id="ytOverlay" min="0" max="80" value="30">
 </div>
 
 <hr>
@@ -115,24 +102,24 @@ var schedules=[];
 function renderBells(){var h="";Object.keys(bells).forEach(function(k){var b=bells[k];h+='<div class="br"><div class="bl">'+b.label+'</div><div class="bt"><input type="time" value="'+b.time+'" data-k="'+k+'" onchange="bells[this.dataset.k].time=this.value"><input type="checkbox" '+(b.enabled?"checked":"")+' data-k="'+k+'" onchange="bells[this.dataset.k].enabled=this.checked"><span style="font-size:0.8rem">Aktif</span></div><input type="text" value="'+(b.musicUrl||"")+'" data-k="'+k+'" placeholder="URL MP3" onchange="bells[this.dataset.k].musicUrl=this.value" style="margin-top:3px;font-size:0.8rem"></div>';});document.getElementById("bellSlots").innerHTML=h;}
 
 function addSchedule(){schedules.push({class:"KELAS ",subject:"Mapel",start:"07:00",end:"08:00",column:"left"});renderSchedules();}
-
 function deleteSchedule(i){schedules.splice(i,1);renderSchedules();}
-
 function renderSchedules(){var h="";schedules.forEach(function(s,i){h+='<div class="br"><div class="row"><div><label>Kelas</label><input value="'+s.class+'" data-i="'+i+'" data-f="class" onchange="schedules[parseInt(this.dataset.i)].class=this.value"></div><div><label>Mapel</label><input value="'+s.subject+'" data-i="'+i+'" data-f="subject" onchange="schedules[parseInt(this.dataset.i)].subject=this.value"></div></div><div class="row"><div><label>Mulai</label><input type="time" value="'+s.start+'" data-i="'+i+'" data-f="start" onchange="schedules[parseInt(this.dataset.i)].start=this.value"></div><div><label>Selesai</label><input type="time" value="'+s.end+'" data-i="'+i+'" data-f="end" onchange="schedules[parseInt(this.dataset.i)].end=this.value"></div></div><div class="row"><div><label>Kolom</label><select data-i="'+i+'" data-f="column" onchange="schedules[parseInt(this.dataset.i)].column=this.value"><option value="left" '+(s.column==="left"?"selected":"")+'>Kiri</option><option value="right" '+(s.column==="right"?"selected":"")+'>Kanan</option></select></div><div style="display:flex;align-items:flex-end"><button class="db" onclick="deleteSchedule('+i+')">Hapus</button></div></div></div>';});document.getElementById("scheduleSlots").innerHTML=h;}
 
 function saveToFirebase(){
-var slides=[];
-for(var i=1;i<=5;i++){var u=val("slide"+i);if(u)slides.push(u);}
+var bgImgs=[];
+for(var i=1;i<=5;i++){var u=val("bgImg"+i);if(u)bgImgs.push(u);}
+
 var data={
 school:{name:val("schoolName"),address:val("schoolAddress"),website:val("schoolWebsite"),logo:val("schoolLogo").toUpperCase(),arabic:val("arabicText"),motto:val("motto")},
 volume:parseInt(val("volume")),
-announcements:{left:val("announcement1"),right:val("announcement2")},
+announcements:{left:val("announcement1")},
 theme:val("theme"),
-wallpaperUrl:val("wallpaperUrl")||"",
-youtubeUrl:val("youtubeUrl")||"",
-ytOverlay:parseInt(val("ytOverlay")),
-building:{title:val("buildingTitle"),subtitle:val("buildingSubtitle")},
-slideshow:{images:slides,interval:parseInt(val("slideInterval"))||8},
+bgSettings:{
+    youtubeUrl:val("bgYoutube")||"",
+    images:bgImgs,
+    interval:parseInt(val("bgInterval"))||10,
+    ytOverlay:parseInt(val("ytOverlay"))
+},
 colTitles:{left:val("colLeft"),right:val("colRight")},
 bells:{},schedules:schedules
 };
@@ -147,15 +134,15 @@ fetch(DB+"/settings.json").then(function(r){return r.json();}).then(function(d){
 if(!d){setSt("Belum ada data","ld");return;}
 if(d.school){setV("schoolName",d.school.name);setV("schoolAddress",d.school.address);setV("schoolWebsite",d.school.website);setV("schoolLogo",d.school.logo);setV("arabicText",d.school.arabic);setV("motto",d.school.motto);}
 if(d.volume!==undefined)setV("volume",d.volume);
-if(d.announcements){setV("announcement1",d.announcements.left);setV("announcement2",d.announcements.right);}
+if(d.announcements){setV("announcement1",d.announcements.left);}
 if(d.theme)setV("theme",d.theme);
-if(d.wallpaperUrl!==undefined)setV("wallpaperUrl",d.wallpaperUrl);
-if(d.youtubeUrl!==undefined)setV("youtubeUrl",d.youtubeUrl);
-if(d.ytOverlay!==undefined)setV("ytOverlay",d.ytOverlay);
-if(d.building){setV("buildingTitle",d.building.title);setV("buildingSubtitle",d.building.subtitle);}
-if(d.slideshow){
-if(d.slideshow.images){for(var i=0;i<5;i++){setV("slide"+(i+1),d.slideshow.images[i]||"");}}
-if(d.slideshow.interval)setV("slideInterval",d.slideshow.interval);
+if(d.bgSettings){
+    setV("bgYoutube",d.bgSettings.youtubeUrl);
+    if(d.bgSettings.images){
+        for(var i=0;i<5;i++){setV("bgImg"+(i+1),d.bgSettings.images[i]||"");}
+    }
+    if(d.bgSettings.interval)setV("bgInterval",d.bgSettings.interval);
+    if(d.bgSettings.ytOverlay)setV("ytOverlay",d.bgSettings.ytOverlay);
 }
 if(d.colTitles){setV("colLeft",d.colTitles.left);setV("colRight",d.colTitles.right);}
 if(d.bells){Object.keys(d.bells).forEach(function(k){if(bells[k]){bells[k].time=d.bells[k].time;bells[k].enabled=d.bells[k].enabled;bells[k].musicUrl=d.bells[k].musicUrl||"";}});renderBells();}
